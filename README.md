@@ -88,7 +88,7 @@ We welcome contributors from the Developers & AI community to enrich Gityzer and
 <h1 align=center> Project Admin <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People%20with%20professions/Man%20Technologist%20Medium%20Skin%20Tone.png" alt="man-techno" height=40 width=40> </h1>
 
   <p align="center">
-  <a href="https://github.com/mdazfar2"><img src="https://avatars.githubusercontent.com/vansh-codes" width="17%" /></a>
+  <a href="https://github.com/vansh-codes"><img src="https://avatars.githubusercontent.com/vansh-codes" width="17%" /></a>
   </p>
 
 <div align="center">
@@ -119,14 +119,14 @@ This project and everyone participating in it is governed by the [Code of Conduc
 
 <br>
 
-<center>
+<!-- <center>
 <div>
 <a href="https://github.com/vansh-codes/Gityzer/graphs/contributors">
   <img width="90%" src="https://contrib.rocks/image?repo=vansh-codes/Gityzer" />
 </a>
 </div>
-
-
+</center>
+ -->
 ## License 📝
 
 <img src="https://img.shields.io/badge/License-MIT-yellow.svg"/> <br> 
