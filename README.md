@@ -7,11 +7,15 @@
 <a href="https://github.com/vansh-codes/Gityzer"><img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103"></a> <a href="https://github.com/vansh-codes/Gityzer/blob/master/LICENSE"><img src="https://img.shields.io/badge/MIT-Licence-blue.svg?v=103"></a> 
 
 ![GitHub issues](https://img.shields.io/github/issues/vansh-codes/Gityzer)
-![GitHub forks](https://img.shields.io/github/forks/vansh-codes/Gityzer)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/vansh-codes/Gityzer)
+![GitHub forks](https://img.shields.io/github/forks/vansh-codes/Gityzer)
 ![GitHub Repo stars](https://img.shields.io/github/stars/vansh-codes/Gityzer?style=social)
 ![GitHub contributors](https://img.shields.io/github/contributors/vansh-codes/Gityzer)
-
+<br/>
+![Repo Size](https://img.shields.io/github/repo-size/vansh-codes/Gityzer)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github?af=5236ad)
+<br/>
+![Visitors Count](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fvansh-codes%2FGityzer&label=visitors&countColor=%2337d67a&style=flat&labelStyle=upper)
 </p>
 
 ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People%20with%20professions/Man%20Technologist%20Medium%20Skin%20Tone.png" alt="man-techno" height=50 width=50> Live Demo
