@@ -19,9 +19,9 @@ jobs:
             const issueCreator = issue.user.login;
             const issueNumber = issue.number;
 
-            const greetingMessage = `Hello @${issueCreator}! Your issue #${issueNumber} ✅ This issue has been successfully closed. Thank you for your contribution and helping us improve the project! If you have any more ideas or run into other issues, feel free to open a new one. Happy coding! 🚀
+            const greetingMessage = `Hello @${issueCreator}! Your issue #${issueNumber} has been successfully closed. ✅ Thank you for your contribution and helping us improve the project! If you have any more ideas or run into other issues, feel free to open a new one. Happy coding! 🚀`;
 
-            github.rest.issues.createComment({
+            await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issueNumber,
