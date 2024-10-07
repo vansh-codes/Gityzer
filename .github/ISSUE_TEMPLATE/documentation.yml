@@ -1,0 +1,26 @@
+name: "📚 Documentation Update"
+description: "Propose an update or improvement for the documentation"
+title: "Doc Update:"
+labels: ["documentation"]
+body:
+  - type: textarea
+    attributes:
+      label: "Describe the Documentation Update"
+      description: "Provide details about the documentation improvement or update you want to suggest."
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: "Add Screenshots (if applicable)"
+      description: "Add any screenshots or examples to help illustrate the update."
+    validations:
+      required: false
+  - type: checkboxes
+    attributes:
+      label: "Confirm"
+      options:
+        - label: "I agree to follow this project's Code of Conduct"
+          required: true
+        - label: "I'm GSSOC'24 Extd registered Contributor"
+        - label: "I'm Hacktoberfest registered Contributor"
+        - label: "I want to work on this documentation issue"
