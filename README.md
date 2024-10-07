@@ -25,8 +25,6 @@ Visit https://gityzer.vercel.app/ to see the live demo
     <img src="https://img.shields.io/badge/Next.js-7c3aed?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js Official Website"/>
   </a> <a href="https://tailwindcss.com/">
     <img src="https://img.shields.io/badge/Tailwind_CSS-grey?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC" alt="TailWind CSS Official Website"/>
-  </a> <a href="https://www.mongodb.com/">
-    <img src="https://img.shields.io/badge/mongodb-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB official Website"/>
   </a>
   <a href="https://ai.google.dev/gemini-api?gad_source=1&gclid=Cj0KCQjwo8S3BhDeARIsAFRmkOP_Ygexqh0M-OkFeeCxgOr5cjzTV2wNnS-nDzydv4Kaq9NPfPPTMhcaAm4_EALw_wcB">
     <img src="https://img.shields.io/badge/Google%20Gemini%20API-886FBF?style=for-the-badge&logo=googlegemini&logoColor=fff" alt="MongoDB official Website"/>
