@@ -11,12 +11,24 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --background-gradient: linear-gradient(
+      145deg,      
+      #021a42 0%,     
+      #012c41 15%,          
+      #013855 30%,     
+      #022f49 45%,   
+      #011c48 55%,       
+      #021d47 65%,      
+      #0b023b 80%,            
+      #3a1336 100%            
+  );
+
   }
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: var(--background-gradient);
   font-family: Arial, Helvetica, sans-serif;
 }
 
