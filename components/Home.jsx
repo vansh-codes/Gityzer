@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from 'react-hot-toast';
+import TypingAnimation from "@/components/ui/typing-animation";
 
 function Home() {
   const [username, setUsername] = useState("");
@@ -52,9 +53,12 @@ function Home() {
 
         {/* Main Content */}
         <main className="flex flex-col justify-center items-center flex-grow">
-          <h1 className="text-4xl font-light text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 tracking-widest mb-8">
-            Let's, Begin...
-          </h1>
+          <TypingAnimation
+            duration={80}
+            className="text-4xl font-light text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 tracking-widest mb-8"
+            text="Let's, Begin..."
+          />
+
           <form className="flex items-center w-1/3 h-1/3" onSubmit={handleSubmit}>
             <div className="flex items-center bg-white rounded-full shadow-md p-2 w-full">
               {/* GitHub Logo inside search bar */}
