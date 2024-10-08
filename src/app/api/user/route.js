@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { generateUserTagline } from "../../../../ai/generateTagline";
 
 const GITHUB_API_URL = "https://api.github.com/graphql";
 
@@ -13,6 +14,25 @@ export async function POST(req) {
     query ($login: String!) {
       user(login: $login) {
         login
+        contributionsCollection {
+          totalCommitContributions
+          contributionCalendar {
+            totalContributions
+          }
+          pullRequestContributionsByRepository {
+            repository {
+              name
+            }
+            totalCount
+          }
+        }
+        repositories(first: 100, orderBy: {field: STARGAZERS, direction: DESC}) {
+          nodes {
+            primaryLanguage {
+              name
+            }
+          }
+        }
       }
     }
   `;
@@ -40,7 +60,14 @@ export async function POST(req) {
         const data = await response.json();
         console.log(data);
         if (data.data.user) {
-            return NextResponse.json({ exists: true });
+            const contributions = data.data.user.contributionsCollection;
+            const tagline = await generateUserTagline(username, contributions);
+            return NextResponse.json({
+                exists: true,
+                totalContributions: contributions.totalCommitContributions,
+                activeCodingDays: contributions.contributionCalendar.totalContributions,
+                tagline,  
+            });
         } else {
             return NextResponse.json({ exists: false });
         }
