@@ -15,7 +15,6 @@
       <th>🐛 Issues</th>
       <th>🔔 Open PRs</th>
       <th>🔕 Close PRs</th>
-      <th>🛠️ Languages</th>
       <th>👥 Contributors</th>
     </tr>
   </thead>
@@ -27,7 +26,6 @@
       <td><img src="https://img.shields.io/github/issues/vansh-codes/Gityzer"></td>
       <td><img src="https://img.shields.io/github/issues-pr/vansh-codes/Gityzer"></td>
       <td><img src="https://img.shields.io/github/issues-pr-closed/vansh-codes/Gityzer?color=critical"></td>
-      <td><img src="https://img.shields.io/github/languages/count/vansh-codes/Gityzer?color=green"></td>
       <td><img src="https://img.shields.io/github/contributors/vansh-codes/Gityzer?color=blue"></td>
     </tr>
   </tbody>
