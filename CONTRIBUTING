@@ -33,25 +33,47 @@ To get started, look at the existing [**Create a new issue**](https://github.com
 
 **Follow these steps to setup Gityzer on your local machine 👇**
 
-- [Fork](https://github.com/vansh-codes/gityzer/fork) the repository
+
+- [Fork](https://github.com/vansh-codes/gityzer/fork) the repository.
 - Clone the forked repository in your local system.
   
   ```bash
-   git clone https://github.com/<your-github-username>/gityzer.git
+  git clone https://github.com/<your-github-username>/gityzer.git
   ```
- - Navigate to the [gityzer](https://github.com/vansh-codes/gityzer) folder if you want to contribute to our website.
-   ```bash
-    cd gityzer
-   ```
- - Now install dependency
-   ```bash
-    npm install
-   ```
-  - Run the Deployment Server
-    ```bash
-     npm run dev
-    ```
-  - `Open http://localhost:3000 with your browser to see the result.`
+
+- Navigate to the [gityzer](https://github.com/vansh-codes/gityzer) folder if you want to contribute to our website.
+  
+  ```bash
+  cd gityzer
+  ```
+
+- Create your GitHub Personal Access Token:
+  1. Go to [GitHub Personal Access Tokens](https://github.com/settings/tokens/new) or follow this path:
+     - Settings -> Developer settings -> Personal access tokens -> Tokens (classic) -> Generate new token -> Generate new token (classic).
+  2. Set the following permissions:
+     - **repo**
+     - **user**
+  3. Generate the token.
+  4. Copy the token.
+  5. Paste the token in `.env.local`.
+
+- Now install dependencies:
+  
+  ```bash
+  npm install
+  ```
+
+- Run the Deployment Server:
+  
+  ```bash
+  npm run dev
+  ```
+
+- Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+> [!NOTE]
+> - The new steps for creating a GitHub Personal Access Token provide clear  guidance on how to generate and use the token.
+> - Make sure to keep the `.env.local` file secure and not share your token publicly.
   
  - Create a new branch for your feature.
    ```bash

@@ -120,7 +120,8 @@ Contributors can help by:
 - **Improving User Experience:** Simplifying the setup process for users and ensuring smooth token handling to avoid rate limits.
 
 
-> [!TIP] Gityzer aims to make it easy for developers to create dynamic, personalized badges for their GitHub profiles, helping them stand out with a summary of their contributions in a visually appealing way. Let's work together to build this awesome tool!
+> [!TIP] 
+> Gityzer aims to make it easy for developers to create dynamic, personalized badges for their GitHub profiles, helping them stand out with a summary of their contributions in a visually appealing way. Let's work together to build this awesome tool!
 
 <div align="left">
 <h2><font size="6"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Handshake.png" alt="Handshake" width="40" height="40" /> Want to Contribute? </font></h2>
