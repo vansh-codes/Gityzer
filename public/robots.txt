@@ -1,0 +1,15 @@
+User-agent: *
+
+# Block access to any API endpoints
+Disallow: /api/
+
+# Block access to any React-specific files
+Disallow: /*.js$
+Disallow: /*.json$
+
+# Block access to development or build-specific directories
+Disallow: /static/
+Disallow: /build/
+
+# Specify the location of your XML sitemap
+Sitemap: https://gityzer.vercel.app/sitemap.xml
