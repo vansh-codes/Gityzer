@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-
 const GITHUB_API_URL = "https://api.github.com/graphql";
 
 export async function POST(req) {
@@ -13,6 +12,25 @@ export async function POST(req) {
     query ($login: String!) {
       user(login: $login) {
         login
+        contributionsCollection {
+          totalCommitContributions
+          contributionCalendar {
+            totalContributions
+          }
+          pullRequestContributionsByRepository {
+            repository {
+              name
+            }
+            totalCount
+          }
+        }
+        repositories(first: 100, orderBy: {field: STARGAZERS, direction: DESC}) {
+          nodes {
+            primaryLanguage {
+              name
+            }
+          }
+        }
       }
     }
   `;
@@ -40,7 +58,12 @@ export async function POST(req) {
         const data = await response.json();
         console.log(data);
         if (data.data.user) {
-            return NextResponse.json({ exists: true });
+            const contributions = data.data.user.contributionsCollection;
+            return NextResponse.json({
+                exists: true,
+                totalContributions: contributions.totalCommitContributions,
+                activeCodingDays: contributions.contributionCalendar.totalContributions 
+            });
         } else {
             return NextResponse.json({ exists: false });
         }
@@ -49,3 +72,4 @@ export async function POST(req) {
         return new NextResponse("Internal Server Error", { status: 500 });
     }
 }
+export default contributions;

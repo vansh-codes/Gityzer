@@ -1,6 +1,8 @@
 'use client';
+import { generateUserTagline } from "../../../ai/generateTagline";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import {contributions} from '../api/ai/route'
 
 function UserPage({ params }) {
   const { username } = params;
@@ -34,12 +36,14 @@ function UserPage({ params }) {
     router.push(`/${username}${queryString}`);
   };
 
+  const tagline=generateUserTagline(username,contributions);
+
   return (
     <div
       className="flex flex-col justify-center items-center h-screen"
       style={{ backgroundColor: theme, color: textColor }}
     >
-      <h1 className="text-2xl font-bold mb-4">Welcome, {username}!</h1>
+      <h1 className="text-2xl font-bold mb-4">{tagline}!</h1>
       <div className="flex space-x-4">
         <div>
           <label className="block mb-2">Background Color</label>
