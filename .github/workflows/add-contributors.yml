@@ -22,5 +22,6 @@ jobs:
           commit_message: "Updated contributors list"
           committer_username: "yashksaini-coder"
           committer_email: "115717039+yashksaini-coder@users.noreply.github.com"
+          readme_path: "CONTRIBUTORS.md"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
