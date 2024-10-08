@@ -22,7 +22,7 @@ export async function POST(req) {
             method: "POST",
             headers: {
                 Accept: "application/json",
-                Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
+                Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
