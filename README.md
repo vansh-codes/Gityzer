@@ -1,22 +1,39 @@
-<h1 align="center">GITYZER</h1>
+<div align="center">
 
-## Gityzer is an open-source tool that generates a personalized image summarizing a user's GitHub stats. This image can be easily embedded in GitHub README files, helping developers showcase their contributions, coding activity, and overall GitHub presence.
+# **GITYZER**
 
-<p align="center">
+<i>Gityzer is an open-source tool that generates a personalized image summarizing a user's GitHub stats. This image can be easily embedded in GitHub README files, helping developers showcase their contributions, coding activity, and overall GitHub presence.*
+</i>
 
-<a href="https://github.com/vansh-codes/Gityzer"><img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103"></a> <a href="https://github.com/vansh-codes/Gityzer/blob/master/LICENSE"><img src="https://img.shields.io/badge/MIT-Licence-blue.svg?v=103"></a> 
-
-![GitHub issues](https://img.shields.io/github/issues/vansh-codes/Gityzer)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/vansh-codes/Gityzer)
-![GitHub forks](https://img.shields.io/github/forks/vansh-codes/Gityzer)
-![GitHub Repo stars](https://img.shields.io/github/stars/vansh-codes/Gityzer?style=social)
-![GitHub contributors](https://img.shields.io/github/contributors/vansh-codes/Gityzer)
-<br/>
-![Repo Size](https://img.shields.io/github/repo-size/vansh-codes/Gityzer)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github?af=5236ad)
-<br/>
-![Visitors Count](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fvansh-codes%2FGityzer&label=visitors&countColor=%2337d67a&style=flat&labelStyle=upper)
-</p>
+<br>
+<table align="center">
+  <thead align="center">
+    <tr border="1">
+      <th>🤖 Project</th>
+      <th>🌟 Stars</th>
+      <th>🍴 Forks</th>
+      <th>🐛 Issues</th>
+      <th>🔔 Open PRs</th>
+      <th>🔕 Close PRs</th>
+      <th>🛠️ Languages</th>
+      <th>👥 Contributors</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103"></td>
+      <td><img src="https://img.shields.io/github/stars/vansh-codes/Gityzer?style=social"></td>
+      <td><img src="https://img.shields.io/github/forks/vansh-codes/Gityzer"></td>
+      <td><img src="https://img.shields.io/github/issues/vansh-codes/Gityzer"></td>
+      <td><img src="https://img.shields.io/github/issues-pr/vansh-codes/Gityzer"></td>
+      <td><img src="https://img.shields.io/github/issues-pr-closed/vansh-codes/Gityzer?color=critical"></td>
+      <td><img src="https://img.shields.io/github/languages/count/vansh-codes/Gityzer?color=green"></td>
+      <td><img src="https://img.shields.io/github/contributors/vansh-codes/Gityzer?color=blue"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
 
 ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People%20with%20professions/Man%20Technologist%20Medium%20Skin%20Tone.png" alt="man-techno" height=50 width=50> Live Demo
 Visit https://gityzer.vercel.app/ to see the live demo
@@ -62,30 +79,38 @@ Gityzer is proudly part of global initiatives engaging with passionate developer
   </a>
 </p>
 
-### How it works ?
-1. Fetch GitHub Data: Gityzer collects details about a user's GitHub profile, such as:
-   - Total contributions
-   - Participation in repositories
-   - Active coding days
-   - Most used programming languages
-   - and many more parameters..
+### How it works
+
+1. **Fetch GitHub Data:** Gityzer collects details about a user's GitHub profile, such as:
+  - Total contributions
+  - Participation in repositories
+  - Active coding days
+  - Most used programming languages
+  - And many more parameters
+
 2. **Generate a Custom Tagline:** Using AI (the Gemini model), Gityzer creates a unique tagline for each user based on their activity and contribution patterns on GitHub. This tagline is consistent and meaningful, providing an at-a-glance summary of the user's work.
+
 3. **Create and Embed an Image:** The tool generates an image with the following customizable elements:
-    - **Username**: Details fetched from the GitHub profile.
-    - **Styling Options:** Users can choose from different styles, themes (like dark or light mode), and color combinations.
-    - **Update Frequency:** Users can decide how often the image gets updated (e.g., every 14 days). 
+   - **Username:** Details fetched from the GitHub profile.
+   - **Styling Options:** Users can choose from different styles, themes (like dark or light mode), and color combinations.
+   - **Update Frequency:** Users can decide how often the image gets updated (e.g., every 14 days).
+
 4. **Avoid Rate Limits:** To prevent hitting GitHub’s API rate limits, users will need to provide their *GitHub personal access token* with read permissions. This allows them to fetch their own profile data more efficiently.
 
-Example URL:
+**Example URL:**
+
 Users can generate and customize the image using a URL like:
+
 ```css
 gityzer.vercel.app?<github_username>&update=14&style=dark&theme=dark&color=white
 ```
-- <github_username>: The GitHub username.
-- update=14: Update the image every 14 days. optional parameter, by default set to 14
-- style=dark: Choose the style (e.g., dark).
-- theme=dark: Set the theme (e.g., dark mode).
-- color=white: Choose the text color (e.g., white).
+
+- `<github_username>`: The GitHub username.
+- `update=14`: Update the image every 14 days (optional parameter, default is 14).
+- `style=dark`: Choose the style (e.g., dark).
+- `theme=dark`: Set the theme (e.g., dark mode).
+- `color=white`: Choose the text color (e.g., white).
+
 
 ## How to contribute ?
 
@@ -143,29 +168,8 @@ This project and everyone participating in it is governed by the [Code of Conduc
 </div>
 <br>
 
-- We extend our heartfelt gratitude for your invaluable contribution to our project! Your efforts play a pivotal role in elevating Gityzer to greater heights.
-- Make sure you show some love by giving ⭐ to our repository
+We extend our heartfelt gratitude for your invaluable contribution to our project! Your efforts play a pivotal role in elevating Gityzer to greater heights. 
 
-<br>
+Here are the wonderful people who have contributed in [Gityzer](https://github.com/vansh-codes/Gityzer). You can see them here [CONTRIBUTORS.md](CONTRIBUTORS.md)
+Make sure you show some love by giving ⭐ to our repository
 
-<!-- <center>
-<div>
-<a href="https://github.com/vansh-codes/Gityzer/graphs/contributors">
-  <img width="90%" src="https://contrib.rocks/image?repo=vansh-codes/Gityzer" />
-</a>
-</div>
-</center>
- -->
-## License 📝
-
-<img src="https://img.shields.io/badge/License-MIT-yellow.svg"/> <br> 
-Gityzer is licensed under the terms of the MIT License. check out <a href="./LICENSE">LICENSE</a> for details. <img width=2300/>
-
-<a name="support"></a>
-
-## Support ⭐
-
-- 💰 Become our [Sponsor](https://github.com/sponsors/vansh-codes)!
-- ⭐ Star our Repo 
-
-<p align="right">(<a href="#top">Back to top⬆️</a>)</p>
