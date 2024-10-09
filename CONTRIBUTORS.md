@@ -26,17 +26,17 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
-                <a href="https://github.com/garimabhayanaa">
-                    <img src="https://avatars.githubusercontent.com/u/169595093?v=4" width="100;" alt="garimabhayanaa"/>
-                    <br />
-                    <sub><b>Garima Bhayana</b></sub>
-                </a>
-            </td>
-            <td align="center">
                 <a href="https://github.com/Tamanna225">
                     <img src="https://avatars.githubusercontent.com/u/119917783?v=4" width="100;" alt="Tamanna225"/>
                     <br />
                     <sub><b>Tamanna</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/garimabhayanaa">
+                    <img src="https://avatars.githubusercontent.com/u/169595093?v=4" width="100;" alt="garimabhayanaa"/>
+                    <br />
+                    <sub><b>Garima Bhayana</b></sub>
                 </a>
             </td>
             <td align="center">
