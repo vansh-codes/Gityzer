@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 const GITHUB_API_URL = "https://api.github.com/graphql";
 
+// Declare contributions as an empty object globally
+let contributions = {};
+
 export async function POST(req) {
     const { username } = await req.json();
 
@@ -58,18 +61,14 @@ export async function POST(req) {
         const data = await response.json();
         console.log(data);
         if (data.data.user) {
-            const contributions = data.data.user.contributionsCollection;
-            return NextResponse.json({
-                exists: true,
-                totalContributions: contributions.totalCommitContributions,
-                activeCodingDays: contributions.contributionCalendar.totalContributions 
-            });
+            contributions = data.data.user.contributionsCollection; // Assign contributions globally
+            return contributions;
         } else {
-            return NextResponse.json({ exists: false });
+            return null;
         }
     } catch (error) {
         console.error("Error checking GitHub username:", error);
         return new NextResponse("Internal Server Error", { status: 500 });
     }
 }
-export default contributions;
+export { contributions };
