@@ -40,6 +40,13 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/Sourabh782">
+                    <img src="https://avatars.githubusercontent.com/u/103349890?v=4" width="100;" alt="Sourabh782"/>
+                    <br />
+                    <sub><b>Sourabh Singh Rawat</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/adityakalburgi">
                     <img src="https://avatars.githubusercontent.com/u/124163311?v=4" width="100;" alt="adityakalburgi"/>
                     <br />
