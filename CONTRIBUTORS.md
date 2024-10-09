@@ -26,6 +26,13 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/garimabhayanaa">
+                    <img src="https://avatars.githubusercontent.com/u/169595093?v=4" width="100;" alt="garimabhayanaa"/>
+                    <br />
+                    <sub><b>Garima Bhayana</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/Tamanna225">
                     <img src="https://avatars.githubusercontent.com/u/119917783?v=4" width="100;" alt="Tamanna225"/>
                     <br />
@@ -33,10 +40,10 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
-                <a href="https://github.com/garimabhayanaa">
-                    <img src="https://avatars.githubusercontent.com/u/169595093?v=4" width="100;" alt="garimabhayanaa"/>
+                <a href="https://github.com/murtaza-sadri-19">
+                    <img src="https://avatars.githubusercontent.com/u/151193465?v=4" width="100;" alt="murtaza-sadri-19"/>
                     <br />
-                    <sub><b>Garima Bhayana</b></sub>
+                    <sub><b>Murtaza Sadriwala</b></sub>
                 </a>
             </td>
             <td align="center">
@@ -46,6 +53,8 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Harshit Shukla</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/Sourabh782">
                     <img src="https://avatars.githubusercontent.com/u/103349890?v=4" width="100;" alt="Sourabh782"/>
@@ -53,8 +62,6 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Sourabh Singh Rawat</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/adityakalburgi">
                     <img src="https://avatars.githubusercontent.com/u/124163311?v=4" width="100;" alt="adityakalburgi"/>
