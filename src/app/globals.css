@@ -20,9 +20,8 @@
       #011c48 55%,       
       #021d47 65%,      
       #0b023b 80%,            
-      #3a1336 100%            
-  );
-
+      #3a1336 100%
+    );
   }
 }
 
@@ -32,8 +31,51 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Subtle glow effect for the text */
+.glow-text {
+  color: #ededed;
+  text-shadow: 0 0 5px rgba(0, 184, 255, 0.6), 0 0 10px rgba(0, 184, 255, 0.6), 0 0 20px rgba(0, 184, 255, 0.7);
+}
+
+/* Fix for GitHub icon background */
+.github-icon {
+  color: #ededed;
+  background: transparent;
+}
+
+/* Ripple effect styling */
+.mouse-ripple {
+  position: absolute;
+  border-radius: 50%;
+  width: 75px;
+  height:75px;
+  background: rgba(0, 102, 204, 0.3); /* Darker, water-like color */
+  transform: scale(0);
+  pointer-events: none;
+  animation: ripple-animation 1s ease-out;
+}
+
+@keyframes ripple-animation {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
   }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.mouse-track {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.search-button {
+  position: relative;
+  z-index: 2; /* Ensure ripple doesn’t affect the button */
 }
