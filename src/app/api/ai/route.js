@@ -62,13 +62,9 @@ export async function POST(req) {
         console.log(data);
         if (data.data.user) {
             contributions = data.data.user.contributionsCollection; // Assign contributions globally
-            return NextResponse.json({
-                exists: true,
-                totalContributions: contributions.totalCommitContributions,
-                activeCodingDays: contributions.contributionCalendar.totalContributions
-            });
+            return contributions;
         } else {
-            return NextResponse.json({ exists: false });
+            return null;
         }
     } catch (error) {
         console.error("Error checking GitHub username:", error);
