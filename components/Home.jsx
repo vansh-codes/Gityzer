@@ -19,6 +19,8 @@ function Home() {
           body: JSON.stringify({ username: username.trim() }),
         });
 
+        console.log(response)
+
         if (response.ok) {
           const data = await response.json();
           console.log(data);

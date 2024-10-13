@@ -1,6 +1,6 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const genAI = new GoogleGenerativeAI(process.env.API_enter_here);
+const genAI = new GoogleGenerativeAI(process.env.API);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 export async function generateUserTagline(username, contributions) {
@@ -8,15 +8,19 @@ export async function generateUserTagline(username, contributions) {
     Generate a custom tagline for the GitHub user "${username}" based on the following activity and contribution patterns:
     - Total Contributions: ${contributions.totalCommitContributions}
     - Active Coding Days: ${contributions.contributionCalendar.totalContributions}
-    - Most Used Programming Languages: ${topLanguages}
     
-    The tagline should be consistent, meaningful, and provide an at-a-glance summary of the user's work.
+    The tagline should be consistent, meaningful, and provide an at-a-glance summary of the user's work..
+    Only generate one tagline, only one.
   `;
 
   try {
     const result = await model.generateContent(prompt);
+    console.log("AI");
+    
+    console.log(result.response.text());
+    
     if (result.response) {
-      return result.response.text;
+      return result.response.text();
     } else {
       throw new Error("Tagline not found in the response");
     }

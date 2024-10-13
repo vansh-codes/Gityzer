@@ -1,8 +1,7 @@
 'use client';
-import { generateUserTagline } from "../../../ai/generateTagline";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import {contributions} from '../api/ai/route'
+import axios from "axios";
 
 function UserPage({ params }) {
   const { username } = params;
@@ -18,6 +17,19 @@ function UserPage({ params }) {
     if (themeParam) setTheme(decodeURIComponent(themeParam));
     if (colorParam) setTextColor(decodeURIComponent(colorParam));
   }, [searchParams]);
+
+  const [tagline, setTagline] = useState("");
+
+  const fetchTagline = async()=>{
+    const res = await axios.post(`http://localhost:3000/api/ai`, {
+      username
+    })
+    
+    setTagline(res.data.tagline);
+  }
+  useEffect(()=>{
+    fetchTagline()
+  },[])
 
   const handleThemeChange = (e) => {
     const newTheme = e.target.value;
@@ -35,8 +47,6 @@ function UserPage({ params }) {
     const queryString = `?theme=${encodeURIComponent(theme)}&color=${encodeURIComponent(color)}`;
     router.push(`/${username}${queryString}`);
   };
-
-  const tagline=generateUserTagline(username,contributions);
 
   return (
     <div
