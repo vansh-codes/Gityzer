@@ -21,7 +21,7 @@ function UserPage({ params }) {
   const [tagline, setTagline] = useState("");
 
   const fetchTagline = async()=>{
-    const res = await axios.post(`http://localhost:3000/api/ai`, {
+    const res = await axios.post(`https://gityzer.vercel.app/api/ai`, {
       username
     })
     
