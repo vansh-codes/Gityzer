@@ -3,11 +3,12 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(process.env.API);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-export async function generateUserTagline(username, contributions) {
+export async function generateUserTagline(username, contributions, mostUsedLanguage) {
   const prompt = `
-    Generate a custom tagline for the GitHub user "${username}" based on the following activity and contribution patterns:
+    Generate a custom tagline for the GitHub user "${username}" based on the following activity, contribution patterns and most used language:
     - Total Contributions: ${contributions.totalCommitContributions}
     - Active Coding Days: ${contributions.contributionCalendar.totalContributions}
+    - most used language: ${mostUsedLanguage}
     
     The tagline should be consistent, meaningful, and provide an at-a-glance summary of the user's work..
     Only generate one tagline, only one.

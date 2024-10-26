@@ -64,9 +64,25 @@ export async function POST(req) {
     const data = await response.json();
     // console.log(data);
     if (data.data.user) {
+      const repositories = data.data.user.repositories.nodes;
+
+      // Count each language's occurrence
+      const languageCounts = {};
+      repositories.forEach(repo => {
+        const language = repo.primaryLanguage?.name;
+        if (language) {
+          languageCounts[language] = (languageCounts[language] || 0) + 1;
+        }
+      });
+
+      // Determine the most used language(s)
+      const mostUsedLanguages = Object.keys(languageCounts).sort(
+        (a, b) => languageCounts[b] - languageCounts[a]
+      );
+      
       const contributions = data.data.user.contributionsCollection;
       // console.log(contributions)
-      const tagline = await generateUserTagline(username, contributions);
+      const tagline = await generateUserTagline(username, contributions, mostUsedLanguages.slice(0, 1));
       return NextResponse.json({
         exists: true,
         tagline,
