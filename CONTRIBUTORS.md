@@ -76,6 +76,20 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Aditya kalburgi</b></sub>
                 </a>
             </td>
+            <td align="center">
+                <a href="https://github.com/dev129">
+                    <img src="https://avatars.githubusercontent.com/u/76431221?v=4" width="100;" alt="dev129"/>
+                    <br />
+                    <sub><b>Devansh Vishwa</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/nithinrvs">
+                    <img src="https://avatars.githubusercontent.com/u/103061474?v=4" width="100;" alt="nithinrvs"/>
+                    <br />
+                    <sub><b>nithinrvs</b></sub>
+                </a>
+            </td>
 		</tr>
 	<tbody>
 </table>
