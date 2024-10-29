@@ -56,6 +56,13 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
 		</tr>
 		<tr>
             <td align="center">
+                <a href="https://github.com/piyushpatelcodes">
+                    <img src="https://avatars.githubusercontent.com/u/136020845?v=4" width="100;" alt="piyushpatelcodes"/>
+                    <br />
+                    <sub><b>Piyush Patel</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/HarshitShukla-dev">
                     <img src="https://avatars.githubusercontent.com/u/109151752?v=4" width="100;" alt="HarshitShukla-dev"/>
                     <br />
