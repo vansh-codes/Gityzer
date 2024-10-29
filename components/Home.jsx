@@ -86,6 +86,7 @@ function Home() {
               <button
                 type="submit"
                 className="bg-purple-500 text-white p-3 rounded-full hover:bg-purple-600  focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50 transition duration-200 flex items-center justify-center"
+                disabled={!username.trim()} // Disable button if username is empty
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
