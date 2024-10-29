@@ -1,37 +1,22 @@
-import { NextResponse } from "next/server";
-
-const GITHUB_API_URL = "https://api.github.com/graphql";
+import { NextResponse } from 'next/server';
 
 export async function POST(req) {
+    // Parse the request body to extract the username
     const { username } = await req.json();
 
     if (!username) {
         return new NextResponse("Username required", { status: 400 });
     }
 
-    const query = `
-    query ($login: String!) {
-      user(login: $login) {
-        login
-      }
-    }
-  `;
-
     try {
-        const response = await fetch(GITHUB_API_URL, {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                query,
-                variables: { login: username },
-            }),
+        // Fetch the user's GitHub profile using the REST API
+        const response = await fetch(`https://api.github.com/users/${username}`, {
+            method: "GET", // Using GET since it's a public REST API request
+           
         });
 
         if (!response.ok) {
+            // Handle different errors from the GitHub API
             return new NextResponse(await response.text(), {
                 status: response.status,
             });
@@ -39,8 +24,10 @@ export async function POST(req) {
 
         const data = await response.json();
         console.log(data);
-        if (data.data.user) {
-            return NextResponse.json({ exists: true });
+
+        // If the user exists, return a response with `exists: true`
+        if (data && data.login) {
+            return NextResponse.json({ exists: true, userData: data });
         } else {
             return NextResponse.json({ exists: false });
         }
