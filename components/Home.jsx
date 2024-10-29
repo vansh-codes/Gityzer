@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from 'react-hot-toast';
+import Typewriter from "typewriter-effect";
 
 function Home() {
   const [username, setUsername] = useState("");
@@ -55,7 +56,24 @@ function Home() {
         {/* Main Content */}
         <main className="flex flex-col justify-center items-center flex-grow px-8 sm:px-4">
           <h1 className="text-4xl font-light text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 tracking-widest mb-8">
-            Let's, Begin...
+            <Typewriter
+              options={{
+                cursor: "<span style='color: #fff; animation: blink 1s infinite;'>|</span>",
+              }}
+              onInit={(typewriter) => {
+                const animate = () => {
+                  typewriter
+                    .typeString("Let's, Begin...")
+                    .pauseFor(1000)
+                    .deleteAll()
+                    .pauseFor(1000)
+                    .start();
+                  setTimeout(animate, 2000); // Adjust delay
+                };
+                animate();
+              }}
+            />
+
           </h1>
           <form className="flex items-center w-full sm:w-2/3 lg:w-1/3 h-1/3" onSubmit={handleSubmit}>
             <div className="flex items-center bg-white rounded-full shadow-md p-2 w-full">
