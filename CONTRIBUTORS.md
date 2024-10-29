@@ -26,12 +26,35 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/garimabhayanaa">
+                    <img src="https://avatars.githubusercontent.com/u/169595093?v=4" width="100;" alt="garimabhayanaa"/>
+                    <br />
+                    <sub><b>Garima Bhayana</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/Sourabh782">
+                    <img src="https://avatars.githubusercontent.com/u/103349890?v=4" width="100;" alt="Sourabh782"/>
+                    <br />
+                    <sub><b>Sourabh Singh Rawat</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/Tamanna225">
                     <img src="https://avatars.githubusercontent.com/u/119917783?v=4" width="100;" alt="Tamanna225"/>
                     <br />
                     <sub><b>Tamanna</b></sub>
                 </a>
             </td>
+            <td align="center">
+                <a href="https://github.com/murtaza-sadri-19">
+                    <img src="https://avatars.githubusercontent.com/u/151193465?v=4" width="100;" alt="murtaza-sadri-19"/>
+                    <br />
+                    <sub><b>Murtaza Sadriwala</b></sub>
+                </a>
+            </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/HarshitShukla-dev">
                     <img src="https://avatars.githubusercontent.com/u/109151752?v=4" width="100;" alt="HarshitShukla-dev"/>
@@ -40,10 +63,31 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/smog-root">
+                    <img src="https://avatars.githubusercontent.com/u/181578777?v=4" width="100;" alt="smog-root"/>
+                    <br />
+                    <sub><b>smog-root</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/adityakalburgi">
                     <img src="https://avatars.githubusercontent.com/u/124163311?v=4" width="100;" alt="adityakalburgi"/>
                     <br />
                     <sub><b>Aditya kalburgi</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/dev129">
+                    <img src="https://avatars.githubusercontent.com/u/76431221?v=4" width="100;" alt="dev129"/>
+                    <br />
+                    <sub><b>Devansh Vishwa</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/nithinrvs">
+                    <img src="https://avatars.githubusercontent.com/u/103061474?v=4" width="100;" alt="nithinrvs"/>
+                    <br />
+                    <sub><b>nithinrvs</b></sub>
                 </a>
             </td>
 		</tr>

@@ -1,13 +1,11 @@
-'use client';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import {
-  FaMapPin,
-  FaClock,
-  FaGithub,
-  FaLink,
-} from 'react-icons/fa';
+"use client";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import NotFound from "@/app/not-found";
+import Image from "next/image";
+import { FaMapPin, FaClock, FaGithub, FaLink } from "react-icons/fa";
+// Create a separate 404 error component
 
 function UserPage({ params }) {
   const { username } = params;
@@ -17,19 +15,43 @@ function UserPage({ params }) {
   const [repositories, setRepositories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const reposPerPage = 6;
+  const [theme, setTheme] = useState("#ffffff");
+  const [textColor, setTextColor] = useState("#000000");
+  const [tagline, setTagline] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [is404, setIs404] = useState(false);
 
   useEffect(() => {
-    // Fetch user data from GitHub API
-    fetch(`https://api.github.com/users/${username}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setUserData(data);
-        return fetch(data.repos_url); // Fetch repos using repos_url from user data
-      })
-      .then((response) => response.json())
-      .then((reposData) => setRepositories(reposData))
-      .catch((error) => console.error('Fetch error:', error));
-  }, [username]);
+    const fetchUserData = async () => {
+        setIsLoading(true); // Start loading
+        setIs404(false); // Reset 404 state for each new fetch
+
+        try {
+            const userResponse = await fetch(`https://api.github.com/users/${username}`);
+            
+            if (userResponse.status === 404) {
+                setIs404(true);
+                setUserData(null);
+                setRepositories([]);
+                setIsLoading(false);
+                return;
+            }
+
+            const userData = await userResponse.json();
+            setUserData(userData);
+
+            const reposResponse = await fetch(userData.repos_url);
+            const reposData = await reposResponse.json();
+            setRepositories(reposData);
+        } catch (error) {
+            console.error("Fetch error:", error);
+        } finally {
+            setIsLoading(false); // End loading
+        }
+    };
+
+    if (username) fetchUserData();
+}, [username]);
 
   const totalPages = Math.ceil(repositories.length / reposPerPage);
   const indexOfLastRepo = currentPage * reposPerPage;
@@ -43,6 +65,42 @@ function UserPage({ params }) {
   const handlePreviousPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
+  
+
+
+
+  const handleThemeChange = (e) => {
+    const newTheme = e.target.value;
+    setTheme(newTheme);
+    updateUrl(newTheme, textColor);
+  };
+
+  const handleTextColorChange = (e) => {
+    const newTextColor = e.target.value;
+    setTextColor(newTextColor);
+    updateUrl(theme, newTextColor);
+  };
+
+  const updateUrl = (theme, color) => {
+    const queryString = `?theme=${encodeURIComponent(
+      theme
+    )}&color=${encodeURIComponent(color)}`;
+    router.push(`/${username}${queryString}`);
+  };
+
+  // Return 404 page if error occurred
+  if (is404) {
+    return <NotFound />;
+  }
+
+  // Show loading spinner while fetching
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8 md:p-16 relative">
@@ -56,7 +114,7 @@ function UserPage({ params }) {
             {/* Profile Image */}
             <div className="flex-shrink-0">
               <Image
-                src={userData.avatar_url || '/default_avatar.jpg'}
+                src={userData.avatar_url || "/default_avatar.jpg"}
                 alt="Profile"
                 width={180}
                 height={180}
@@ -67,18 +125,22 @@ function UserPage({ params }) {
             {/* Profile Info */}
             <div className="text-center md:text-left">
               <h1 className="text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-purple-800">
-                {userData.name || 'Unknown User'}
+                {userData.name || "Unknown User"}
               </h1>
-              <p className="text-gray-400 mt-2">@{userData.login || 'username'}</p>
+              <p className="text-gray-400 mt-2">
+                @{userData.login || "username"}
+              </p>
 
               <div className="mt-4 space-y-2">
                 <p className="flex justify-center md:justify-start items-center gap-2 text-gray-400">
                   <FaMapPin className="w-4 h-4" />
-                  {userData.location || 'Unknown'}
+                  {userData.location || "Unknown"}
                 </p>
                 <p className="flex justify-center md:justify-start items-center gap-2 text-gray-400">
                   <FaClock className="w-4 h-4" />
-                  {new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+                  {new Date().toLocaleString("en-IN", {
+                    timeZone: "Asia/Kolkata",
+                  })}
                 </p>
               </div>
 
@@ -97,18 +159,29 @@ function UserPage({ params }) {
 
           {/* Repositories Section */}
           <div className="mt-10">
-            <h3 className="text-3xl font-semibold mb-6 text-purple-400">Repositories</h3>
+            <h3 className="text-3xl font-semibold mb-6 text-purple-400">
+             {userData.login.toUpperCase()}'s Repositories
+            </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {currentRepos.map((repo) => (
-                <div key={repo.id} className="bg-gray-700 p-6 rounded-lg shadow-lg">
+                <div
+                  key={repo.id}
+                  className="bg-gray-700 p-6 rounded-lg overflow-hidden shadow-lg"
+                >
                   <h4 className="text-xl font-semibold text-blue-400 hover:underline">
-                    <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={repo.html_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       {repo.name}
                     </a>
                   </h4>
-                  <p className="text-gray-300 mt-2">{repo.description || 'No description available.'}</p>
-                  <div className="flex justify-between mt-4 text-gray-400 text-sm">
-                    <span>{repo.language || 'Unknown'}</span>
+                  <p className="text-gray-300 mt-2">
+                    {repo.description || "No description available."}
+                  </p>
+                  <div className="flex bg-stone-500/10 p-1.5 rounded-md justify-between mt-4 text-gray-400 text-sm">
+                    <span>{repo.language || "Unknown"}</span>
                     <span>★ {repo.stargazers_count || 0}</span>
                   </div>
                 </div>
@@ -116,7 +189,7 @@ function UserPage({ params }) {
             </div>
 
             {/* Pagination */}
-            <div className="flex justify-between items-center mt-8">
+            <div className="flex mb-5 justify-between items-center mt-8">
               <button
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
@@ -134,6 +207,22 @@ function UserPage({ params }) {
               >
                 Next
               </button>
+            </div>
+          </div>
+          <div
+            className="flex flex-col justify-center items-center h-screen"
+            style={{ backgroundColor: theme, color: textColor }}
+          >
+            <h1 className="text-2xl font-bold mb-4">{tagline} <FaGithub /></h1>
+            <div className="flex space-x-4">
+              <div>
+                <label className="block mb-2">Background Color</label>
+                <input
+                  type="color"
+                  value={theme}
+                  onChange={handleThemeChange}
+                />
+              </div>
             </div>
           </div>
         </div>

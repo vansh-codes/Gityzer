@@ -36,6 +36,12 @@
 ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People%20with%20professions/Man%20Technologist%20Medium%20Skin%20Tone.png" alt="man-techno" height=50 width=50> Live Demo
 Visit https://gityzer.vercel.app/ to see the live demo
 
+> [!NOTE]
+> Take UI inspiration from [Socialify](https://socialify.git.ci/)
+> Inspiration doesnt means copying the exact same UI from there
+
+
+
 ## 💪 Outreach
 
 Gityzer is proudly part of global initiatives engaging with passionate developers and open-source enthusiasts worldwide:
