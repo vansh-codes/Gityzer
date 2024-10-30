@@ -77,6 +77,13 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/amiya-cyber">
+                    <img src="https://avatars.githubusercontent.com/u/182724034?v=4" width="100;" alt="amiya-cyber"/>
+                    <br />
+                    <sub><b>Amiya Singh</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/adityakalburgi">
                     <img src="https://avatars.githubusercontent.com/u/124163311?v=4" width="100;" alt="adityakalburgi"/>
                     <br />
@@ -90,6 +97,8 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Akash Das</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/dev129">
                     <img src="https://avatars.githubusercontent.com/u/76431221?v=4" width="100;" alt="dev129"/>
@@ -97,13 +106,18 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Devansh Vishwa</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/nithinrvs">
                     <img src="https://avatars.githubusercontent.com/u/103061474?v=4" width="100;" alt="nithinrvs"/>
                     <br />
                     <sub><b>nithinrvs</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/Unnati2603">
+                    <img src="https://avatars.githubusercontent.com/u/130018046?v=4" width="100;" alt="Unnati2603"/>
+                    <br />
+                    <sub><b>Unnati</b></sub>
                 </a>
             </td>
 		</tr>
