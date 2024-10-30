@@ -84,12 +84,21 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/akash70629">
+                    <img src="https://avatars.githubusercontent.com/u/76689571?v=4" width="100;" alt="akash70629"/>
+                    <br />
+                    <sub><b>Akash Das</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/dev129">
                     <img src="https://avatars.githubusercontent.com/u/76431221?v=4" width="100;" alt="dev129"/>
                     <br />
                     <sub><b>Devansh Vishwa</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/nithinrvs">
                     <img src="https://avatars.githubusercontent.com/u/103061474?v=4" width="100;" alt="nithinrvs"/>
