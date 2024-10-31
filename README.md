@@ -115,6 +115,9 @@ gityzer.vercel.app?<github_username>&update=14&style=dark&theme=dark&color=white
 - `theme=dark`: Set the theme (e.g., dark mode).
 - `color=white`: Choose the text color (e.g., white).
 
+## ✨ Project Structure
+
+Check the project structure here [Project Structure](PROJECT_STRUCTURE.md)
 
 ## How to contribute ?
 
