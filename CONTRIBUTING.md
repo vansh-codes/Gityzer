@@ -114,7 +114,7 @@ git push -u origin <your_branch_name>
 - If you haven't cloned the project repository yet, you can do so by clicking on the "File" menu and selecting "Clone Repository."
 - Choose the project repository from the list of repositories on GitHub and clone it to your local machine.
 
-3.**Switch to the Correct Branch:**
+3. **Switch to the Correct Branch:**
 - Ensure you are on the branch that you want to submit a pull request for.
 - If you need to switch branches, you can do so by clicking on the "Current Branch" dropdown menu and selecting the desired branch.
 
