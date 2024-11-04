@@ -84,12 +84,21 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/milansamuel609">
+                    <img src="https://avatars.githubusercontent.com/u/75712741?v=4" width="100;" alt="milansamuel609"/>
+                    <br />
+                    <sub><b>Milan P Samuel</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/amiya-cyber">
                     <img src="https://avatars.githubusercontent.com/u/182724034?v=4" width="100;" alt="amiya-cyber"/>
                     <br />
                     <sub><b>Amiya Singh</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/adityakalburgi">
                     <img src="https://avatars.githubusercontent.com/u/124163311?v=4" width="100;" alt="adityakalburgi"/>
@@ -97,8 +106,6 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Aditya kalburgi</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/akash70629">
                     <img src="https://avatars.githubusercontent.com/u/76689571?v=4" width="100;" alt="akash70629"/>
