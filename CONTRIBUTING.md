@@ -166,7 +166,7 @@ Your pull request will now be available for review by the project maintainers. T
 
 # For Help And Support 💬
 
-- Admin Github Profile:- (Vansh Chaurasiya)[https://github.com/vansh-codes]
+- Admin Github Profile:- [Vansh Chaurasiya](https://github.com/vansh-codes)
 - Contact :- [Email](vanshchaurasiya1557@gmail.com)
 
 <br>
