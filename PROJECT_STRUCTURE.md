@@ -12,7 +12,9 @@
 ├── ai/
 │   └── generateTagline.js
 ├── components/
-│   └── Home.jsx
+│   ├── Contributors.jsx
+│   ├── Home.jsx
+│   └── MyCard.jsx
 ├── jsconfig.json
 ├── logos/
 │   ├── dark-logo.ico
