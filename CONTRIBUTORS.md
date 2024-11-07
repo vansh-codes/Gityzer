@@ -40,40 +40,26 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
-                <a href="https://github.com/Sourabh782">
-                    <img src="https://avatars.githubusercontent.com/u/103349890?v=4" width="100;" alt="Sourabh782"/>
-                    <br />
-                    <sub><b>Sourabh Singh Rawat</b></sub>
-                </a>
-            </td>
-            <td align="center">
                 <a href="https://github.com/Tamanna225">
                     <img src="https://avatars.githubusercontent.com/u/119917783?v=4" width="100;" alt="Tamanna225"/>
                     <br />
                     <sub><b>Tamanna</b></sub>
                 </a>
             </td>
+            <td align="center">
+                <a href="https://github.com/Sourabh782">
+                    <img src="https://avatars.githubusercontent.com/u/103349890?v=4" width="100;" alt="Sourabh782"/>
+                    <br />
+                    <sub><b>Sourabh Singh Rawat</b></sub>
+                </a>
+            </td>
 		</tr>
 		<tr>
             <td align="center">
-                <a href="https://github.com/smog-root">
-                    <img src="https://avatars.githubusercontent.com/u/181578777?v=4" width="100;" alt="smog-root"/>
+                <a href="https://github.com/milansamuel609">
+                    <img src="https://avatars.githubusercontent.com/u/75712741?v=4" width="100;" alt="milansamuel609"/>
                     <br />
-                    <sub><b>smog-root</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/HarshitShukla-dev">
-                    <img src="https://avatars.githubusercontent.com/u/109151752?v=4" width="100;" alt="HarshitShukla-dev"/>
-                    <br />
-                    <sub><b>Harshit Shukla</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/piyushpatelcodes">
-                    <img src="https://avatars.githubusercontent.com/u/136020845?v=4" width="100;" alt="piyushpatelcodes"/>
-                    <br />
-                    <sub><b>Piyush Patel</b></sub>
+                    <sub><b>Milan P Samuel</b></sub>
                 </a>
             </td>
             <td align="center">
@@ -84,10 +70,24 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
-                <a href="https://github.com/milansamuel609">
-                    <img src="https://avatars.githubusercontent.com/u/75712741?v=4" width="100;" alt="milansamuel609"/>
+                <a href="https://github.com/piyushpatelcodes">
+                    <img src="https://avatars.githubusercontent.com/u/136020845?v=4" width="100;" alt="piyushpatelcodes"/>
                     <br />
-                    <sub><b>Milan P Samuel</b></sub>
+                    <sub><b>Piyush Patel</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/HarshitShukla-dev">
+                    <img src="https://avatars.githubusercontent.com/u/109151752?v=4" width="100;" alt="HarshitShukla-dev"/>
+                    <br />
+                    <sub><b>Harshit Shukla</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/smog-root">
+                    <img src="https://avatars.githubusercontent.com/u/181578777?v=4" width="100;" alt="smog-root"/>
+                    <br />
+                    <sub><b>smog-root</b></sub>
                 </a>
             </td>
             <td align="center">
