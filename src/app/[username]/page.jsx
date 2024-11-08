@@ -109,6 +109,47 @@ function UserPage({ params }) {
     link.click();
   };
 
+  // Function to download profile stats in .md format with additional info
+  const downloadProfileStats = () => {
+    const profileMarkdown = `# GitHub Profile: ${userData.name || "Unknown User"}
+
+**Username**: ${userData.login}
+
+**Bio**: ${userData.bio || "No bio available"}
+
+**Location**: ${userData.location || "Unknown"}
+
+**Company**: ${userData.company || "Unknown"}
+
+**Email**: ${userData.email || "Not provided"}
+
+**Followers**: ${userData.followers}
+
+**Following**: ${userData.following}
+
+**Public Repositories**: ${userData.public_repos}
+
+**Public Gists**: ${userData.public_gists}
+
+**Account Created On**: ${new Date(userData.created_at).toLocaleDateString()}
+
+**Last Updated On**: ${new Date(userData.updated_at).toLocaleDateString()}
+
+---
+
+## Additional Information:
+
+- **URL**: [GitHub Profile Link](https://github.com/${userData.login})
+- **Profile Image**: ![Profile Image](${userData.avatar_url})
+`;
+
+    const blob = new Blob([profileMarkdown], { type: "text/markdown" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${userData.login}_profile_stats.md`;
+    link.click();
+  };
+
   if (is404) {
     return <NotFound />;
   }
@@ -168,7 +209,15 @@ function UserPage({ params }) {
             <h3 className="text-3xl font-semibold mb-6 text-purple-400">
               {userData.login.toUpperCase()}'s Repositories
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <button
+              onClick={downloadProfileStats}
+              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md flex items-center gap-2"
+            >
+              <FaDownload />
+            Profile Stats
+            </button>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
               {currentRepos.map((repo) => (
                 <div key={repo.id} className="bg-gray-700 p-6 rounded-lg overflow-hidden shadow-lg">
                   <h4 className="text-xl font-semibold text-blue-400 hover:underline">
