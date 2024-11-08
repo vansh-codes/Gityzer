@@ -84,12 +84,35 @@ function UserPage({ params }) {
     router.push(`/${username}${queryString}`);
   };
 
-  // Return 404 page if error occurred
+  // Function to download repo stats in .md format
+  const downloadRepoStats = (repo) => {
+    const statsMarkdown = `# Repository: ${repo.name}
+
+**Description**: ${repo.description || "No description available"}
+
+## Stats:
+- **Stars**: ${repo.stargazers_count}
+- **Forks**: ${repo.forks_count}
+- **Open Issues**: ${repo.open_issues_count}
+- **Language**: ${repo.language || "Unknown"}
+
+## Links:
+- **Repository URL**: [${repo.html_url}](${repo.html_url})
+- **Created At**: ${new Date(repo.created_at).toLocaleDateString()}
+- **Last Updated**: ${new Date(repo.updated_at).toLocaleDateString()}
+`;
+
+    const blob = new Blob([statsMarkdown], { type: "text/markdown" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${repo.name}_stats.md`;
+    link.click();
+  };
+
   if (is404) {
     return <NotFound />;
   }
 
-  // Show loading spinner while fetching
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -98,37 +121,12 @@ function UserPage({ params }) {
     );
   }
 
-  // Function to download repo stats in .txt format
-  const downloadRepoStats = (repo) => {
-    const statsText = `
-Repository Name: ${repo.name}
-Description: ${repo.description || "No description available"}
-Stars: ${repo.stargazers_count}
-Forks: ${repo.forks_count}
-Open Issues: ${repo.open_issues_count}
-Language: ${repo.language || "Unknown"}
-URL: ${repo.html_url}
-Created At: ${new Date(repo.created_at).toLocaleDateString()}
-Last Updated: ${new Date(repo.updated_at).toLocaleDateString()}
-    `;
-
-    const blob = new Blob([statsText], { type: "text/plain" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = `${repo.name}_stats.txt`;
-    link.click();
-  };
-
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8 md:p-16 relative">
-      {/* Stylish Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 via-purple-600 to-indigo-600 opacity-30 -z-10"></div>
-
-      {/* User Profile Section */}
       {userData && (
         <div className="max-w-6xl mx-auto bg-gray-800 bg-opacity-80 rounded-xl p-8 shadow-lg">
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-            {/* Profile Image */}
             <div className="flex-shrink-0">
               <Image
                 src={userData.avatar_url || "/default_avatar.jpg"}
@@ -138,16 +136,11 @@ Last Updated: ${new Date(repo.updated_at).toLocaleDateString()}
                 className="rounded-full border-4 border-purple-500"
               />
             </div>
-
-            {/* Profile Info */}
             <div className="text-center md:text-left">
               <h1 className="text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-purple-800">
                 {userData.name || "Unknown User"}
               </h1>
-              <p className="text-gray-400 mt-2">
-                @{userData.login || "username"}
-              </p>
-
+              <p className="text-gray-400 mt-2">@{userData.login || "username"}</p>
               <div className="mt-4 space-y-2">
                 <p className="flex justify-center md:justify-start items-center gap-2 text-gray-400">
                   <FaMapPin className="w-4 h-4" />
@@ -155,12 +148,9 @@ Last Updated: ${new Date(repo.updated_at).toLocaleDateString()}
                 </p>
                 <p className="flex justify-center md:justify-start items-center gap-2 text-gray-400">
                   <FaClock className="w-4 h-4" />
-                  {new Date().toLocaleString("en-IN", {
-                    timeZone: "Asia/Kolkata",
-                  })}
+                  {new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}
                 </p>
               </div>
-
               <div className="mt-4 flex justify-center md:justify-start gap-6 text-gray-500">
                 <div>
                   <FaGithub className="inline mr-1" />
@@ -174,23 +164,15 @@ Last Updated: ${new Date(repo.updated_at).toLocaleDateString()}
             </div>
           </div>
 
-          {/* Repositories Section */}
           <div className="mt-10">
             <h3 className="text-3xl font-semibold mb-6 text-purple-400">
-             {userData.login.toUpperCase()}'s Repositories
+              {userData.login.toUpperCase()}'s Repositories
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {currentRepos.map((repo) => (
-                <div
-                  key={repo.id}
-                  className="bg-gray-700 p-6 rounded-lg overflow-hidden shadow-lg"
-                >
+                <div key={repo.id} className="bg-gray-700 p-6 rounded-lg overflow-hidden shadow-lg">
                   <h4 className="text-xl font-semibold text-blue-400 hover:underline">
-                    <a
-                      href={repo.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
                       {repo.name}
                     </a>
                   </h4>
@@ -212,7 +194,6 @@ Last Updated: ${new Date(repo.updated_at).toLocaleDateString()}
               ))}
             </div>
 
-            {/* Pagination */}
             <div className="flex mb-5 justify-between items-center mt-8">
               <button
                 onClick={handlePreviousPage}
