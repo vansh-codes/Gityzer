@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import NotFound from "@/app/not-found";
 import Image from "next/image";
-import { FaMapPin, FaClock, FaGithub, FaLink } from "react-icons/fa";
-// Create a separate 404 error component
+import { FaMapPin, FaClock, FaGithub, FaLink, FaDownload } from "react-icons/fa";
 
 function UserPage({ params }) {
   const { username } = params;
@@ -23,35 +22,35 @@ function UserPage({ params }) {
 
   useEffect(() => {
     const fetchUserData = async () => {
-        setIsLoading(true); // Start loading
-        setIs404(false); // Reset 404 state for each new fetch
+      setIsLoading(true); // Start loading
+      setIs404(false); // Reset 404 state for each new fetch
 
-        try {
-            const userResponse = await fetch(`https://api.github.com/users/${username}`);
-            
-            if (userResponse.status === 404) {
-                setIs404(true);
-                setUserData(null);
-                setRepositories([]);
-                setIsLoading(false);
-                return;
-            }
+      try {
+        const userResponse = await fetch(`https://api.github.com/users/${username}`);
 
-            const userData = await userResponse.json();
-            setUserData(userData);
-
-            const reposResponse = await fetch(userData.repos_url);
-            const reposData = await reposResponse.json();
-            setRepositories(reposData);
-        } catch (error) {
-            console.error("Fetch error:", error);
-        } finally {
-            setIsLoading(false); // End loading
+        if (userResponse.status === 404) {
+          setIs404(true);
+          setUserData(null);
+          setRepositories([]);
+          setIsLoading(false);
+          return;
         }
+
+        const userData = await userResponse.json();
+        setUserData(userData);
+
+        const reposResponse = await fetch(userData.repos_url);
+        const reposData = await reposResponse.json();
+        setRepositories(reposData);
+      } catch (error) {
+        console.error("Fetch error:", error);
+      } finally {
+        setIsLoading(false); // End loading
+      }
     };
 
     if (username) fetchUserData();
-}, [username]);
+  }, [username]);
 
   const totalPages = Math.ceil(repositories.length / reposPerPage);
   const indexOfLastRepo = currentPage * reposPerPage;
@@ -65,9 +64,6 @@ function UserPage({ params }) {
   const handlePreviousPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
-  
-
-
 
   const handleThemeChange = (e) => {
     const newTheme = e.target.value;
@@ -88,12 +84,35 @@ function UserPage({ params }) {
     router.push(`/${username}${queryString}`);
   };
 
-  // Return 404 page if error occurred
+  // Function to download repo stats in .md format
+  const downloadRepoStats = (repo) => {
+    const statsMarkdown = `# Repository: ${repo.name}
+
+**Description**: ${repo.description || "No description available"}
+
+## Stats:
+- **Stars**: ${repo.stargazers_count}
+- **Forks**: ${repo.forks_count}
+- **Open Issues**: ${repo.open_issues_count}
+- **Language**: ${repo.language || "Unknown"}
+
+## Links:
+- **Repository URL**: [${repo.html_url}](${repo.html_url})
+- **Created At**: ${new Date(repo.created_at).toLocaleDateString()}
+- **Last Updated**: ${new Date(repo.updated_at).toLocaleDateString()}
+`;
+
+    const blob = new Blob([statsMarkdown], { type: "text/markdown" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${repo.name}_stats.md`;
+    link.click();
+  };
+
   if (is404) {
     return <NotFound />;
   }
 
-  // Show loading spinner while fetching
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -104,14 +123,10 @@ function UserPage({ params }) {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8 md:p-16 relative">
-      {/* Stylish Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 via-purple-600 to-indigo-600 opacity-30 -z-10"></div>
-
-      {/* User Profile Section */}
       {userData && (
         <div className="max-w-6xl mx-auto bg-gray-800 bg-opacity-80 rounded-xl p-8 shadow-lg">
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-            {/* Profile Image */}
             <div className="flex-shrink-0">
               <Image
                 src={userData.avatar_url || "/default_avatar.jpg"}
@@ -121,16 +136,11 @@ function UserPage({ params }) {
                 className="rounded-full border-4 border-purple-500"
               />
             </div>
-
-            {/* Profile Info */}
             <div className="text-center md:text-left">
               <h1 className="text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-purple-800">
                 {userData.name || "Unknown User"}
               </h1>
-              <p className="text-gray-400 mt-2">
-                @{userData.login || "username"}
-              </p>
-
+              <p className="text-gray-400 mt-2">@{userData.login || "username"}</p>
               <div className="mt-4 space-y-2">
                 <p className="flex justify-center md:justify-start items-center gap-2 text-gray-400">
                   <FaMapPin className="w-4 h-4" />
@@ -138,12 +148,9 @@ function UserPage({ params }) {
                 </p>
                 <p className="flex justify-center md:justify-start items-center gap-2 text-gray-400">
                   <FaClock className="w-4 h-4" />
-                  {new Date().toLocaleString("en-IN", {
-                    timeZone: "Asia/Kolkata",
-                  })}
+                  {new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}
                 </p>
               </div>
-
               <div className="mt-4 flex justify-center md:justify-start gap-6 text-gray-500">
                 <div>
                   <FaGithub className="inline mr-1" />
@@ -157,23 +164,15 @@ function UserPage({ params }) {
             </div>
           </div>
 
-          {/* Repositories Section */}
           <div className="mt-10">
             <h3 className="text-3xl font-semibold mb-6 text-purple-400">
-             {userData.login.toUpperCase()}'s Repositories
+              {userData.login.toUpperCase()}'s Repositories
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {currentRepos.map((repo) => (
-                <div
-                  key={repo.id}
-                  className="bg-gray-700 p-6 rounded-lg overflow-hidden shadow-lg"
-                >
+                <div key={repo.id} className="bg-gray-700 p-6 rounded-lg overflow-hidden shadow-lg">
                   <h4 className="text-xl font-semibold text-blue-400 hover:underline">
-                    <a
-                      href={repo.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
                       {repo.name}
                     </a>
                   </h4>
@@ -184,11 +183,17 @@ function UserPage({ params }) {
                     <span>{repo.language || "Unknown"}</span>
                     <span>★ {repo.stargazers_count || 0}</span>
                   </div>
+                  <button
+                    onClick={() => downloadRepoStats(repo)}
+                    className="mt-4 px-4 py-2 bg-green-600 text-white rounded-md flex items-center gap-2"
+                  >
+                    <FaDownload />
+                    Stats
+                  </button>
                 </div>
               ))}
             </div>
 
-            {/* Pagination */}
             <div className="flex mb-5 justify-between items-center mt-8">
               <button
                 onClick={handlePreviousPage}
@@ -207,22 +212,6 @@ function UserPage({ params }) {
               >
                 Next
               </button>
-            </div>
-          </div>
-          <div
-            className="flex flex-col justify-center items-center h-screen"
-            style={{ backgroundColor: theme, color: textColor }}
-          >
-            <h1 className="text-2xl font-bold mb-4">{tagline} <FaGithub /></h1>
-            <div className="flex space-x-4">
-              <div>
-                <label className="block mb-2">Background Color</label>
-                <input
-                  type="color"
-                  value={theme}
-                  onChange={handleThemeChange}
-                />
-              </div>
             </div>
           </div>
         </div>
