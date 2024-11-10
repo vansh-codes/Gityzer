@@ -1,17 +1,89 @@
 'use client';
-import { useState,useEffect } from "react";
+import { useState,useEffect,useRef } from "react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from 'react-hot-toast';
 import Typewriter from "typewriter-effect";
 import Contributors from "./Contributors";
+import { MdHistory } from "react-icons/md";
 
 function Home() {
-  const [username, setUsername] = useState("");
+  const [username, setUserName] = useState("");
   const [showContributors, setShowContributors] = useState(false);
   const router = useRouter();
+ const [topSearches,setTopSearches] = useState([]);
+ const [showRecents,setShowRecents] = useState(false);
+ const inputRef = useRef(null);
+  const topRef = useRef(null);
 
+ useEffect(() => {
+  const names = localStorage.getItem("usernames");
+  if (names) {
+      const userObj = JSON.parse(names);
+      const sortedUsernames = Object.entries(userObj)
+          .sort(([, a], [, b]) => b.count - a.count)
+          .map(([key, value]) => ({ name: key, count: value.count }));
+      
+      setTopSearches(sortedUsernames.slice(0, 5)); 
+  }
+}, []);
+
+useEffect(() => {
+  // Add event listener to detect clicks outside
+  document.addEventListener('mousedown', handleClickOutside);
+  return () => {
+    // Cleanup event listener on component unmount
+    document.removeEventListener('mousedown', handleClickOutside);
+  };
+}, []);
+
+  // Function to check if a click is outside the input or top element
+const handleClickOutside = (event) => {
+  if (
+    topRef.current &&
+    !topRef.current.contains(event.target) &&
+    !inputRef.current.contains(event.target)
+  ) {
+    setShowRecents(false);
+  }
+};
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const val = username.trim();
+      if (!val) {
+          toast.error('Please enter a valid username.');
+          return;
+      }
+    const names = localStorage.getItem("usernames");
+
+    let userObj;
+    if (names) {
+        
+        userObj = JSON.parse(names);
+
+        if (userObj[val]) {
+           
+            userObj[val].count += 1;
+        } else {
+           
+            userObj[val] = { count: 1 };
+        }
+    } else {
+        
+        userObj = { [val]: { count: 1 } };
+    }
+    
+    localStorage.setItem("usernames", JSON.stringify(userObj));
+
+    
+    const sortedUsernames = Object.entries(userObj)
+        .sort(([, a], [, b]) => b.count - a.count)  // Sort by count in descending order
+        .map(([key, value]) => ({ name: key, count: value.count }));  // Convert back to array format
+
+    
+    setTopSearches(sortedUsernames.slice(0, 5));
+    
+
     if (username.trim()) {
       try {
         const response = await fetch('/api/user', {
@@ -22,11 +94,8 @@ function Home() {
           body: JSON.stringify({ username: username.trim() }),
         });
 
-        console.log(response)
-
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
           if (data.exists) {
             router.push(`/${username.trim()}`);
           } else {
@@ -42,6 +111,15 @@ function Home() {
       toast.error('Please enter a username.');
     }
   };
+
+  const handleTopSearchClick = (name) => {
+    setUserName(name); 
+};
+
+  const handleUser = async (e) => {
+    const val = e.target.value;
+    setUserName(val);
+};
 
   return (
     <>
@@ -98,11 +176,11 @@ function Home() {
               <input
                 type="text"
                 placeholder="Enter GitHub username"
-                className="w-full px-4 py-2 text-gray-700 bg-white focus:outline-none rounded-full"
+                className="w-full px-4 py-2 text-gray-700 bg-white focus:outline-none"
                 value={username}
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
+                onChange={handleUser}
+                ref={inputRef}
+                onFocus={() => setShowRecents(true)}
               />
 
               {/* Submit button */}
@@ -123,6 +201,25 @@ function Home() {
               </button>
             </div>
           </form>
+          {
+            topSearches && showRecents && topSearches.length > 0 ?  (
+          <div className="bg-transparent text-white justify-center w-1/2 pt-1 rounded-b-lg"
+          ref={topRef}
+          >
+                <div className="flex flex-col justify-center">
+                    {topSearches.map((user, index) => (
+                        
+                        <div
+                            key={index}
+                            className="flex justify-center p-1 cursor-pointer hover:text-green-500 rounded "
+                            onClick={() => handleTopSearchClick(user.name)} 
+                        >
+                          <MdHistory style={{marginRight:"9px",marginTop:"5px"}}/>  {user.name} 
+                        </div>
+                    ))}
+                </div>
+            </div>
+            ): null}
           </>
           )}
           {showContributors && (
