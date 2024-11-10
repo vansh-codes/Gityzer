@@ -40,12 +40,21 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/Akshithsaai">
+                    <img src="https://avatars.githubusercontent.com/u/76246437?v=4" width="100;" alt="Akshithsaai"/>
+                    <br />
+                    <sub><b>Akshith saai</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/mehul-m-prajapati">
                     <img src="https://avatars.githubusercontent.com/u/7879392?v=4" width="100;" alt="mehul-m-prajapati"/>
                     <br />
                     <sub><b>Mehul Prajapati</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/Sourabh782">
                     <img src="https://avatars.githubusercontent.com/u/103349890?v=4" width="100;" alt="Sourabh782"/>
@@ -53,8 +62,6 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Sourabh Singh Rawat</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/Tamanna225">
                     <img src="https://avatars.githubusercontent.com/u/119917783?v=4" width="100;" alt="Tamanna225"/>
@@ -90,20 +97,13 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Murtaza Sadriwala</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/milansamuel609">
                     <img src="https://avatars.githubusercontent.com/u/75712741?v=4" width="100;" alt="milansamuel609"/>
                     <br />
                     <sub><b>Milan P Samuel</b></sub>
-                </a>
-            </td>
-		</tr>
-		<tr>
-            <td align="center">
-                <a href="https://github.com/Akshithsaai">
-                    <img src="https://avatars.githubusercontent.com/u/76246437?v=4" width="100;" alt="Akshithsaai"/>
-                    <br />
-                    <sub><b>Akshith saai</b></sub>
                 </a>
             </td>
             <td align="center">
