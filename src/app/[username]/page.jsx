@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import NotFound from "@/app/not-found";
 import Image from "next/image";
-import { FaMapPin, FaClock, FaGithub, FaLink, FaDownload } from "react-icons/fa";
+import { FaMapPin, FaClock, FaGithub, FaLink, FaDownload,FaArrowCircleLeft } from "react-icons/fa";
 
 function UserPage({ params }) {
   const { username } = params;
@@ -164,6 +164,7 @@ function UserPage({ params }) {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8 md:p-16 relative">
+      <a href="/" style={{display:"block",width:"max-content"}}><div style={{backgroundColor:"#9F4DEB",width:"max-content",height:"15%",borderRadius:"8px",alignItems: "center",display: "flex",justifyContent: "center",padding:"5%",marginBottom:"10px"}} ><FaArrowCircleLeft style={{marginRight:"5px"}}/> Back to Home</div></a>
       <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 via-purple-600 to-indigo-600 opacity-30 -z-10"></div>
       {userData && (
         <div className="max-w-6xl mx-auto bg-gray-800 bg-opacity-80 rounded-xl p-8 shadow-lg">
