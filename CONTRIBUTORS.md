@@ -40,10 +40,10 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
-                <a href="https://github.com/Tamanna225">
-                    <img src="https://avatars.githubusercontent.com/u/119917783?v=4" width="100;" alt="Tamanna225"/>
+                <a href="https://github.com/mehul-m-prajapati">
+                    <img src="https://avatars.githubusercontent.com/u/7879392?v=4" width="100;" alt="mehul-m-prajapati"/>
                     <br />
-                    <sub><b>Tamanna</b></sub>
+                    <sub><b>Mehul Prajapati</b></sub>
                 </a>
             </td>
             <td align="center">
@@ -56,31 +56,17 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
 		</tr>
 		<tr>
             <td align="center">
-                <a href="https://github.com/mehul-m-prajapati">
-                    <img src="https://avatars.githubusercontent.com/u/7879392?v=4" width="100;" alt="mehul-m-prajapati"/>
+                <a href="https://github.com/Tamanna225">
+                    <img src="https://avatars.githubusercontent.com/u/119917783?v=4" width="100;" alt="Tamanna225"/>
                     <br />
-                    <sub><b>Mehul Prajapati</b></sub>
+                    <sub><b>Tamanna</b></sub>
                 </a>
             </td>
             <td align="center">
-                <a href="https://github.com/milansamuel609">
-                    <img src="https://avatars.githubusercontent.com/u/75712741?v=4" width="100;" alt="milansamuel609"/>
+                <a href="https://github.com/smog-root">
+                    <img src="https://avatars.githubusercontent.com/u/181578777?v=4" width="100;" alt="smog-root"/>
                     <br />
-                    <sub><b>Milan P Samuel</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/murtaza-sadri-19">
-                    <img src="https://avatars.githubusercontent.com/u/151193465?v=4" width="100;" alt="murtaza-sadri-19"/>
-                    <br />
-                    <sub><b>Murtaza Sadriwala</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/piyushpatelcodes">
-                    <img src="https://avatars.githubusercontent.com/u/136020845?v=4" width="100;" alt="piyushpatelcodes"/>
-                    <br />
-                    <sub><b>Piyush Patel</b></sub>
+                    <sub><b>smog-root</b></sub>
                 </a>
             </td>
             <td align="center">
@@ -91,10 +77,24 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
-                <a href="https://github.com/smog-root">
-                    <img src="https://avatars.githubusercontent.com/u/181578777?v=4" width="100;" alt="smog-root"/>
+                <a href="https://github.com/piyushpatelcodes">
+                    <img src="https://avatars.githubusercontent.com/u/136020845?v=4" width="100;" alt="piyushpatelcodes"/>
                     <br />
-                    <sub><b>smog-root</b></sub>
+                    <sub><b>Piyush Patel</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/murtaza-sadri-19">
+                    <img src="https://avatars.githubusercontent.com/u/151193465?v=4" width="100;" alt="murtaza-sadri-19"/>
+                    <br />
+                    <sub><b>Murtaza Sadriwala</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/milansamuel609">
+                    <img src="https://avatars.githubusercontent.com/u/75712741?v=4" width="100;" alt="milansamuel609"/>
+                    <br />
+                    <sub><b>Milan P Samuel</b></sub>
                 </a>
             </td>
 		</tr>
