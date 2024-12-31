@@ -139,9 +139,9 @@ Contributors can help by:
 </div>
 <br>
 
-We welcome contributors from the Developers & AI community to enrich Gityzer and make it even more valuable for everyone. Please follow our [CONTRIBUTING guidelines](https://github.com/vansh-codes/Gityzer/blob/master/CONTRIBUTING) for the following:-
+We welcome contributors from the Developers & AI community to enrich Gityzer and make it even more valuable for everyone. Please follow our [CONTRIBUTING guidelines](https://github.com/vansh-codes/Gityzer/blob/master/CONTRIBUTING.md) for the following:-
 
-**_Want to contribute to our website you must have to read [CONTRIBUTING guidelines](https://github.com/vansh-codes/Gityzer/blob/master/CONTRIBUTING)._**
+**_Want to contribute to our website you must have to read [CONTRIBUTING guidelines](https://github.com/vansh-codes/Gityzer/blob/master/CONTRIBUTING.md)._**
 
 - Setup Gityzer on your local machine
 - Enhance the website
