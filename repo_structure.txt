@@ -7,48 +7,52 @@
 ├── SECURITY.md
 ├── ai/
 │   └── generateTagline.js
-├── components/
-│   ├── Contributors.jsx
-│   ├── Home.jsx
-│   └── MyCard.jsx
 ├── jsconfig.json
-├── logos/
-│   ├── dark-logo.ico
-│   ├── dark-logo.png
-│   ├── dark-logo.svg
-│   ├── dark-logo.webp
-│   ├── favicon.ico
-│   ├── light-logo.ico
-│   ├── light-logo.png
-│   ├── light-logo.svg
-│   └── light-logo.webp
 ├── next.config.mjs
 ├── package-lock.json
 ├── package.json
 ├── postcss.config.mjs
 ├── public/
+│   ├── Githuberror404.png
 │   ├── github-filled.svg
-│   ├── robots.txt
-│   └── sitemap.xml
+│   └── humans.txt
 ├── repo_structure.txt
 ├── src/
 │   ├── README.md
-│   └── app/
-│       ├── [username]/
-│       │   └── page.jsx
-│       ├── api/
-│       │   ├── ai/
-│       │   │   └── route.js
-│       │   └── user/
-│       │       └── route.js
-│       ├── favicon.ico
-│       ├── fonts/
-│       │   ├── GeistMonoVF.woff
-│       │   └── GeistVF.woff
-│       ├── globals.css
-│       ├── images/
-│       │   └── Githuberror404.png
-│       ├── layout.js
-│       ├── not-found.jsx
-│       └── page.jsx
-└── tailwind.config.js
+│   ├── app/
+│   │   ├── [...not-found]/
+│   │   │   └── page.jsx
+│   │   ├── [username]/
+│   │   │   └── page.jsx
+│   │   ├── api/
+│   │   │   ├── ai/
+│   │   │   │   └── route.js
+│   │   │   └── user/
+│   │   │       └── route.js
+│   │   ├── contributors/
+│   │   │   └── page.jsx
+│   │   ├── favicon.ico
+│   │   ├── fonts/
+│   │   │   ├── GeistMonoVF.woff
+│   │   │   └── GeistVF.woff
+│   │   ├── globals.css
+│   │   ├── layout.js
+│   │   ├── page.jsx
+│   │   ├── robots.ts
+│   │   └── sitemap.ts
+│   ├── components/
+│   │   ├── MyCard.jsx
+│   │   └── README.md
+│   ├── hooks/
+│   │   └── README.md
+│   ├── libs/
+│   │   ├── README.md
+│   │   └── utils.ts
+│   └── pages/
+│       ├── Contributors.jsx
+│       ├── Home.jsx
+│       ├── NotFound.jsx
+│       ├── README.md
+│       └── UserProfile.jsx
+├── tailwind.config.js
+└── tsconfig.json
