@@ -1,6 +1,7 @@
 ## Project Structure ✨
 
 <!-- START_STRUCTURE -->
+
 ```
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
@@ -57,4 +58,5 @@
 │       └── page.jsx
 └── tailwind.config.js
 ```
+
 <!-- END_STRUCTURE -->

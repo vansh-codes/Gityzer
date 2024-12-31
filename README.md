@@ -2,7 +2,7 @@
 
 # **GITYZER**
 
-<i>Gityzer is an open-source tool that generates a personalized image summarizing a user's GitHub stats. This image can be easily embedded in GitHub README files, helping developers showcase their contributions, coding activity, and overall GitHub presence.*
+<i>Gityzer is an open-source tool that generates a personalized image summarizing a user's GitHub stats. This image can be easily embedded in GitHub README files, helping developers showcase their contributions, coding activity, and overall GitHub presence.\*
 </i>
 
 <br>
@@ -34,13 +34,12 @@
 <br>
 
 ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People%20with%20professions/Man%20Technologist%20Medium%20Skin%20Tone.png" alt="man-techno" height=50 width=50> Live Demo
+
 Visit https://gityzer.vercel.app/ to see the live demo
 
 > [!NOTE]
 > Take UI inspiration from [Socialify](https://socialify.git.ci/)
 > Inspiration doesnt means copying the exact same UI from there
-
-
 
 ## 💪 Outreach
 
@@ -70,6 +69,7 @@ Gityzer is proudly part of global initiatives engaging with passionate developer
 </table>
 
 ## Technologies Used:
+
 <p>
   <a href="https://react.dev/">
     <img src="https://shields.io/badge/react-black?logo=react&style=for-the-badge" alt="Next.js Official Website"/>
@@ -86,20 +86,22 @@ Gityzer is proudly part of global initiatives engaging with passionate developer
 ### How it works
 
 1. **Fetch GitHub Data:** Gityzer collects details about a user's GitHub profile, such as:
-  - Total contributions
-  - Participation in repositories
-  - Active coding days
-  - Most used programming languages
-  - And many more parameters
+
+- Total contributions
+- Participation in repositories
+- Active coding days
+- Most used programming languages
+- And many more parameters
 
 2. **Generate a Custom Tagline:** Using AI (the Gemini model), Gityzer creates a unique tagline for each user based on their activity and contribution patterns on GitHub. This tagline is consistent and meaningful, providing an at-a-glance summary of the user's work.
 
 3. **Create and Embed an Image:** The tool generates an image with the following customizable elements:
+
    - **Username:** Details fetched from the GitHub profile.
    - **Styling Options:** Users can choose from different styles, themes (like dark or light mode), and color combinations.
    - **Update Frequency:** Users can decide how often the image gets updated (e.g., every 14 days).
 
-4. **Avoid Rate Limits:** To prevent hitting GitHub’s API rate limits, users will need to provide their *GitHub personal access token* with read permissions. This allows them to fetch their own profile data more efficiently.
+4. **Avoid Rate Limits:** To prevent hitting GitHub’s API rate limits, users will need to provide their _GitHub personal access token_ with read permissions. This allows them to fetch their own profile data more efficiently.
 
 **Example URL:**
 
@@ -122,14 +124,14 @@ Check the project structure here [Project Structure](PROJECT_STRUCTURE.md)
 ## How to contribute ?
 
 Contributors can help by:
+
 - **Building the API:** Integrating GitHub’s API to fetch user data.
 - **Fine-tuning the Gemini AI model:** Ensuring the AI generates meaningful taglines.
 - **Improving the Image Generator:** Enhancing the styling options and themes.
 - **Improving the Website UI:** Enhancing the website style, design and UI
 - **Improving User Experience:** Simplifying the setup process for users and ensuring smooth token handling to avoid rate limits.
 
-
-> [!TIP] 
+> [!TIP]
 > Gityzer aims to make it easy for developers to create dynamic, personalized badges for their GitHub profiles, helping them stand out with a summary of their contributions in a visually appealing way. Let's work together to build this awesome tool!
 
 <div align="left">
@@ -139,13 +141,13 @@ Contributors can help by:
 
 We welcome contributors from the Developers & AI community to enrich Gityzer and make it even more valuable for everyone. Please follow our [CONTRIBUTING guidelines](https://github.com/vansh-codes/Gityzer/blob/master/CONTRIBUTING) for the following:-
 
-***Want to contribute to our website you must have to read [CONTRIBUTING guidelines](https://github.com/vansh-codes/Gityzer/blob/master/CONTRIBUTING).***
+**_Want to contribute to our website you must have to read [CONTRIBUTING guidelines](https://github.com/vansh-codes/Gityzer/blob/master/CONTRIBUTING)._**
+
 - Setup Gityzer on your local machine
 - Enhance the website
 - Finetune the AI model
 - enhance the image generation by making it responsive, adding themes and colors
 - And more!
-
 
 <h1 align=center> Project Admin <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People%20with%20professions/Man%20Technologist%20Medium%20Skin%20Tone.png" alt="man-techno" height=40 width=40> </h1>
 
@@ -160,11 +162,9 @@ We welcome contributors from the Developers & AI community to enrich Gityzer and
 </p>
 </div>
 
-
 ## Code Of Conduct📑
 
 This project and everyone participating in it is governed by the [Code of Conduct](https://github.com/vansh-codes/Gityzer/blob/master/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
-
 
 <div align="center">
 
@@ -176,8 +176,7 @@ This project and everyone participating in it is governed by the [Code of Conduc
 </div>
 <br>
 
-We extend our heartfelt gratitude for your invaluable contribution to our project! Your efforts play a pivotal role in elevating Gityzer to greater heights. 
+We extend our heartfelt gratitude for your invaluable contribution to our project! Your efforts play a pivotal role in elevating Gityzer to greater heights.
 
 Here are the wonderful people who have contributed in [Gityzer](https://github.com/vansh-codes/Gityzer). You can see them here [CONTRIBUTORS.md](CONTRIBUTORS.md)
 Make sure you show some love by giving ⭐ to our repository
-

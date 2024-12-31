@@ -1,4 +1,5 @@
 ## Contributors
+
 We are immensely grateful to the following amazing individuals who have contributed their time, effort, and expertise to make this project better. Your contributions, whether through code, documentation, bug reports, or feature suggestions, have been invaluable. Thank you for helping us build and improve GITYZER 🌟✨
 
 Your dedication and hard work are what drive this project forward, and we couldn't have done it without you. Each contribution, no matter how small, plays a crucial role in our journey towards creating a more efficient and user-friendly tool for developers. 🙌💻
@@ -166,9 +167,9 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
 </div>
 
 ### &#8627; Forkers
+
 <div align='center'>
 
 [![Forkers repo roster for @vansh-codes/Gityzer](https://reporoster.com/forks/vansh-codes/Gityzer)](https://github.com/vansh-codes/Gityzer/network/members)
 
 </div>
-

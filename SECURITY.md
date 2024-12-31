@@ -10,7 +10,7 @@ The security policy covers the codebase and documentation of the open source pro
 
 ## Vulnerability Disclosure Process
 
-The project will provide a dedicated email address (gityzer@gmail.com) for submitting vulnerability reports related to the [Gityzer](https://gityzer.vercel.app/) which you can search any queries or documentation to our dashboard. 
+The project will provide a dedicated email address (gityzer@gmail.com) for submitting vulnerability reports related to the [Gityzer](https://gityzer.vercel.app/) which you can search any queries or documentation to our dashboard.
 
 ## Roles and Responsibilities
 

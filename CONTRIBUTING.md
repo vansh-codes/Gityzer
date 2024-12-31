@@ -20,7 +20,7 @@ Please read and follow our [Code of Conduct](https://github.com/vansh-codes/Gity
 
 <br>
 
-# <h1 align="center">Star our Repository ⭐</h1>  
+# <h1 align="center">Star our Repository ⭐</h1>
 
 ### <div align = "center" style = "display:flex; justify-content:space-evenly; gap:100px;" > [![Stars](https://img.shields.io/github/stars/vansh-codes/Gityzer?style=for-the-badge&logo=github)](https://github.com/vansh-codes/Gityzer/stargazers) [![Forks](https://img.shields.io/github/forks/vansh-codes/Gityzer?style=for-the-badge&logo=github)](https://github.com/vansh-codes/Gityzer/network/members) [![Issues](https://img.shields.io/github/issues/vansh-codes/Gityzer?style=for-the-badge&logo=github)](https://github.com/vansh-codes/Gityzer/issues) [![PRs Open](https://img.shields.io/github/issues-pr/vansh-codes/Gityzer?style=for-the-badge&logo=github)](https://github.com/vansh-codes/Gityzer/pulls) [![PRs Closed](https://img.shields.io/github/issues-pr-closed/vansh-codes/Gityzer?style=for-the-badge&logo=github&color=2cbe4e)](https://github.com/vansh-codes/Gityzer/pulls?q=is%3Apr+is%3Aclosed)</div>
 
@@ -56,8 +56,8 @@ To get started, look at the existing [**Create a new issue**](https://github.com
 
 > [!NOTE]
 > This is [Next.js](https://nextjs.org/docs) project.
-> You must have installed Node.js on your local macahine. If you don't have it installed yet,                                                             
-  you can download it from [here](https://nodejs.org/en/download/package-manager).
+> You must have installed Node.js on your local macahine. If you don't have it installed yet,  
+>  you can download it from [here](https://nodejs.org/en/download/package-manager).
 
 <br>
 
@@ -70,7 +70,7 @@ To get started, look at the existing [**Create a new issue**](https://github.com
 ```bash
 git clone https://github.com/<your-github-username>/Gityzer.git
 ```
-  
+
 3. **Navigate to the project directory**
 
 ```bash
@@ -108,47 +108,54 @@ git push -u origin <your_branch_name>
 ## Alternatively, contribute using GitHub Desktop 🖥️
 
 1. **Open GitHub Desktop:**
-  Launch GitHub Desktop and log in to your GitHub account if you haven't already.
+   Launch GitHub Desktop and log in to your GitHub account if you haven't already.
 
 2. **Clone the Repository:**
+
 - If you haven't cloned the project repository yet, you can do so by clicking on the "File" menu and selecting "Clone Repository."
 - Choose the project repository from the list of repositories on GitHub and clone it to your local machine.
 
 3. **Switch to the Correct Branch:**
+
 - Ensure you are on the branch that you want to submit a pull request for.
 - If you need to switch branches, you can do so by clicking on the "Current Branch" dropdown menu and selecting the desired branch.
 
 4. **Make Changes:**
+
 - Make your changes to the code or files in the repository using your preferred code editor.
 
 5. **Commit Changes:**
+
 - In GitHub Desktop, you'll see a list of the files you've changed. Check the box next to each file you want to include in the commit.
 - Enter a summary and description for your changes in the "Summary" and "Description" fields, respectively. Click the "Commit to <branch-name>" button to commit your changes to the local branch.
 
 6. **Push Changes to GitHub:**
+
 - After committing your changes, click the "Push origin" button in the top right corner of GitHub Desktop to push your changes to your forked repository on GitHub.
 
 7. **Create a Pull Request:**
+
 - Go to the GitHub website and navigate to your fork of the project repository.
 - You should see a button to "Compare & pull request" between your fork and the original repository. Click on it.
 
 8. **Review and Submit:**
+
 - On the pull request page, review your changes and add any additional information, such as a title and description, that you want to include with your pull request.
 - Once you're satisfied, click the "Create pull request" button to submit your pull request.
 
 9. **Wait for Review:**
-Your pull request will now be available for review by the project maintainers. They may provide feedback or ask for changes before merging your pull request into the main branch of the project repository.
+   Your pull request will now be available for review by the project maintainers. They may provide feedback or ask for changes before merging your pull request into the main branch of the project repository.
 
 ## To Install dependencies 👾
 
 - Installation:
-  
+
   ```bash
   npm install
   ```
 
 - Run the Deployment Server:
-  
+
   ```bash
   npm run dev
   ```
@@ -172,6 +179,7 @@ Your pull request will now be available for review by the project maintainers. T
 <br>
 
 # Guidelines for Good Commit Messages ✅
+
 We follow a standardized commit message format using Commitlint to ensure consistency and clarity in our commit history. Each commit message should adhere to the following guidelines:
 
 1. **Be Concise and Descriptive**: Summarize the change in a way that’s easy to understand at a glance.
@@ -180,7 +188,7 @@ We follow a standardized commit message format using Commitlint to ensure consis
 4. **Reference Issues and Pull Requests**: Include `issue numbers` or PR references if the commit addresses them.
 5. **Issue reference** (Optional): Include the issue number associated with the commit (e.g., `#123`).
 
-## Examples of Invalid Commit Messages ❌ 
+## Examples of Invalid Commit Messages ❌
 
 - `Added new stuff`
 - `Fixed a bug`

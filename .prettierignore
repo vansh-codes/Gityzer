@@ -1,0 +1,59 @@
+# Node.js dependencies
+node_modules/
+.next/
+
+# Github files
+.github
+.gitignore
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+CONTRIBUTORS.md
+LICENSE
+PROJECT_STRUCTURE.md
+repo_structure.txt
+SECURITY.md
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# Build artifacts
+dist/
+build/
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+.env
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Static files and assets
+public/
+*.ico
+*.png
+*.jpg
+*.svg
+
+# Minified files
+*.min.js
+*.min.css

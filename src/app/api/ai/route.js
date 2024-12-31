@@ -1,12 +1,12 @@
-import { NextResponse } from "next/server";
-import { generateUserTagline } from "../../../../ai/generateTagline";
-const GITHUB_API_URL = "https://api.github.com/graphql";
+import { NextResponse } from 'next/server'
+import { generateUserTagline } from '../../../../ai/generateTagline'
+const GITHUB_API_URL = 'https://api.github.com/graphql'
 
 export async function POST(req) {
-  const { username } = await req.json();
+  const { username } = await req.json()
 
   if (!username) {
-    return new NextResponse("Username required", { status: 400 });
+    return new NextResponse('Username required', { status: 400 })
   }
 
   const query = `
@@ -33,65 +33,68 @@ export async function POST(req) {
         }
       }
     }
-  `;
+  `
 
   try {
-    console.log("hii");
-    
+    console.log('hii')
+
     const response = await fetch(GITHUB_API_URL, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        Accept: "application/json",
+        Accept: 'application/json',
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         query,
         variables: { login: username },
       }),
-    });
+    })
 
     // console.log(response)
-    console.log("hello");
-    
+    console.log('hello')
 
     if (!response.ok) {
       return new NextResponse(await response.text(), {
         status: response.status,
-      });
+      })
     }
 
-    const data = await response.json();
+    const data = await response.json()
     // console.log(data);
     if (data.data.user) {
-      const repositories = data.data.user.repositories.nodes;
+      const repositories = data.data.user.repositories.nodes
 
       // Count each language's occurrence
-      const languageCounts = {};
-      repositories.forEach(repo => {
-        const language = repo.primaryLanguage?.name;
+      const languageCounts = {}
+      repositories.forEach((repo) => {
+        const language = repo.primaryLanguage?.name
         if (language) {
-          languageCounts[language] = (languageCounts[language] || 0) + 1;
+          languageCounts[language] = (languageCounts[language] || 0) + 1
         }
-      });
+      })
 
       // Determine the most used language(s)
       const mostUsedLanguages = Object.keys(languageCounts).sort(
         (a, b) => languageCounts[b] - languageCounts[a]
-      );
-      
-      const contributions = data.data.user.contributionsCollection;
+      )
+
+      const contributions = data.data.user.contributionsCollection
       // console.log(contributions)
-      const tagline = await generateUserTagline(username, contributions, mostUsedLanguages.slice(0, 1));
+      const tagline = await generateUserTagline(
+        username,
+        contributions,
+        mostUsedLanguages.slice(0, 1)
+      )
       return NextResponse.json({
         exists: true,
         tagline,
-      });
+      })
     } else {
-      return NextResponse.json({ exists: false });
+      return NextResponse.json({ exists: false })
     }
   } catch (error) {
-    console.error("Error checking GitHub username:", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
+    console.error('Error checking GitHub username:', error)
+    return new NextResponse('Internal Server Error', { status: 500 })
   }
 }
