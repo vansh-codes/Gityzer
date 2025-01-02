@@ -3,7 +3,8 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import NotFound from '@/pages/NotFound'
 import Image from 'next/image'
-import { FaMapPin, FaClock, FaGithub, FaLink, FaDownload } from 'react-icons/fa'
+import { FaMapPin, FaClock, FaGithub, FaLink, FaDownload, FaBackward } from 'react-icons/fa'
+import { IoArrowBackCircle } from "react-icons/io5";
 import React from 'react'
 
 export default function UserProfile({ username }) {
@@ -162,6 +163,7 @@ export default function UserProfile({ username }) {
       <div className='absolute inset-0 bg-gradient-to-tr from-indigo-600 via-purple-600 to-indigo-600 opacity-30 -z-10'></div>
       {userData && (
         <div className='max-w-6xl mx-auto bg-gray-800 bg-opacity-80 rounded-xl p-8 shadow-lg'>
+        <a href="/" className='text-lg flex gap-2 text-gray-400 items-center m-4 font-semibold hover:underline'><FaBackward /> Try Another Profile </a>
           <div className='flex flex-col md:flex-row items-center md:items-start gap-8'>
             <div className='flex-shrink-0'>
               <Image
@@ -214,13 +216,13 @@ export default function UserProfile({ username }) {
 
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6'>
               {currentRepos.map((repo) => (
-                <div key={repo.id} className='bg-gray-700 p-6 rounded-lg overflow-hidden shadow-lg'>
+                <div key={repo.id} className='bg-gray-700 p-6 rounded-lg overflow-hidden shadow-lg flex flex-col justify-between'>  
                   <h4 className='text-xl font-semibold text-blue-400 hover:underline'>
                     <a href={repo.html_url} target='_blank' rel='noopener noreferrer'>
                       {repo.name}
                     </a>
                   </h4>
-                  <p className='text-gray-300 mt-2'>
+                  <p className='text-gray-300 mt-2 grow'>
                     {repo.description || 'No description available.'}
                   </p>
                   <div className='flex bg-stone-500/10 p-1.5 rounded-md justify-between mt-4 text-gray-400 text-sm'>
@@ -229,8 +231,7 @@ export default function UserProfile({ username }) {
                   </div>
                   <button
                     onClick={() => downloadRepoStats(repo)}
-                    className='mt-4 px-4 py-2 bg-green-600 text-white rounded-md flex items-center gap-2'
-                  >
+                    className='mt-4 px-4 py-2 bg-green-600 text-white rounded-md flex items-center gap-2 justify-center'>
                     <FaDownload />
                     Stats
                   </button>
