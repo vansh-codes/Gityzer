@@ -64,6 +64,13 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/LoneWolf4713">
+                    <img src="https://avatars.githubusercontent.com/u/72555478?v=4" width="100;" alt="LoneWolf4713"/>
+                    <br />
+                    <sub><b>prtyksh</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/Tamanna225">
                     <img src="https://avatars.githubusercontent.com/u/119917783?v=4" width="100;" alt="Tamanna225"/>
                     <br />
@@ -91,6 +98,8 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Piyush Patel</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/murtaza-sadri-19">
                     <img src="https://avatars.githubusercontent.com/u/151193465?v=4" width="100;" alt="murtaza-sadri-19"/>
@@ -98,8 +107,6 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Murtaza Sadriwala</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/milansamuel609">
                     <img src="https://avatars.githubusercontent.com/u/75712741?v=4" width="100;" alt="milansamuel609"/>
@@ -135,6 +142,8 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Devansh Vishwa</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/nithinrvs">
                     <img src="https://avatars.githubusercontent.com/u/103061474?v=4" width="100;" alt="nithinrvs"/>
@@ -142,8 +151,6 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>nithinrvs</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/Unnati2603">
                     <img src="https://avatars.githubusercontent.com/u/130018046?v=4" width="100;" alt="Unnati2603"/>
