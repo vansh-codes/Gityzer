@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server'
+import { RequestBody } from './interface'
 
-export async function POST(req) {
+export async function POST(req: Request): Promise<NextResponse> {
   // Parse the request body to extract the username
-  const { username } = await req.json()
+  const { username }: RequestBody = await req.json()
 
   if (!username) {
     return new NextResponse('Username required', { status: 400 })
@@ -22,7 +23,7 @@ export async function POST(req) {
     }
 
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
 
     // If the user exists, return a response with `exists: true`
     if (data && data.login) {
