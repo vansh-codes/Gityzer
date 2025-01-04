@@ -9,8 +9,6 @@
 ├── PROJECT_STRUCTURE.md
 ├── README.md
 ├── SECURITY.md
-├── ai/
-│   └── generateTagline.js
 ├── jsconfig.json
 ├── next.config.mjs
 ├── package-lock.json
@@ -18,8 +16,14 @@
 ├── postcss.config.mjs
 ├── public/
 │   ├── Githuberror404.png
+│   ├── download.svg
 │   ├── github-filled.svg
-│   └── humans.txt
+│   ├── humans.txt
+│   ├── img.svg
+│   ├── markdown.svg
+│   ├── shape1.png
+│   ├── shape2.png
+│   └── url.svg
 ├── repo_structure.txt
 ├── src/
 │   ├── README.md
@@ -27,10 +31,14 @@
 │   │   ├── [...not-found]/
 │   │   │   └── page.jsx
 │   │   ├── [username]/
+│   │   │   ├── badge/
+│   │   │   │   └── page.jsx
 │   │   │   └── page.jsx
 │   │   ├── api/
 │   │   │   ├── ai/
-│   │   │   │   └── route.js
+│   │   │   │   └── route.ts
+│   │   │   ├── github_profile/
+│   │   │   │   └── route.ts
 │   │   │   └── user/
 │   │   │       └── route.js
 │   │   ├── contributors/
@@ -45,6 +53,7 @@
 │   │   ├── robots.ts
 │   │   └── sitemap.ts
 │   ├── components/
+│   │   ├── Canvas.jsx
 │   │   ├── MyCard.jsx
 │   │   └── README.md
 │   ├── hooks/
