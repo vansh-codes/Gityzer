@@ -31,8 +31,6 @@
 │   │   ├── [...not-found]/
 │   │   │   └── page.jsx
 │   │   ├── [username]/
-│   │   │   ├── badge/
-│   │   │   │   └── page.jsx
 │   │   │   └── page.jsx
 │   │   ├── api/
 │   │   │   ├── ai/
@@ -40,7 +38,8 @@
 │   │   │   ├── github_profile/
 │   │   │   │   └── route.ts
 │   │   │   └── user/
-│   │   │       └── route.js
+│   │   │       ├── interface.ts
+│   │   │       └── route.ts
 │   │   ├── contributors/
 │   │   │   └── page.jsx
 │   │   ├── favicon.ico
@@ -54,6 +53,7 @@
 │   │   └── sitemap.ts
 │   ├── components/
 │   │   ├── Canvas.jsx
+│   │   ├── Header.jsx
 │   │   ├── MyCard.jsx
 │   │   └── README.md
 │   ├── hooks/
@@ -65,8 +65,7 @@
 │       ├── Contributors.jsx
 │       ├── Home.jsx
 │       ├── NotFound.jsx
-│       ├── README.md
-│       └── UserProfile.jsx
+│       └── README.md
 ├── tailwind.config.js
 └── tsconfig.json
 ```
