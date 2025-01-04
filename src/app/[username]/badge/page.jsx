@@ -162,12 +162,14 @@ export default function Badge({ params }) {
       });
 
       const data = await res.json();
-      if (res.ok) {
+      if (data.success) {
         setTagline(data.response);
       } else {
+        console.warn("Error generating tagline!", data.error)
         setTagline(`Error: ${data.error}`);
       }
     } catch (error) {
+      console.error("Error in tagline generation", error)
       setTagline("Error communicating with the server.");
     }
   };

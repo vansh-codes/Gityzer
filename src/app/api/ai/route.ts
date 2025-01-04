@@ -14,8 +14,8 @@ export const POST = async (request: Request) => {
     const response = result.response
     const tagline = response.text();
 
-    return NextResponse.json({ response: tagline })
+    return NextResponse.json({ response: tagline, success: true })
   } catch (error) {
-    return NextResponse.json({ error: "Failed to generate content." })
+    return NextResponse.json({ error: "Failed to generate content.", success: false })
   }
 }
