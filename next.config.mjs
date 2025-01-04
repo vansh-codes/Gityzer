@@ -22,8 +22,12 @@ const nextConfig = {
           },
         ],
       },
-    ]
+    ];
   },
-}
+  // Enable usage of environment variables in your app
+  env: {
+    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+  },
+};
 
-export default nextConfig
+export default nextConfig;
