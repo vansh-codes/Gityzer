@@ -9,7 +9,7 @@ export default function Badge({ params }) {
   const router = useRouter();
   const [userData, setUserData] = useState(null); // user's github data
   const [loading, setLoading] = useState(true);   // Loading state
-  const [tagline, setTagline] = useState("");
+  const [Tagline, setTagline] = useState("");
   const [taglineGenerated, setTaglineGenerated] = useState(false);
   const [userFetched, setUserFetched] = useState(false);
   const Languages = {};
@@ -30,7 +30,7 @@ export default function Badge({ params }) {
     fork: false,
     issue: false,
     UserName: username,
-    Tagline: tagline,
+    Tagline: Tagline,
     star_count: 0,
     fork_count: 0,
     issue_count: 0,
@@ -184,16 +184,16 @@ export default function Badge({ params }) {
   useEffect(() => {
     setConfig((prevConfig) => ({
       ...prevConfig,
-      tagline, // Sync the tagline to the config
+      Tagline, // Sync the tagline to the config
     }));
-  }, [tagline]);
+  }, [Tagline]);
 
 
   return (
     <div className='min-h-screen text-white p-4 md:p-6 relative flex flex-col gap-2' >
       <div className="flex gap-10 items-center justify-center h-[450px]">
         {/* Conditionally render Canvas only if tagline exists */}
-        {tagline && tagline.trim() ? (
+        {Tagline && Tagline.trim() ? (
           <Canvas config={config} />
         ) : (
           <p>Loading your badge...</p>
