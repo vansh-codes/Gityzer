@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import toast, { Toaster } from 'react-hot-toast'
 
 export default function CanvasEditor({ config }) {
   const canvasRef = useRef(null);
@@ -144,33 +145,68 @@ export default function CanvasEditor({ config }) {
 
   const exportCanvas = () => {
     const canvas = canvasRef.current;
+    const url = canvas.toDataURL("image/png");
     const link = document.createElement("a");
-    link.download = "canvas-image.png";
-    link.href = canvas.toDataURL("image/png");
+    link.download = `${config.UserName}-canvas.png`;
+    link.href = url;
     link.click();
+    toast.success("Image downloaded successfully!");
   };
-  
+
+  const exportMarkdown = () => {
+    const canvas = canvasRef.current;
+    const markdownLink = `![Canvas Output](${canvas.toDataURL("image/png")})`;
+    navigator.clipboard
+      .writeText(markdownLink)
+      .then(() => toast.success("Markdown copied successfully!"))
+      .catch(() => toast.error("Failed to copy Markdown link!"));
+  };
+
+  const exportURL = () => {
+    const canvas = canvasRef.current;
+    const url = canvas.toDataURL("image/png");
+    navigator.clipboard
+      .writeText(url)
+      .then(() => toast.success("Image URL copied successfully!"))
+      .catch(() => toast.error("Failed to copy Image URL!"));
+  };
+
+  const exportHTML = () => {
+    const canvas = canvasRef.current;
+    const htmlCode = `<img src="${canvas.toDataURL("image/png")}" alt="Canvas Output" />`;
+    navigator.clipboard
+      .writeText(htmlCode)
+      .then(() => toast.success("HTML code copied successfully!"))
+      .catch(() => toast.error("Failed to copy HTML code!"));
+  };
 
   return (
     <div className="flex flex-col gap-4 items-center justify-center">
       <canvas ref={canvasRef} width={720} height={360} className="border-none rounded-xl" />
       <div className="text-justify font-semibold font-mono flex bg-slate-800 bg-opacity-80 rounded-xl p-4 shadow-lg gap-8 items-center justify-center">
-        <button className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]">
-          <img src="/markdown.svg" alt="" width="20" />MARKDOWN
+        <button
+          onClick={exportMarkdown}
+          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]">
+          <img src="/markdown.svg" alt="Markdown svg" width="20" />MARKDOWN
         </button>
         <button
           onClick={exportCanvas}
           className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]"
         >
-          <img src="/download.svg" alt="" width="20" />DOWNLOAD
+          <img src="/download.svg" alt="Download dvg" width="20" />DOWNLOAD
         </button>
-        <button className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]">
-          <img src="/url.svg" alt="" width="20" />URL
+        <button
+          onClick={exportURL}
+          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]">
+          <img src="/url.svg" alt="URL svg" width="20" />URL
         </button>
-        <button className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]">
-          <img src="/img.svg" alt="" width="20" />&lt;IMG /&gt;
+        <button
+          onClick={exportHTML}
+          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]">
+          <img src="/img.svg" alt="Image svg" width="20" />&lt;IMG /&gt;
         </button>
       </div>
+      <Toaster />
     </div>
   );
 }
