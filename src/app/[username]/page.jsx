@@ -1,60 +1,66 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Canvas from "@/components/Canvas";
+import processUserData from "@/app/api/github_profile/user";
+import generateTagline from "@/app/api/generate_tagline/generateTagline";
 import { useRouter } from "next/navigation";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Badge({ params }) {
   const username = params.username;
   const router = useRouter();
-  const [userData, setUserData] = useState(null); // user's github data
-  const [loading, setLoading] = useState(true);   // Loading state
-  const [Tagline, setTagline] = useState("");
+  const canvasRef = useRef(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [tagline, setTagline] = useState("");
   const [taglineGenerated, setTaglineGenerated] = useState(false);
   const [userFetched, setUserFetched] = useState(false);
-  const Languages = {};
-  const Description = {};
-  const Stars = {};
-  const Forks = {};
-  const Issues = {};
+  const [processedData, setProcessedData] = useState(null);
   const [config, setConfig] = useState({
     theme: "dark",
     font: "helvetica",
     pattern: "shape 1",
-    update: "14", // future implementation
+    update: "14",
     image: "",
     username: true,
     tagline: true,
-    lang: false, // future implementation
+    lang: false,
     star: false,
     fork: false,
     issue: false,
     UserName: username,
-    Tagline: Tagline,
+    Tagline: tagline,
     star_count: 0,
     fork_count: 0,
     issue_count: 0,
   });
 
-  // Utility function to update the URL
+  const prevConfigRef = useRef(config);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollPosition(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const updateURL = () => {
     const params = new URLSearchParams();
-
-    // List of keys to exclude from the URL
-    const excludeKeys = ["username", "tagline", "lang", "UserName", "Tagline", "star_count", "fork_count", "issue_count"];
-
+    const excludeKeys = ["username", "tagline", "lang", "UserName", "Tagline", "star_count", "fork_count", "issue_count", "update"];
     Object.entries(config).forEach(([key, value]) => {
       if (!excludeKeys.includes(key) && value !== false && value !== "" && value !== null) {
         params.set(key, value);
       }
     });
-
-    router.replace(`/${username}?${params.toString()}`, undefined, { shallow: true });
+    router.replace(`/${username}?${params.toString()}`, undefined, { shallow: true, scroll: false });
   };
 
-  // Handle changes to config and update the URL
   useEffect(() => {
-    updateURL();
+    if (JSON.stringify(prevConfigRef.current) !== JSON.stringify(config)) {
+      updateURL();
+      prevConfigRef.current = config;
+    }
   }, [config]);
 
   const handleChange = (e) => {
@@ -67,23 +73,24 @@ export default function Badge({ params }) {
 
   const handleUser = async () => {
     try {
-      setLoading(true); // Set loading to true while fetching data
+      setLoading(true);
       const res = await fetch("../api/github_profile", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username }),
       });
-
       const data = await res.json();
       if (res.ok) {
         setUserData(data);
+        const processed = processUserData(data.repos);
+        setProcessedData(processed);
       } else {
         setUserData(new Error("Failed to fetch user data."));
       }
     } catch (error) {
       setUserData(new Error("Failed to fetch user data."));
     } finally {
-      setLoading(false); // Data loading complete
+      setLoading(false);
     }
   };
 
@@ -95,88 +102,60 @@ export default function Badge({ params }) {
   }, [userFetched]);
 
   useEffect(() => {
-    if (userData !== null && !loading) {
+    if (userFetched && userData !== null && !loading) {
+      const Languages = {};
+      const Description = {};
+      let starCount = 0;
+      let forkCount = 0;
+      let issueCount = 0;
+
       userData.forEach((item) => {
-        if (item.language !== null) {
+        if (item.language) {
           Languages[item.language] = (Languages[item.language] || 0) + 1;
         }
-
-        if (item.description !== null) {
+        if (item.description) {
           Description[item.name] = item.description;
         }
-        if (item.stargazers_count !== null) {
-          Stars[item.name] = item.stargazers_count;
+        if (item.stargazers_count) {
+          starCount += item.stargazers_count;
         }
-        if (item.forks_count !== null) {
-          Forks[item.name] = item.forks_count;
+        if (item.forks_count) {
+          forkCount += item.forks_count;
         }
-        if (item.open_issues_count !== null) {
-          Issues[item.name] = item.open_issues_count;
+        if (item.open_issues_count) {
+          issueCount += item.open_issues_count;
         }
       });
-
-      const stars = userData.reduce(
-        (acc, item) => acc + (item.stargazers_count || 0),
-        0
-      );
-      const forks = userData.reduce(
-        (acc, item) => acc + (item.forks_count || 0),
-        0
-      );
-      const issues = userData.reduce(
-        (acc, item) => acc + (item.open_issues_count || 0),
-        0
-      );
 
       setConfig((prevConfig) => ({
         ...prevConfig,
-        star_count: stars,
-        fork_count: forks,
-        issue_count: issues,
+        star_count: starCount,
+        fork_count: forkCount,
+        issue_count: issueCount,
       }));
     }
-  }, [userData, loading]);
+  }, [userFetched, userData, loading]);
 
   const handleGenerate = async () => {
-    const prompt = `Generate a unique tagline for ${username} based on their GitHub profile activity:
-
-                    The user works with the following languages: ${Object.keys(Languages).join(
-      ", "
-    )}  
-                    Repo highlights:  
-                    ${Object.entries(Description)
-        .map(([repo, desc]) => `${repo}: ${desc}`)
-        .join(", ")}  
-                    Total Stars: ${config.star_count}, Total Forks: ${config.fork_count}, Total Issues: ${config.issue_count}  
-
-                    The tagline should summarize their impact and versatility in 100 characters or less, in a meaningful tone.
-
-                    Only generate one tagline.`;
-
+    const input = {
+      username: username,
+      Languages: processedData?.Languages || {},
+      Description: processedData?.Description || {},
+      config: config,
+    };
 
     try {
-      const res = await fetch("../api/ai", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
-      });
-
-      const data = await res.json();
-      if (data.success) {
-        setTagline(data.response);
-      } else {
-        console.warn("Error generating tagline!", data.error)
-        setTagline(`Error: ${data.error}`);
-      }
+      const tagline = await generateTagline(input);
+      setTagline(tagline);
     } catch (error) {
-      console.error("Error in tagline generation", error)
-      setTagline("Error communicating with the server.");
+      console.error("Error:", error.message);
+      setTagline("Failed to generate a tagline. Please try again.");
     }
   };
 
   useEffect(() => {
     if (!loading && userData !== null && !taglineGenerated) {
-      handleGenerate(); // Trigger tagline generation only after data is loaded
+      handleGenerate();
       setTaglineGenerated(true);
     }
   }, [loading, userData]);
@@ -184,22 +163,70 @@ export default function Badge({ params }) {
   useEffect(() => {
     setConfig((prevConfig) => ({
       ...prevConfig,
-      Tagline, // Sync the tagline to the config
+      Tagline: tagline,
     }));
-  }, [Tagline]);
+  }, [tagline]);
 
+  const exportCanvas = () => {
+    const canvas = canvasRef.current;
+    const dataURL = canvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.href = dataURL;
+    link.download = "canvas.png";
+    link.click();
+    toast.success("Image downloaded successfully!");
+  };
+
+  const exportMarkdown = () => {
+    toast.error("Sorry, this feature is not available yet.");
+  };
+
+  const exportURL = () => {
+    toast.error("Sorry, this feature is not available yet.");
+  };
+
+  const exportImg = () => {
+    toast.error("Sorry, this feature is not available yet.");
+  };
 
   return (
     <div className='min-h-screen text-white p-4 md:p-6 relative flex flex-col gap-2' >
       <div className="flex gap-10 items-center justify-center h-[450px]">
         {/* Conditionally render Canvas only if tagline exists */}
-        {Tagline && Tagline.trim() ? (
-          <Canvas config={config} />
+        {tagline && tagline.trim() ? (
+          <Canvas config={config} ref={canvasRef} />
         ) : (
           <p>Loading your badge...</p>
         )}
       </div>
-      <div className='max-w-6xl mx-auto mb-10 bg-slate-800 bg-opacity-80 rounded-xl p-8 shadow-lg h-fit w-[50vw] items-center justify-center font-medium'>
+      <div className="text-justify font-semibold font-mono flex bg-slate-800 bg-opacity-80 rounded-xl p-4 shadow-lg gap-8 items-center justify-center w-[50vw] mx-auto">
+        <button 
+          onClick={exportMarkdown}
+          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]">
+          <img src="/markdown.svg" alt="" width="20" />
+          MARKDOWN
+        </button>
+        <button
+          onClick={exportCanvas}
+          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]"
+        >
+          <img src="/download.svg" alt="" width="20" />
+          DOWNLOAD
+        </button>
+        <button 
+          onClick={exportURL}
+          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]">
+          <img src="/url.svg" alt="" width="20" />
+          URL
+        </button>
+        <button 
+          onClick={exportImg}
+          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]">
+          <img src="/img.svg" alt="" width="20" />
+          &lt;IMG /&gt;
+        </button>
+      </div>
+      <div className="max-w-6xl mx-auto mb-2 bg-slate-800 bg-opacity-80 rounded-xl p-8 shadow-lg h-fit w-[50vw] items-center justify-center font-medium">
         <form className="flex flex-col gap-8">
           <div className="grid grid-cols-3 gap-7">
             <div className="flex items-center justify-center">
@@ -306,6 +333,7 @@ export default function Badge({ params }) {
           </div>
         </form>
       </div>
+      <Toaster />
     </div>
   );
 }
