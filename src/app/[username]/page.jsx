@@ -190,8 +190,8 @@ export default function Badge({ params }) {
   };
 
   return (
-    <div className='min-h-screen text-white p-4 md:p-6 relative flex flex-col gap-2' >
-      <div className="flex gap-10 items-center justify-center h-[450px]">
+    <div className='min-h-screen text-white relative flex flex-col gap-2' >
+      <div className="flex gap-10 items-center justify-center mb-2 h-[360px]">
         {/* Conditionally render Canvas only if tagline exists */}
         {tagline && tagline.trim() ? (
           <Canvas config={config} ref={canvasRef} />
