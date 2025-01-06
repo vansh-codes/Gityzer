@@ -4,14 +4,14 @@ import { NextResponse } from "next/server";
 export const POST = async (request: Request): Promise<NextResponse> => {
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
-  try{
+  try {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const data = await request.json()
-    const prompt = data.prompt
+    const data = await request.json();
+    const prompt = data.prompt;
 
     const result = await model.generateContent(prompt);
-    const response = result.response
+    const response = result.response;
     const tagline = response.text();
 
     return NextResponse.json({ response: tagline, success: true })
@@ -19,4 +19,4 @@ export const POST = async (request: Request): Promise<NextResponse> => {
     console.error("Error generating content: ", error)
     return NextResponse.json({ error: "Failed to generate content.", success: false })
   }
-}
+};
