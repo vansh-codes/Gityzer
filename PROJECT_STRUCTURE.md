@@ -16,13 +16,14 @@
 ├── postcss.config.mjs
 ├── public/
 │   ├── Githuberror404.png
+│   ├── default_profile.svg
 │   ├── download.svg
 │   ├── github-filled.svg
 │   ├── humans.txt
 │   ├── img.svg
 │   ├── markdown.svg
-│   ├── shape1.png
-│   ├── shape2.png
+│   ├── shape1.svg
+│   ├── shape2.svg
 │   └── url.svg
 ├── repo_structure.txt
 ├── src/
@@ -58,7 +59,9 @@
 │   │   ├── Canvas.jsx
 │   │   ├── Header.jsx
 │   │   ├── MyCard.jsx
-│   │   └── README.md
+│   │   ├── README.md
+│   │   ├── UserCard.jsx
+│   │   └── UserConfig.ts
 │   ├── hooks/
 │   │   └── README.md
 │   ├── libs/
