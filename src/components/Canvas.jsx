@@ -1,31 +1,36 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const CanvasEditor = React.forwardRef(({ config }, ref) => {
   const canvasRef = ref || useRef(null);
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    // Set ARIA attributes for canvas
-    canvas.setAttribute('role', 'img');
-    canvas.setAttribute('aria-label', `GitHub Profile Badge for ${config.UserName}`);
-
-    // Add keyboard focus handling
-    canvas.tabIndex = 0;
-    canvas.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        // Trigger any relevant action when canvas is focused and Enter is pressed
-        canvas.click();
-      }
-    });
-
     const ctx = canvas.getContext("2d");
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Make canvas responsive
+    const updateCanvasSize = () => {
+      const container = canvas.parentElement;
+      const width = Math.min(container.clientWidth, 800); // Max width of 800px
+      const height = (width * 9) / 16; // 16:9 aspect ratio
 
-    ctx.fillStyle = config.theme === "dark" ? "#030303" : "#E8E8E8";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+      canvas.width = width;
+      canvas.height = height;
+
+      // Redraw content after resize
+      drawCanvas();
+    };
+
+    // Initial size update and event listener
+    updateCanvasSize();
+    window.addEventListener('resize', updateCanvasSize);
+
+    const drawCanvas = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = config.theme === "dark" ? "#030303" : "#E8E8E8";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      drawContent();
+    };
 
     function drawContent() {
       const canvasWidth = canvas.width;
@@ -34,11 +39,40 @@ const CanvasEditor = React.forwardRef(({ config }, ref) => {
       const noStatsActive = !config.star && !config.fork && !config.issue;
       const yOffset = noStatsActive ? 30 : 0;
 
-      if (config.image === "") {
-        const img = new Image();
-        img.crossOrigin = "Anonymous";
-        img.src = "/github-filled.svg";
-        img.onload = () => {
+      // Handle profile image
+      const loadImage = (src) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.crossOrigin = "Anonymous";
+          img.onload = () => resolve(img);
+          img.onerror = () => {
+            setImageError(true);
+            reject(new Error('Failed to load image'));
+          };
+          img.src = src;
+        });
+      };
+
+      const drawProfileImage = async () => {
+        try {
+          const img = await loadImage(config.image || "/github-filled.svg");
+          const x = (canvasWidth - 160) / 2;
+          const y = (canvasHeight - 300) / 2 + yOffset;
+
+          ctx.save();
+          if (!config.image) {
+            ctx.filter = config.theme === "dark" ? "invert(1)" : "invert(0)";
+          }
+          ctx.beginPath();
+          ctx.arc(x + 80, y + 80, 80, 0, 2 * Math.PI);
+          ctx.clip();
+          ctx.drawImage(img, x, y, 160, 160);
+          ctx.restore();
+          ctx.filter = "none";
+        } catch (error) {
+          console.error('Error loading profile image:', error);
+          // Load default image as fallback
+          const defaultImg = await loadImage("/github-filled.svg");
           const x = (canvasWidth - 160) / 2;
           const y = (canvasHeight - 300) / 2 + yOffset;
 
@@ -47,27 +81,14 @@ const CanvasEditor = React.forwardRef(({ config }, ref) => {
           ctx.beginPath();
           ctx.arc(x + 80, y + 80, 80, 0, 2 * Math.PI);
           ctx.clip();
-          ctx.drawImage(img, x, y, 160, 160);
+          ctx.drawImage(defaultImg, x, y, 160, 160);
           ctx.restore();
           ctx.filter = "none";
-        };
-      } else {
-        const img = new Image();
-        img.crossOrigin = "Anonymous";
-        img.src = config.image;
-        img.onload = () => {
-          const x = (canvasWidth - 160) / 2;
-          const y = (canvasHeight - 300) / 2 + yOffset;
+        }
+      };
 
-          ctx.save();
-          ctx.beginPath();
-          ctx.arc(x + 80, y + 80, 80, 0, 2 * Math.PI);
-          ctx.clip();
-          ctx.drawImage(img, x, y, 160, 160);
-          ctx.restore();
-          ctx.filter = "none";
-        };
-      }
+      // Draw the profile image
+      drawProfileImage();
 
       ctx.fillStyle = config.theme === "dark" ? "#fff" : "#000";
       ctx.textAlign = "center";
@@ -117,32 +138,30 @@ const CanvasEditor = React.forwardRef(({ config }, ref) => {
         ctx.fillStyle = "#333333";
         ctx.fillText(stat.count, x + 62.5, 303);
       });
+
+      if (config.pattern === "shape 1") {
+        const patternImg = new Image();
+        patternImg.crossOrigin = "Anonymous";
+        patternImg.src = "/shape1.png";
+        patternImg.onload = () => {
+          ctx.filter = config.theme === "dark" ? "invert(0.2)" : "invert(0.5)";
+          ctx.drawImage(patternImg, 0, 0, canvas.width, canvas.height);
+          ctx.filter = "none";
+        };
+      } else if (config.pattern === "shape 2") {
+        const patternImg = new Image();
+        patternImg.crossOrigin = "Anonymous";
+        patternImg.src = "/shape2.png";
+        patternImg.onload = () => {
+          ctx.filter = "opacity(50%)";
+          ctx.drawImage(patternImg, 0, 0, canvas.width, canvas.height);
+          ctx.filter = "none";
+        };
+      }
     }
 
-    if (config.pattern === "shape 1") {
-      const patternImg = new Image();
-      patternImg.crossOrigin = "Anonymous";
-      patternImg.src = "/shape1.png";
-      patternImg.onload = () => {
-        ctx.filter = config.theme === "dark" ? "invert(0.2)" : "invert(0.5)";
-        ctx.drawImage(patternImg, 0, 0, canvas.width, canvas.height);
-        ctx.filter = "none";
-        drawContent();
-      };
-    } else if (config.pattern === "shape 2") {
-      const patternImg = new Image();
-      patternImg.crossOrigin = "Anonymous";
-      patternImg.src = "/shape2.png";
-      patternImg.onload = () => {
-        ctx.filter = "opacity(50%)";
-        ctx.drawImage(patternImg, 0, 0, canvas.width, canvas.height);
-        ctx.filter = "none";
-        drawContent();
-      };
-    } else {
-      drawContent();
-    }
-  }, [config]);
+    drawCanvas();
+  }, [config, imageError]);
 
   return <canvas ref={canvasRef} width={720} height={360} />;
 });
