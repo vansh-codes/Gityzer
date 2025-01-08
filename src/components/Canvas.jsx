@@ -22,7 +22,7 @@ const CanvasEditor = React.forwardRef(({ config }, ref) => {
       if (config.image === "") {
         const img = new Image();
         img.crossOrigin = "Anonymous";
-        img.src = "/github-filled.svg";
+        img.src = "/default_profile.svg";
         img.onload = () => {
           const x = (canvasWidth - 160) / 2;
           const y = (canvasHeight - 300) / 2 + yOffset;
@@ -107,7 +107,7 @@ const CanvasEditor = React.forwardRef(({ config }, ref) => {
     if (config.pattern === "shape 1") {
       const patternImg = new Image();
       patternImg.crossOrigin = "Anonymous";
-      patternImg.src = "/shape1.png";
+      patternImg.src = "/shape1.svg";
       patternImg.onload = () => {
         ctx.filter = config.theme === "dark" ? "invert(0.2)" : "invert(0.5)";
         ctx.drawImage(patternImg, 0, 0, canvas.width, canvas.height);
@@ -117,7 +117,7 @@ const CanvasEditor = React.forwardRef(({ config }, ref) => {
     } else if (config.pattern === "shape 2") {
       const patternImg = new Image();
       patternImg.crossOrigin = "Anonymous";
-      patternImg.src = "/shape2.png";
+      patternImg.src = "/shape2.svg";
       patternImg.onload = () => {
         ctx.filter = "opacity(50%)";
         ctx.drawImage(patternImg, 0, 0, canvas.width, canvas.height);

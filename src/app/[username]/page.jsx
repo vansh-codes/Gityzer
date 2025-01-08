@@ -2,23 +2,24 @@
 
 import { useEffect, useState, useRef } from "react";
 import Canvas from "@/components/Canvas";
-import processUserData from "@/app/api/github_profile/user";
-import generateTagline from "@/app/api/generate_tagline/generateTagline";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import toast, { Toaster } from 'react-hot-toast';
+import UserConfig from "@/components/UserConfig";
+import UserCard from "@/components/UserCard";
 
 export default function Badge({ params }) {
   const username = params.username;
   const router = useRouter();
+  const searchParams = useSearchParams();
   const canvasRef = useRef(null);
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [tagline, setTagline] = useState("");
-  const [taglineGenerated, setTaglineGenerated] = useState(false);
-  const [userFetched, setUserFetched] = useState(false);
-  const [processedData, setProcessedData] = useState(null);
-  const [config, setConfig] = useState({
+  const [config, setConfig] = useState({});
+  const [configGenerated, setConfigGenerated] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const prevConfigRef = useRef(config);
+  const configCalled = useRef(false);
+  const userConfigRef = useRef({});
+
+  const defaultConfig = {
     theme: "dark",
     font: "helvetica",
     pattern: "shape 1",
@@ -30,20 +31,7 @@ export default function Badge({ params }) {
     star: false,
     fork: false,
     issue: false,
-    UserName: username,
-    Tagline: tagline,
-    star_count: 0,
-    fork_count: 0,
-    issue_count: 0,
-  });
-
-  const prevConfigRef = useRef(config);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollPosition(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  };
 
   const updateURL = () => {
     const params = new URLSearchParams();
@@ -53,8 +41,21 @@ export default function Badge({ params }) {
         params.set(key, value);
       }
     });
-    router.replace(`/${username}?${params.toString()}`, undefined, { shallow: true, scroll: false });
+    const newUrl = `/${username}?${params.toString()}`;
+    history.replaceState(null, "", newUrl);
   };
+
+  useEffect(() => {
+    const urlParams = Object.fromEntries(searchParams.entries());
+    userConfigRef.current = urlParams; // Save user-provided URL attributes
+    const mergedConfig = { ...defaultConfig, ...urlParams };
+    setConfig(mergedConfig);
+
+    if (Object.keys(urlParams).length === 0 && !configCalled.current) {
+      const defaultParams = new URLSearchParams(defaultConfig).toString();
+      router.replace(`/${username}?${defaultParams}`, undefined, { shallow: true, scroll: false });
+    }
+  }, []);
 
   useEffect(() => {
     if (JSON.stringify(prevConfigRef.current) !== JSON.stringify(config)) {
@@ -71,101 +72,29 @@ export default function Badge({ params }) {
     }));
   };
 
-  const handleUser = async () => {
-    try {
+  const handleConfig = async () => {
+    if (!configGenerated && !loading && !configCalled.current) {
+      configCalled.current = true;
       setLoading(true);
-      const res = await fetch("../api/github_profile", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setUserData(data);
-        const processed = processUserData(data.repos);
-        setProcessedData(processed);
-      } else {
-        setUserData(new Error("Failed to fetch user data."));
+      try {
+        const configData = await UserConfig(username);
+        const mergedConfig = { ...configData, ...userConfigRef.current }; // Merge with user-provided attributes
+        setConfig((prev) => ({ ...prev, ...mergedConfig }));
+        setConfigGenerated(true);
+        updateURL(); // Update URL after setting config
+      } catch (error) {
+        console.error("Error:", error.message);
       }
-    } catch (error) {
-      setUserData(new Error("Failed to fetch user data."));
-    } finally {
-      setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (!userFetched) {
-      handleUser();
-      setUserFetched(true);
-    }
-  }, [userFetched]);
+    handleConfig();
+  }, []); 
 
-  useEffect(() => {
-    if (userFetched && userData !== null && !loading) {
-      const Languages = {};
-      const Description = {};
-      let starCount = 0;
-      let forkCount = 0;
-      let issueCount = 0;
-
-      userData.forEach((item) => {
-        if (item.language) {
-          Languages[item.language] = (Languages[item.language] || 0) + 1;
-        }
-        if (item.description) {
-          Description[item.name] = item.description;
-        }
-        if (item.stargazers_count) {
-          starCount += item.stargazers_count;
-        }
-        if (item.forks_count) {
-          forkCount += item.forks_count;
-        }
-        if (item.open_issues_count) {
-          issueCount += item.open_issues_count;
-        }
-      });
-
-      setConfig((prevConfig) => ({
-        ...prevConfig,
-        star_count: starCount,
-        fork_count: forkCount,
-        issue_count: issueCount,
-      }));
-    }
-  }, [userFetched, userData, loading]);
-
-  const handleGenerate = async () => {
-    const input = {
-      username: username,
-      Languages: processedData?.Languages || {},
-      Description: processedData?.Description || {},
-      config: config,
-    };
-
-    try {
-      const tagline = await generateTagline(input);
-      setTagline(tagline);
-    } catch (error) {
-      console.error("Error:", error.message);
-      setTagline("Failed to generate a tagline. Please try again.");
-    }
-  };
-
-  useEffect(() => {
-    if (!loading && userData !== null && !taglineGenerated) {
-      handleGenerate();
-      setTaglineGenerated(true);
-    }
-  }, [loading, userData]);
-
-  useEffect(() => {
-    setConfig((prevConfig) => ({
-      ...prevConfig,
-      Tagline: tagline,
-    }));
-  }, [tagline]);
+  if (config !== null && Object.keys(config).length > 0) {
+    console.log(config.Tagline);
+  }
 
   const exportCanvas = () => {
     const canvas = canvasRef.current;
@@ -192,36 +121,43 @@ export default function Badge({ params }) {
   return (
     <div className='min-h-screen text-white relative flex flex-col gap-2' >
       <div className="flex gap-10 items-center justify-center mb-2 h-[360px]">
-        {/* Conditionally render Canvas only if tagline exists */}
-        {tagline && tagline.trim() ? (
-          <Canvas config={config} ref={canvasRef} />
+        {/* Conditionally render Canvas only if config is not empty */}
+        <div className="hidden">
+          {Object.keys(config).length > 0 ? (
+            <Canvas config={config} ref={canvasRef} />
+          ) : (
+            <p>Loading your badge...</p>
+          )}
+        </div>
+        {Object.keys(config).length > 0 ? (
+          <UserCard config={config} />
         ) : (
           <p>Loading your badge...</p>
         )}
       </div>
-      <div className="text-justify font-semibold font-mono flex bg-slate-800 bg-opacity-80 rounded-xl p-4 shadow-lg gap-8 items-center justify-center w-[50vw] mx-auto">
+      <div className="text-justify font-semibold font-mono flex bg-slate-800 bg-opacity-80 rounded-xl p-4 shadow-lg gap-8 items-center justify-center w-[50vw] min-w-[600px] mx-auto">
         <button 
           onClick={exportMarkdown}
-          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]">
+          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] min-w-[120px]">
           <img src="/markdown.svg" alt="" width="20" />
           MARKDOWN
         </button>
         <button
           onClick={exportCanvas}
-          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]"
+          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] min-w-[120px]"
         >
           <img src="/download.svg" alt="" width="20" />
           DOWNLOAD
         </button>
         <button 
           onClick={exportURL}
-          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]">
+          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] min-w-[120px]">
           <img src="/url.svg" alt="" width="20" />
           URL
         </button>
         <button 
           onClick={exportImg}
-          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]">
+          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] min-w-[120px]">
           <img src="/img.svg" alt="" width="20" />
           &lt;IMG /&gt;
         </button>
@@ -235,7 +171,7 @@ export default function Badge({ params }) {
                 <select
                   name="theme"
                   id="theme"
-                  value={config.theme}
+                  value={config.theme || ""}
                   onChange={handleChange}
                   className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[100px]"
                 >
@@ -250,7 +186,7 @@ export default function Badge({ params }) {
                 <select
                   name="font"
                   id="font"
-                  value={config.font}
+                  value={config.font || ""}
                   onChange={handleChange}
                   className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[100px]"
                 >
@@ -268,7 +204,7 @@ export default function Badge({ params }) {
                 <select
                   name="pattern"
                   id="pattern"
-                  value={config.pattern}
+                  value={config.pattern || ""}
                   onChange={handleChange}
                   className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[100px]"
                 >
@@ -285,7 +221,7 @@ export default function Badge({ params }) {
                   name="image"
                   id="image"
                   placeholder="Enter image URL"
-                  value={config.image}
+                  value={config.image || ""}
                   onChange={handleChange}
                   className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[40vw] h-8 resize-none break-normal"
                   style={{
@@ -303,7 +239,7 @@ export default function Badge({ params }) {
               <input
                 type="checkbox"
                 name="star"
-                checked={config.star}
+                checked={config.star || false}
                 onChange={handleChange}
                 className="accent-blue-500"
               />
@@ -313,7 +249,7 @@ export default function Badge({ params }) {
               <input
                 type="checkbox"
                 name="fork"
-                checked={config.fork}
+                checked={config.fork || false}
                 onChange={handleChange}
                 className="accent-blue-500"
               />
@@ -323,7 +259,7 @@ export default function Badge({ params }) {
               <input
                 type="checkbox"
                 name="issue"
-                checked={config.issue}
+                checked={config.issue || false}
                 onChange={handleChange}
                 className="accent-blue-500"
               />
