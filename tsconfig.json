@@ -28,6 +28,6 @@
     },
     "strictNullChecks": true
   },
-  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "src/app/api/generate-image/route.ts"],
+  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "src/app/api/generate-image/route.ts", "src/app/api/userconfig/route.ts", "src/app/api/[username]/image/route.js"],
   "exclude": ["node_modules"]
 }
