@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import Canvas from "@/components/Canvas";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast, { Toaster } from 'react-hot-toast';
-import UserConfig from "@/app/api/userconfig/route";
+import UserConfig from "@/components/UserConfig";
 import UserCard from "@/components/UserCard";
 
 export default function Badge({ params }) {
