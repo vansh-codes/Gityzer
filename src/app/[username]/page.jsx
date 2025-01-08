@@ -189,151 +189,186 @@ export default function Badge({ params }) {
     toast.error("Sorry, this feature is not available yet.");
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleGenerate();
+    }
+  };
+
   return (
-    <div className='min-h-screen text-white p-4 md:p-6 relative flex flex-col gap-2' >
-      <div className="flex gap-10 items-center justify-center h-[450px]">
-        {/* Conditionally render Canvas only if tagline exists */}
-        {tagline && tagline.trim() ? (
-          <Canvas config={config} ref={canvasRef} />
-        ) : (
-          <p>Loading your badge...</p>
-        )}
-      </div>
-      <div className="text-justify font-semibold font-mono flex bg-slate-800 bg-opacity-80 rounded-xl p-4 shadow-lg gap-8 items-center justify-center w-[50vw] mx-auto">
-        <button 
-          onClick={exportMarkdown}
-          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]">
-          <img src="/markdown.svg" alt="" width="20" />
-          MARKDOWN
-        </button>
-        <button
-          onClick={exportCanvas}
-          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]"
-        >
-          <img src="/download.svg" alt="" width="20" />
-          DOWNLOAD
-        </button>
-        <button 
-          onClick={exportURL}
-          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]">
-          <img src="/url.svg" alt="" width="20" />
-          URL
-        </button>
-        <button 
-          onClick={exportImg}
-          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] w-[120px]">
-          <img src="/img.svg" alt="" width="20" />
-          &lt;IMG /&gt;
-        </button>
-      </div>
-      <div className="max-w-6xl mx-auto mb-2 bg-slate-800 bg-opacity-80 rounded-xl p-8 shadow-lg h-fit w-[50vw] items-center justify-center font-medium">
-        <form className="flex flex-col gap-8">
-          <div className="grid grid-cols-3 gap-7">
-            <div className="flex items-center justify-center">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="theme">Theme</label>
-                <select
-                  name="theme"
-                  id="theme"
-                  value={config.theme}
-                  onChange={handleChange}
-                  className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[100px]"
-                >
-                  <option value="dark">Dark</option>
-                  <option value="light">Light</option>
-                </select>
+    <main className="min-h-screen" role="main">
+      <div className="flex flex-col items-center justify-center">
+        <div className="w-full max-w-5xl p-4">
+          <div className="flex flex-col items-center justify-center space-y-4">
+            <div 
+              className="w-full bg-white rounded-lg shadow-lg overflow-hidden"
+              role="region"
+              aria-label="GitHub Profile Badge Generator"
+            >
+              <div className="p-4">
+                {tagline && tagline.trim() ? (
+                  <Canvas
+                    ref={canvasRef}
+                    config={config}
+                    tagline={tagline}
+                    aria-label="Badge Preview Canvas"
+                  />
+                ) : (
+                  <p>Loading your badge...</p>
+                )}
+              </div>
+              <div className="p-4 bg-gray-50">
+                <div className="flex flex-wrap gap-4">
+                  <button
+                    onClick={handleGenerate}
+                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    aria-label="Generate New Tagline"
+                    onKeyDown={handleKeyDown}
+                  >
+                    Generate
+                  </button>
+                  <button
+                    onClick={exportCanvas}
+                    className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                    aria-label="Export Badge as Image"
+                  >
+                    Export as Image
+                  </button>
+                  <button
+                    onClick={exportURL}
+                    className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                    aria-label="Copy Badge URL"
+                  >
+                    Copy URL
+                  </button>
+                  <button 
+                    onClick={exportMarkdown}
+                    className="px-4 py-2 bg-slate-600 text-white rounded hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
+                    aria-label="Export Badge as Markdown"
+                  >
+                    Export as Markdown
+                  </button>
+                  <button 
+                    onClick={exportImg}
+                    className="px-4 py-2 bg-slate-600 text-white rounded hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
+                    aria-label="Export Badge as IMG"
+                  >
+                    Export as IMG
+                  </button>
+                </div>
               </div>
             </div>
-            <div className="flex items-center justify-center">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="font">Font</label>
-                <select
-                  name="font"
-                  id="font"
-                  value={config.font}
-                  onChange={handleChange}
-                  className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[100px]"
-                >
-                  <option value="helvetica">Helvetica</option>
-                  <option value="arial">Arial</option>
-                  <option value="times_new_roman">Times New Roman</option>
-                  <option value="calibri">Calibri</option>
-                  <option value="verdana">Verdana</option>
-                </select>
-              </div>
-            </div>
-            <div className="flex items-center justify-center">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="pattern">Pattern</label>
-                <select
-                  name="pattern"
-                  id="pattern"
-                  value={config.pattern}
-                  onChange={handleChange}
-                  className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[100px]"
-                >
-                  <option value="shape 1">Shape 1</option>
-                  <option value="shape 2">Shape 2</option>
-                </select>
-              </div>
-            </div>
-            <div className="flex items-center justify-center col-span-3">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="image">Image URL (Optional)</label>
-                <input
-                  type="text"
-                  name="image"
-                  id="image"
-                  placeholder="Enter image URL"
-                  value={config.image}
-                  onChange={handleChange}
-                  className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[40vw] h-8 resize-none break-normal"
-                  style={{
-                    overflowX: "scroll",
-                    overflowY: "hidden",
-                    scrollbarWidth: "none", // For Firefox
-                    msOverflowStyle: "none" // For Internet Explorer
-                  }}
-                />
-              </div>
+            <div className="max-w-6xl mx-auto mb-2 bg-slate-800 bg-opacity-80 rounded-xl p-8 shadow-lg h-fit w-[50vw] items-center justify-center font-medium">
+              <form className="flex flex-col gap-8">
+                <div className="grid grid-cols-3 gap-7">
+                  <div className="flex items-center justify-center">
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="theme">Theme</label>
+                      <select
+                        name="theme"
+                        id="theme"
+                        value={config.theme}
+                        onChange={handleChange}
+                        className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[100px]"
+                      >
+                        <option value="dark">Dark</option>
+                        <option value="light">Light</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="font">Font</label>
+                      <select
+                        name="font"
+                        id="font"
+                        value={config.font}
+                        onChange={handleChange}
+                        className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[100px]"
+                      >
+                        <option value="helvetica">Helvetica</option>
+                        <option value="arial">Arial</option>
+                        <option value="times_new_roman">Times New Roman</option>
+                        <option value="calibri">Calibri</option>
+                        <option value="verdana">Verdana</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="pattern">Pattern</label>
+                      <select
+                        name="pattern"
+                        id="pattern"
+                        value={config.pattern}
+                        onChange={handleChange}
+                        className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[100px]"
+                      >
+                        <option value="shape 1">Shape 1</option>
+                        <option value="shape 2">Shape 2</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center col-span-3">
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="image">Image URL (Optional)</label>
+                      <input
+                        type="text"
+                        name="image"
+                        id="image"
+                        placeholder="Enter image URL"
+                        value={config.image}
+                        onChange={handleChange}
+                        className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[40vw] h-8 resize-none break-normal"
+                        style={{
+                          overflowX: "scroll",
+                          overflowY: "hidden",
+                          scrollbarWidth: "none", // For Firefox
+                          msOverflowStyle: "none" // For Internet Explorer
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-7">
+                  <div className="flex gap-1 items-center justify-center">
+                    <input
+                      type="checkbox"
+                      name="star"
+                      checked={config.star}
+                      onChange={handleChange}
+                      className="accent-blue-500"
+                    />
+                    <label htmlFor="username">Star</label>
+                  </div>
+                  <div className="flex gap-1 items-center justify-center">
+                    <input
+                      type="checkbox"
+                      name="fork"
+                      checked={config.fork}
+                      onChange={handleChange}
+                      className="accent-blue-500"
+                    />
+                    <label htmlFor="username">Fork</label>
+                  </div>
+                  <div className="flex gap-1 items-center justify-center">
+                    <input
+                      type="checkbox"
+                      name="issue"
+                      checked={config.issue}
+                      onChange={handleChange}
+                      className="accent-blue-500"
+                    />
+                    <label htmlFor="username">Issue</label>
+                  </div>
+                  {/* Add more checkboxes similar to this for other fields */}
+                </div>
+              </form>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-7">
-            <div className="flex gap-1 items-center justify-center">
-              <input
-                type="checkbox"
-                name="star"
-                checked={config.star}
-                onChange={handleChange}
-                className="accent-blue-500"
-              />
-              <label htmlFor="username">Star</label>
-            </div>
-            <div className="flex gap-1 items-center justify-center">
-              <input
-                type="checkbox"
-                name="fork"
-                checked={config.fork}
-                onChange={handleChange}
-                className="accent-blue-500"
-              />
-              <label htmlFor="username">Fork</label>
-            </div>
-            <div className="flex gap-1 items-center justify-center">
-              <input
-                type="checkbox"
-                name="issue"
-                checked={config.issue}
-                onChange={handleChange}
-                className="accent-blue-500"
-              />
-              <label htmlFor="username">Issue</label>
-            </div>
-            {/* Add more checkboxes similar to this for other fields */}
-          </div>
-        </form>
+        </div>
       </div>
       <Toaster />
-    </div>
+    </main>
   );
 }

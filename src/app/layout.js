@@ -1,5 +1,4 @@
 import localFont from 'next/font/local'
-import { ErrorBoundary } from '@/components/ErrorBoundary'
 import './globals.css'
 import Header from '@/components/Header'
 
@@ -66,9 +65,7 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Header />
-        <ErrorBoundary>
-          {children}
-        </ErrorBoundary>
+        {children}
       </body>
     </html>
   )

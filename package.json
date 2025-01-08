@@ -7,9 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write .",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -36,16 +34,11 @@
     "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^14.3.1",
-    "@types/jest": "^29.5.14",
     "@types/node": "22.10.2",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "5.7.2"

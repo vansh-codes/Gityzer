@@ -5,6 +5,21 @@ const CanvasEditor = React.forwardRef(({ config }, ref) => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    // Set ARIA attributes for canvas
+    canvas.setAttribute('role', 'img');
+    canvas.setAttribute('aria-label', `GitHub Profile Badge for ${config.UserName}`);
+
+    // Add keyboard focus handling
+    canvas.tabIndex = 0;
+    canvas.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        // Trigger any relevant action when canvas is focused and Enter is pressed
+        canvas.click();
+      }
+    });
+
     const ctx = canvas.getContext("2d");
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
