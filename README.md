@@ -66,6 +66,11 @@ Gityzer is proudly part of global initiatives engaging with passionate developer
     <td><img src="https://github.com/user-attachments/assets/027eb349-43f2-4834-9343-1e8ba0bf54ed" alt="logo of Hacktoberfest 2024"></td>
     <td> Hacktoberfest is a month-long October event welcoming all skill levels to join the open source community </td>
   </tr>
+  <tr>
+    <td>SWOC 2024</td>
+    <td><img src="https://private-user-images.githubusercontent.com/80592559/400343793-eb175a0d-a4c4-4380-a971-fffb23288002.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzYxODUwMTUsIm5iZiI6MTczNjE4NDcxNSwicGF0aCI6Ii84MDU5MjU1OS80MDAzNDM3OTMtZWIxNzVhMGQtYTRjNC00MzgwLWE5NzEtZmZmYjIzMjg4MDAyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAxMDYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMTA2VDE3MzE1NVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWZkZTQ4MzU3NmI1MDk3ZTY4ZDI5MTA5Zjg0NDA4YjYyNTgyOGJhMzY4OTUzNzM0YjE1ZTI4NDdjZTdmZmIzYTkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.VaBTjMCkP4UW2VMe4hmU4V-zdxvYTtUKhaTPZIbMC5I" alt="SWOC 2024"></td>
+    <td> Social Winter of Code introduces participants to open source through projects, mentorship, and workshops on development, AI, Web3, and more.</td>
+  </tr>
 </table>
 
 ## Technologies Used:

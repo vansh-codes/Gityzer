@@ -19,7 +19,7 @@ const generateTagline = async ({ username, Languages, Description, config }: Gen
                     .join(", ")}  
                   Total Stars: ${config.star_count}, Total Forks: ${config.fork_count}, Total Issues: ${config.issue_count}  
   
-                  The tagline should summarize their impact, versatility, quality, and strength, everything in 120 characters or less, in a meaningful professional tone.
+                  The tagline should summarize their impact, versatility, quality, and strength, everything in 100 characters or less, in a meaningful professional tone.
   
                   Only generate one tagline. Do not include any code or code-like syntax in the response. Do not include any personal information. 
                   Do not include any offensive or inappropriate content. Do not include any content that is not safe for work.
