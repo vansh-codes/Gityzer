@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server'
 import { RequestBody } from './interface'
 
 export async function POST(req: Request): Promise<NextResponse> {
-  // Parse the request body to extract the username
   const { username }: RequestBody = await req.json()
 
   if (!username) {
@@ -10,23 +9,19 @@ export async function POST(req: Request): Promise<NextResponse> {
   }
 
   try {
-    // Fetch the user's GitHub profile using the REST API
     const response = await fetch(`https://api.github.com/users/${username}`, {
-      method: 'GET', // Using GET since it's a public REST API request
+      method: 'GET',
     })
 
     if (!response.ok) {
-      // Handle different errors from the GitHub API
       return new NextResponse(await response.text(), {
         status: response.status,
       })
     }
 
-    const data = await response.json()
-    // console.log(data)
+    const data: { login?: string } = await response.json()
 
-    // If the user exists, return a response with `exists: true`
-    if (data && data.login) {
+    if (data.login) {
       return NextResponse.json({ exists: true, userData: data })
     } else {
       return NextResponse.json({ exists: false })

@@ -1,3 +1,3 @@
 export interface RequestBody {
-    username: string
+    username: string;
 }
