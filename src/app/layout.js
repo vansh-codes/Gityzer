@@ -1,5 +1,5 @@
 import localFont from 'next/font/local'
-import { ErrorBoundary } from '@/components/ErrorBoundary'
+import ErrorBoundary from '@/components/ErrorBoundary'
 import './globals.css'
 import Header from '@/components/Header'
 

@@ -50,13 +50,41 @@ export default async function UserConfig(username: string): Promise<Config> {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username }),
       });
+
+      if (!res.ok) {
+        console.error('GitHub API Error:', await res.text());
+        throw new Error(`Failed to fetch user data: ${res.status}`);
+      }
+
       const data = await res.json();
-      if (res.ok) {
-        userData = data;
-        const processed = processUserData(data.repos);
+      console.log('GitHub API Response:', data);
+      
+      if (data.userInfo) {
+        config.UserName = data.userInfo.name || username;
+      }
+
+      if (data.Languages && data.Description && data.Stars && data.Forks && data.Issues) {
+        const processed = processUserData(Object.values(data));
         processedData = processed;
-      } else {
-        throw new Error("Failed to fetch user data.");
+        
+        if (processed.config) {
+          config.star_count = processed.config.star_count;
+          config.fork_count = processed.config.fork_count;
+          config.issue_count = processed.config.issue_count;
+        }
+      }
+
+      // Generate tagline after getting user data
+      if (data.userInfo && data.userInfo.bio) {
+        try {
+          const taglineResponse = await generateTagline(data.userInfo.bio);
+          if (taglineResponse) {
+            config.Tagline = taglineResponse;
+          }
+        } catch (error) {
+          console.error('Error generating tagline:', error);
+          config.Tagline = data.userInfo.bio;
+        }
       }
     } catch (error) {
       throw new Error("Failed to fetch user data.");
@@ -64,61 +92,6 @@ export default async function UserConfig(username: string): Promise<Config> {
   };
 
   await handleUser();
-
-  if (userData !== null) {
-    const Languages: { [key: string]: number } = {};
-    const Description: { [key: string]: string } = {};
-    let starCount = 0;
-    let forkCount = 0;
-    let issueCount = 0;
-
-    config.UserName = userData[0].owner.login;
-
-    userData.forEach((item: any) => {
-      if (item.language) {
-        Languages[item.language] = (Languages[item.language] || 0) + 1;
-      }
-      if (item.description) {
-        Description[item.name] = item.description;
-      }
-      if (item.stargazers_count) {
-        starCount += item.stargazers_count;
-      }
-      if (item.forks_count) {
-        forkCount += item.forks_count;
-      }
-      if (item.open_issues_count) {
-        issueCount += item.open_issues_count;
-      }
-    });
-
-    config = {
-      ...config,
-      star_count: starCount,
-      fork_count: forkCount,
-      issue_count: issueCount,
-    };
-  }
-
-  const handleGenerate = async () => {
-    const input = {
-      username: username,
-      Languages: processedData?.Languages || {},
-      Description: processedData?.Description || {},
-      config: config,
-    };
-
-    try {
-      tagline = await generateTagline(input);
-    } catch (error) {
-      console.error("Error:", error.message);
-      tagline = "Failed to generate a tagline. Please try again.";
-    }
-  };
-
-  await handleGenerate();
-
-  config.Tagline = tagline;
 
   return config;
 }

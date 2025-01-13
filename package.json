@@ -9,7 +9,8 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -38,9 +39,9 @@
     "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^14.3.1",
-    "@types/jest": "^29.5.14",
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^14.1.2",
+    "@types/jest": "^29.5.11",
     "@types/node": "22.10.2",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",

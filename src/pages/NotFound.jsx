@@ -24,11 +24,11 @@ export default function NotFound() {
           </h1>
 
           <h2 className='text-2xl font-semibold text-white mb-4'>
-            The page you're looking for doesn't exist.
+            The page you&apos;re looking for doesn&apos;t exist.
           </h2>
 
           <p className='text-lg text-white mb-6'>
-            Looks like you've wandered into unknown acount. Let's get you back to home!
+            Looks like you&apos;ve wandered into unknown acount. Let&apos;s get you back to home!
           </p>
 
           <div>
