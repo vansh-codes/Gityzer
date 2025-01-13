@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import toast, { Toaster } from 'react-hot-toast';
 import UserConfig from "@/components/UserConfig";
 import UserCard from "@/components/UserCard";
+import Image from 'next/image';
 
 export default function Badge({ params }) {
   const username = params.username;
@@ -14,7 +15,12 @@ export default function Badge({ params }) {
   const canvasRef = useRef(null);
   const [config, setConfig] = useState({});
   const [configGenerated, setConfigGenerated] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loadingStates, setLoadingStates] = useState({
+    profile: false,
+    repos: false,
+    tagline: false,
+    canvas: false
+  });
   const prevConfigRef = useRef(config);
   const configCalled = useRef(false);
   const userConfigRef = useRef({});
@@ -33,7 +39,7 @@ export default function Badge({ params }) {
     issue: false,
   };
 
-  const updateURL = () => {
+  const updateURL = (config) => {
     const params = new URLSearchParams();
     const excludeKeys = ["username", "tagline", "lang", "UserName", "Tagline", "star_count", "fork_count", "issue_count", "update"];
     Object.entries(config).forEach(([key, value]) => {
@@ -46,23 +52,33 @@ export default function Badge({ params }) {
   };
 
   useEffect(() => {
-    const urlParams = Object.fromEntries(searchParams.entries());
-    userConfigRef.current = urlParams; // Save user-provided URL attributes
-    const mergedConfig = { ...defaultConfig, ...urlParams };
-    setConfig(mergedConfig);
-
-    if (Object.keys(urlParams).length === 0 && !configCalled.current) {
-      const defaultParams = new URLSearchParams(defaultConfig).toString();
-      router.replace(`/${username}?${defaultParams}`, undefined, { shallow: true, scroll: false });
+    if (!username) {
+      router.push('/');
+      return;
     }
-  }, []);
+
+    const initialConfig = {
+      ...defaultConfig,
+      ...Object.fromEntries(searchParams.entries())
+    };
+    setConfig(initialConfig);
+  }, [username, defaultConfig, router, searchParams]);
+
+  useEffect(() => {
+    if (config) {
+      updateURL(config);
+    }
+  }, [config, updateURL]);
 
   useEffect(() => {
     if (JSON.stringify(prevConfigRef.current) !== JSON.stringify(config)) {
-      updateURL();
       prevConfigRef.current = config;
     }
   }, [config]);
+
+  useEffect(() => {
+    handleConfig();
+  }, [handleConfig]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -73,37 +89,42 @@ export default function Badge({ params }) {
   };
 
   const handleConfig = async () => {
-    if (!configGenerated && !loading && !configCalled.current) {
+    if (!configGenerated && !loadingStates.profile && !configCalled.current) {
       configCalled.current = true;
-      setLoading(true);
+      setLoadingStates(prev => ({ ...prev, profile: true }));
       try {
         const configData = await UserConfig(username);
         const mergedConfig = { ...configData, ...userConfigRef.current }; // Merge with user-provided attributes
         setConfig((prev) => ({ ...prev, ...mergedConfig }));
         setConfigGenerated(true);
-        updateURL(); // Update URL after setting config
       } catch (error) {
         console.error("Error:", error.message);
+      } finally {
+        setLoadingStates(prev => ({ ...prev, profile: false }));
       }
     }
   };
-
-  useEffect(() => {
-    handleConfig();
-  }, []); 
 
   if (config !== null && Object.keys(config).length > 0) {
     console.log(config.Tagline);
   }
 
-  const exportCanvas = () => {
-    const canvas = canvasRef.current;
-    const dataURL = canvas.toDataURL("image/png");
-    const link = document.createElement("a");
-    link.href = dataURL;
-    link.download = "canvas.png";
-    link.click();
-    toast.success("Image downloaded successfully!");
+  const exportCanvas = async () => {
+    setLoadingStates(prev => ({ ...prev, canvas: true }));
+    try {
+      const canvas = canvasRef.current;
+      const dataURL = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = dataURL;
+      link.download = "canvas.png";
+      link.click();
+      toast.success("Image downloaded successfully!");
+    } catch (error) {
+      console.error("Export error:", error);
+      toast.error('Failed to export image');
+    } finally {
+      setLoadingStates(prev => ({ ...prev, canvas: false }));
+    }
   };
 
   const exportMarkdown = () => {
@@ -120,6 +141,14 @@ export default function Badge({ params }) {
 
   return (
     <div className='min-h-screen text-white relative flex flex-col gap-2' >
+      {Object.entries(loadingStates).some(([_, value]) => value) && (
+        <div className="fixed top-0 left-0 w-full bg-blue-500 text-white text-center py-2">
+          {loadingStates.profile && <p>Loading profile...</p>}
+          {loadingStates.repos && <p>Loading repositories...</p>}
+          {loadingStates.tagline && <p>Generating tagline...</p>}
+          {loadingStates.canvas && <p>Processing canvas...</p>}
+        </div>
+      )}
       <div className="flex gap-10 items-center justify-center mb-2 h-[360px]">
         {/* Conditionally render Canvas only if config is not empty */}
         <div className="hidden">
@@ -139,26 +168,26 @@ export default function Badge({ params }) {
         <button 
           onClick={exportMarkdown}
           className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] min-w-[120px]">
-          <img src="/markdown.svg" alt="" width="20" />
+          <Image src="/markdown.svg" alt="" width={20} height={20} />
           MARKDOWN
         </button>
         <button
           onClick={exportCanvas}
           className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] min-w-[120px]"
         >
-          <img src="/download.svg" alt="" width="20" />
+          <Image src="/download.svg" alt="" width={20} height={20} />
           DOWNLOAD
         </button>
         <button 
           onClick={exportURL}
           className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] min-w-[120px]">
-          <img src="/url.svg" alt="" width="20" />
+          <Image src="/url.svg" alt="" width={20} height={20} />
           URL
         </button>
         <button 
           onClick={exportImg}
           className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] min-w-[120px]">
-          <img src="/img.svg" alt="" width="20" />
+          <Image src="/img.svg" alt="" width={20} height={20} />
           &lt;IMG /&gt;
         </button>
       </div>

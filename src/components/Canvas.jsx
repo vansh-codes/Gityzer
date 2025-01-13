@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
 const CanvasEditor = React.forwardRef(({ config }, ref) => {
-  const canvasRef = ref || useRef(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -127,9 +127,11 @@ const CanvasEditor = React.forwardRef(({ config }, ref) => {
     } else {
       drawContent();
     }
-  }, [config]);
+  }, [config, canvasRef]);
 
-  return <canvas ref={canvasRef} width={720} height={360} />;
+  return <canvas ref={canvasRef} width={1100} height={220} />;
 });
+
+CanvasEditor.displayName = 'CanvasEditor';
 
 export default CanvasEditor;
