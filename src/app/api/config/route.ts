@@ -1,11 +1,31 @@
-interface GitHubRepo {
+type GitHubRepo = {
   language: string | null;
   description: string | null;
   stargazers_count: number | null;
   forks_count: number | null;
   open_issues_count: number | null;
+  owner: { login: string };
   name: string;
-}
+};
+
+type Config = {
+  theme: string;
+  font: string;
+  pattern: string;
+  update: string;
+  image: string;
+  username: boolean;
+  tagline: boolean;
+  lang: boolean;
+  star: boolean;
+  fork: boolean;
+  issue: boolean;
+  UserName: string;
+  Tagline: string;
+  star_count: number;
+  fork_count: number;
+  issue_count: number;
+};
 
 export async function POST(request: Request): Promise<Response> {
   try {
@@ -24,11 +44,24 @@ export async function POST(request: Request): Promise<Response> {
     const userData: GitHubRepo[] = await response.json();
 
     const Languages: Record<string, number> = {};
-    const Description: Record<string, string | null> = {};
+    const Description: Record<string, string> = {};
     const Stars: Record<string, number | null> = {};
     const Forks: Record<string, number | null> = {};
     const Issues: Record<string, number | null> = {};
-    const config = {
+    const config: Config = {
+      theme: "dark",
+      font: "helvetica",
+      pattern: "shape 1",
+      update: "14",
+      image: "",
+      username: true,
+      tagline: true,
+      lang: false,
+      star: false,
+      fork: false,
+      issue: false,
+      UserName: userData[0].owner.login,
+      Tagline: "",
       star_count: 0,
       fork_count: 0,
       issue_count: 0,
@@ -73,19 +106,41 @@ export async function POST(request: Request): Promise<Response> {
       );
     }
 
-    return new Response(JSON.stringify({
-      Languages,
-      Description,
-      Stars,
-      Forks,
-      Issues,
-      config,
-    }), {
+    const filteredDescription: Record<string, string> = {};
+    for (const key in Description) {
+      if (Description[key] !== null) {
+        filteredDescription[key] = Description[key] as string;
+      }
+    }
+
+    const input = {
+      username: username,
+      Languages: Languages,
+      Description: filteredDescription,
+      config: config,
+    };
+
+    const taglineResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/generate_tagline`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(input),
+    });
+
+    const taglineData = await taglineResponse.json();
+
+    if (!taglineResponse.ok) {
+      console.error("Tagline generation failed:", taglineData.error || "Unknown error");
+      throw new Error(`Tagline generation failed with status ${taglineResponse.status}`);
+    }
+
+    config.Tagline = taglineData.response;
+
+    return new Response(JSON.stringify(config), {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("Error fetching GitHub profile:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
+    console.error("Error processing request:", error);
+    return new Response(JSON.stringify({ error: (error as Error).message }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
