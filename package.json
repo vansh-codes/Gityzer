@@ -16,6 +16,8 @@
     "@emotion/styled": "^11.13.0",
     "@google/generative-ai": "^0.21.0",
     "@mui/material": "^6.1.6",
+    "@react-pdf/renderer": "^4.1.6",
+    "@vercel/og": "^0.6.4",
     "axios": "^1.7.7",
     "canvas": "^3.0.1",
     "express": "^4.21.2",

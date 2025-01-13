@@ -36,8 +36,11 @@
 │   │   ├── api/
 │   │   │   ├── ai/
 │   │   │   │   └── route.ts
+│   │   │   ├── config/
+│   │   │   │   └── route.ts
 │   │   │   ├── generate_tagline/
-│   │   │   │   └── generateTagline.ts
+│   │   │   │   ├── generateTagline.ts
+│   │   │   │   └── route.ts
 │   │   │   ├── github_profile/
 │   │   │   │   ├── route.ts
 │   │   │   │   └── user.ts
