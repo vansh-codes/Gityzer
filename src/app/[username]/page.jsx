@@ -1,23 +1,18 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import Canvas from "@/components/Canvas";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast, { Toaster } from 'react-hot-toast';
-import UserConfig from "@/components/UserConfig";
-import UserCard from "@/components/UserCard";
 
-export default function Badge({ params }) {
+export default function previewCard({ params }) {
   const username = params.username;
   const router = useRouter();
   const searchParams = useSearchParams();
-  const canvasRef = useRef(null);
   const [config, setConfig] = useState({});
-  const [configGenerated, setConfigGenerated] = useState(false);
-  const [loading, setLoading] = useState(false);
   const prevConfigRef = useRef(config);
   const configCalled = useRef(false);
   const userConfigRef = useRef({});
+  const [imageUrl, setImageUrl] = useState("");
 
   const defaultConfig = {
     theme: "dark",
@@ -72,38 +67,8 @@ export default function Badge({ params }) {
     }));
   };
 
-  const handleConfig = async () => {
-    if (!configGenerated && !loading && !configCalled.current) {
-      configCalled.current = true;
-      setLoading(true);
-      try {
-        const configData = await UserConfig(username);
-        const mergedConfig = { ...configData, ...userConfigRef.current }; // Merge with user-provided attributes
-        setConfig((prev) => ({ ...prev, ...mergedConfig }));
-        setConfigGenerated(true);
-        updateURL(); // Update URL after setting config
-      } catch (error) {
-        console.error("Error:", error.message);
-      }
-    }
-  };
-
-  useEffect(() => {
-    handleConfig();
-  }, []); 
-
-  if (config !== null && Object.keys(config).length > 0) {
-    console.log(config.Tagline);
-  }
-
   const exportCanvas = () => {
-    const canvas = canvasRef.current;
-    const dataURL = canvas.toDataURL("image/png");
-    const link = document.createElement("a");
-    link.href = dataURL;
-    link.download = "canvas.png";
-    link.click();
-    toast.success("Image downloaded successfully!");
+    toast.error("Sorry, this feature is not available yet.");
   };
 
   const exportMarkdown = () => {
@@ -118,22 +83,41 @@ export default function Badge({ params }) {
     toast.error("Sorry, this feature is not available yet.");
   };
 
+  const getUrlParams = (config) => {
+    const params = new URLSearchParams();
+    const includeKeys = ["theme", "font", "pattern", "image", "star", "fork", "issue"];
+    Object.entries(config).forEach(([key, value]) => {
+      if (includeKeys.includes(key) && value !== false && value !== "" && value !== null) {
+        params.set(key, value);
+      }
+    });
+    return params.toString();
+  };
+
+  const isUrlComplete = () => {
+    const requiredParams = ["theme", "font", "pattern"];
+    return requiredParams.every(param => config[param]);
+  };
+
+  const fetchImage = async () => {
+    if (isUrlComplete()) {
+      const url = `${process.env.NEXT_PUBLIC_BASE_URL}/${username}/image?${getUrlParams(config)}`;
+      setImageUrl(url);
+    } else {
+      setImageUrl("");
+    }
+  };
+
+  useEffect(() => {
+    fetchImage();
+  }, [config]);
+
   return (
     <div className='min-h-screen text-white relative flex flex-col gap-2' >
       <div className="flex gap-10 items-center justify-center mb-2 h-[360px]">
-        {/* Conditionally render Canvas only if config is not empty */}
-        <div className="hidden">
-          {Object.keys(config).length > 0 ? (
-            <Canvas config={config} ref={canvasRef} />
-          ) : (
-            <p>Loading your badge...</p>
-          )}
+        <div className="w-[720px] h-[360px] flex">
+          {imageUrl && <img src={imageUrl} alt="" />}
         </div>
-        {Object.keys(config).length > 0 ? (
-          <UserCard config={config} />
-        ) : (
-          <p>Loading your badge...</p>
-        )}
       </div>
       <div className="text-justify font-semibold font-mono flex bg-slate-800 bg-opacity-80 rounded-xl p-4 shadow-lg gap-8 items-center justify-center w-[50vw] min-w-[600px] mx-auto">
         <button 
@@ -190,11 +174,11 @@ export default function Badge({ params }) {
                   onChange={handleChange}
                   className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[100px]"
                 >
-                  <option value="helvetica">Helvetica</option>
-                  <option value="arial">Arial</option>
-                  <option value="times_new_roman">Times New Roman</option>
-                  <option value="calibri">Calibri</option>
-                  <option value="verdana">Verdana</option>
+                  <option value="Helvetica">Helvetica</option>
+                  <option value="Arial">Arial</option>
+                  <option value="TimesNewRoman">Times New Roman</option>
+                  <option value="Calibri">Calibri</option>
+                  <option value="Verdana">Verdana</option>
                 </select>
               </div>
             </div>
@@ -265,7 +249,6 @@ export default function Badge({ params }) {
               />
               <label htmlFor="username">Issue</label>
             </div>
-            {/* Add more checkboxes similar to this for other fields */}
           </div>
         </form>
       </div>
