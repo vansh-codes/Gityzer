@@ -38,8 +38,6 @@
 │   │   ├── [...not-found]/
 │   │   │   └── page.jsx
 │   │   ├── [username]/
-│   │   │   ├── image/
-│   │   │   │   └── route.jsx
 │   │   │   └── page.jsx
 │   │   ├── api/
 │   │   │   ├── ai/
@@ -50,6 +48,8 @@
 │   │   │   │   └── route.ts
 │   │   │   ├── github_profile/
 │   │   │   │   └── route.ts
+│   │   │   ├── image/
+│   │   │   │   └── route.jsx
 │   │   │   └── user/
 │   │   │       ├── interface.ts
 │   │   │       └── route.ts
