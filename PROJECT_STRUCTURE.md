@@ -41,12 +41,16 @@
 │   │   │   └── page.jsx
 │   │   ├── api/
 │   │   │   ├── ai/
+│   │   │   │   ├── interface.ts
 │   │   │   │   └── route.ts
 │   │   │   ├── config/
+│   │   │   │   ├── interface.ts
 │   │   │   │   └── route.ts
 │   │   │   ├── generate_tagline/
+│   │   │   │   ├── interface.ts
 │   │   │   │   └── route.ts
 │   │   │   ├── github_profile/
+│   │   │   │   ├── interface.ts
 │   │   │   │   └── route.ts
 │   │   │   ├── image/
 │   │   │   │   └── route.jsx
