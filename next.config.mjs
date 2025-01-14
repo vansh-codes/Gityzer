@@ -1,5 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/:username/image',
+        destination: '/api/image',
+      },
+    ]
+  },
   images: {
     remotePatterns: [
       {

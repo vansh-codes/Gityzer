@@ -27,6 +27,8 @@ type Config = {
   issue_count: number;
 };
 
+export const runtime = 'edge';
+
 export async function POST(request: Request): Promise<Response> {
   try {
     const { username }: { username: string } = await request.json();
