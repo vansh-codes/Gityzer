@@ -1,15 +1,6 @@
 import { GoogleGenerativeAI, GenerativeModel } from "@google/generative-ai";
 import { NextResponse } from "next/server";
-
-interface RequestData {
-  prompt: string;
-}
-
-interface ResponseData {
-  response?: string;
-  success: boolean;
-  error?: string;
-}
+import { RequestData, ResponseData } from "./interface";
 
 export const runtime = 'edge';
 

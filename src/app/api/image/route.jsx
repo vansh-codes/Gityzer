@@ -28,7 +28,7 @@ export async function GET(req) {
     });
 
     if (!configRes.ok) {
-      throw new Error("Failed to fetch config");
+        throw new Error("Failed to fetch config");
     }
 
     const configData = await configRes.json();

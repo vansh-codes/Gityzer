@@ -1,18 +1,4 @@
-interface GenerateTaglineParams {
-  username: string;
-  Languages: Record<string, any>;
-  Description: Record<string, string>;
-  config: {
-    star_count: number;
-    fork_count: number;
-    issue_count: number;
-  };
-}
-
-interface ApiResponse {
-  response: string;
-  error?: string;
-}
+import { ApiResponse, GenerateTaglineParams } from "./interface";
 
 export const runtime = 'edge';
 

@@ -1,11 +1,4 @@
-interface GitHubRepo {
-  language: string | null;
-  description: string | null;
-  stargazers_count: number | null;
-  forks_count: number | null;
-  open_issues_count: number | null;
-  name: string;
-}
+import { GitHubRepo } from "./interface";
 
 export const runtime = 'edge';
 
