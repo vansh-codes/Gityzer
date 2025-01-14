@@ -15,7 +15,13 @@
 ├── package.json
 ├── postcss.config.mjs
 ├── public/
+│   ├── Arial.ttf
+│   ├── Calibri.ttf
+│   ├── CascadiaCode-Bold.otf
 │   ├── Githuberror404.png
+│   ├── Helvetica.otf
+│   ├── TimesNewRoman.ttf
+│   ├── Verdana.ttf
 │   ├── default_profile.svg
 │   ├── download.svg
 │   ├── github-filled.svg
@@ -32,6 +38,8 @@
 │   │   ├── [...not-found]/
 │   │   │   └── page.jsx
 │   │   ├── [username]/
+│   │   │   ├── image/
+│   │   │   │   └── route.jsx
 │   │   │   └── page.jsx
 │   │   ├── api/
 │   │   │   ├── ai/
@@ -39,11 +47,9 @@
 │   │   │   ├── config/
 │   │   │   │   └── route.ts
 │   │   │   ├── generate_tagline/
-│   │   │   │   ├── generateTagline.ts
 │   │   │   │   └── route.ts
 │   │   │   ├── github_profile/
-│   │   │   │   ├── route.ts
-│   │   │   │   └── user.ts
+│   │   │   │   └── route.ts
 │   │   │   └── user/
 │   │   │       ├── interface.ts
 │   │   │       └── route.ts
@@ -59,12 +65,10 @@
 │   │   ├── robots.ts
 │   │   └── sitemap.ts
 │   ├── components/
-│   │   ├── Canvas.jsx
 │   │   ├── Header.jsx
 │   │   ├── MyCard.jsx
 │   │   ├── README.md
-│   │   ├── UserCard.jsx
-│   │   └── UserConfig.ts
+│   │   └── RenderSVG.jsx
 │   ├── hooks/
 │   │   └── README.md
 │   ├── libs/
