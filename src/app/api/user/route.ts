@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { RequestBody } from './interface'
 
+export const runtime = 'edge';
+
 export async function POST(req: Request): Promise<NextResponse> {
   const { username }: RequestBody = await req.json()
 

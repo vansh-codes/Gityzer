@@ -11,6 +11,8 @@ interface ResponseData {
   error?: string;
 }
 
+export const runtime = 'edge';
+
 export const POST = async (request: Request): Promise<NextResponse> => {
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 

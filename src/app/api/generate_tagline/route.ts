@@ -14,6 +14,8 @@ interface ApiResponse {
   error?: string;
 }
 
+export const runtime = 'edge';
+
 export async function POST(request: Request): Promise<Response> {
   try {
     const { username, Languages, Description, config }: GenerateTaglineParams = await request.json();

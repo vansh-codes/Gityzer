@@ -7,6 +7,8 @@ interface GitHubRepo {
   name: string;
 }
 
+export const runtime = 'edge';
+
 export async function POST(request: Request): Promise<Response> {
   try {
     const { username }: { username: string } = await request.json();
