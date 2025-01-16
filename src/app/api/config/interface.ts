@@ -3,7 +3,6 @@ export interface GitHubRepo {
     description: string | null;
     stargazers_count: number | null;
     forks_count: number | null;
-    open_issues_count: number | null;
     owner: { login: string };
     name: string;
   };
@@ -19,10 +18,10 @@ export interface GitHubRepo {
     lang: boolean;
     star: boolean;
     fork: boolean;
-    issue: boolean;
+    repo: boolean;
     UserName: string;
     Tagline: string;
     star_count: number;
     fork_count: number;
-    issue_count: number;
+    repo_count: number;
   };

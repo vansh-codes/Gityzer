@@ -10,7 +10,7 @@ const RenderSVG = (config) => {
     const activeStats = [];
     if (config.star) activeStats.push({ label: "Star", color: "orange", count: config.star_count || 0 });
     if (config.fork) activeStats.push({ label: "Fork", color: "lightblue", count: config.fork_count || 0 });
-    if (config.issue) activeStats.push({ label: "Issue", color: "lightgreen", count: config.issue_count || 0 });
+    if (config.repo) activeStats.push({ label: "Repo", color: "lightgreen", count: config.repo_count || 0 });
 
     const positions = calculatePositions(activeStats, 720);
 
@@ -57,7 +57,7 @@ const RenderSVG = (config) => {
     });
   };
 
-  const statsDisplayed = config.star || config.fork || config.issue;
+  const statsDisplayed = config.star || config.fork || config.repo;
   const yOffset = statsDisplayed ? -30 : 0;
 
   const patternSrc = {

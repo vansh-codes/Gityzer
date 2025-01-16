@@ -44,12 +44,12 @@ export async function GET(req) {
         lang: configData.lang !== undefined ? configData.lang : false,
         star: query.star !== undefined ? true : configData.star !== undefined ? configData.star : false,
         fork: query.fork !== undefined ? true : configData.fork !== undefined ? configData.fork : false,
-        issue: query.issue !== undefined ? true : configData.issue !== undefined ? configData.issue : false,
+        repo: query.repo !== undefined ? true : configData.repo !== undefined ? configData.repo : false,
         UserName: configData.UserName || '',
         Tagline: configData.Tagline || '',
         star_count: configData.star_count || 0,
         fork_count: configData.fork_count || 0,
-        issue_count: configData.issue_count || 0,
+        repo_count: configData.repo_count || 0,
     };
 
 

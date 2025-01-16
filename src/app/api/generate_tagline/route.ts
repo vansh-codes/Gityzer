@@ -13,9 +13,9 @@ export async function POST(request: Request): Promise<Response> {
                     ${Object.entries(Description)
                       .map(([repo, desc]) => `${repo}: ${desc}`)
                       .join(", ")}  
-                    Total Stars: ${config.star_count}, Total Forks: ${config.fork_count}, Total Issues: ${config.issue_count}  
+                    Total Stars: ${config.star_count}, Total Forks: ${config.fork_count}, Total Repositories: ${config.repo_count}  
     
-                    The tagline should summarize their impact, versatility, quality, and strength, everything in 100 characters or less, in a meaningful professional tone.
+                    The tagline should summarize their impactfulness, quality, and strength, everything in 100 characters or less, in a meaningful professional tone. Also, the tagline should be unique and not generic. Should inculde user's personal or professional traits.
     
                     Only generate one tagline. Do not include any code or code-like syntax in the response. Do not include any personal information. 
                     Do not include any offensive or inappropriate content. Do not include any content that is not safe for work.
