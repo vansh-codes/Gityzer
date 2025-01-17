@@ -67,20 +67,66 @@ export default function previewCard({ params }) {
     }));
   };
 
-  const exportCanvas = () => {
-    toast.error("Sorry, this feature is not available yet.");
+  const exportPNG = () => {
+    if (imageUrl) {
+      fetch(imageUrl)
+        .then(response => response.text())
+        .then(svgText => {
+          const svg = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
+          const url = URL.createObjectURL(svg);
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            URL.revokeObjectURL(url);
+            canvas.toBlob(blob => {
+              const link = document.createElement('a');
+              link.href = URL.createObjectURL(blob);
+              link.download = `${username}.png`;
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+              toast.success("PNG downloaded successfully.");
+            }, 'image/png');
+          };
+          img.src = url;
+        })
+        .catch(() => {
+          toast.error("Failed to convert SVG to PNG.");
+        });
+    } else {
+      toast.error("Image URL is not available.");
+    }
   };
 
   const exportMarkdown = () => {
-    toast.error("Sorry, this feature is not available yet.");
+    const markdownContent = `![${username}](${imageUrl})`;
+    navigator.clipboard.writeText(markdownContent).then(() => {
+      toast.success("Markdown copied to clipboard.");
+    }).catch(() => {
+      toast.error("Failed to copy Markdown.");
+    });
   };
 
   const exportURL = () => {
-    toast.error("Sorry, this feature is not available yet.");
+    const url = `${imageUrl}`;
+    navigator.clipboard.writeText(url).then(() => {
+      toast.success("URL copied to clipboard.");
+    }).catch(() => {
+      toast.error("Failed to copy URL.");
+    });
   };
 
   const exportImg = () => {
-    toast.error("Sorry, this feature is not available yet.");
+    const imgTag = `<img src="${imageUrl}" alt="${username}" />`;
+    navigator.clipboard.writeText(imgTag).then(() => {
+      toast.success("<img> tag copied to clipboard.");
+    }).catch(() => {
+      toast.error("Failed to copy <img> tag.");
+    });
   };
 
   const getUrlParams = (config) => {
@@ -127,7 +173,7 @@ export default function previewCard({ params }) {
           MARKDOWN
         </button>
         <button
-          onClick={exportCanvas}
+          onClick={exportPNG}
           className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] min-w-[120px]"
         >
           <img src="/download.svg" alt="" width="20" />
