@@ -25,12 +25,12 @@ export default function previewCard({ params }) {
     lang: false,
     star: false,
     fork: false,
-    issue: false,
+    repo: false,
   };
 
   const updateURL = () => {
     const params = new URLSearchParams();
-    const excludeKeys = ["username", "tagline", "lang", "UserName", "Tagline", "star_count", "fork_count", "issue_count", "update"];
+    const excludeKeys = ["username", "tagline", "lang", "UserName", "Tagline", "star_count", "fork_count", "repo_count", "update"];
     Object.entries(config).forEach(([key, value]) => {
       if (!excludeKeys.includes(key) && value !== false && value !== "" && value !== null) {
         params.set(key, value);
@@ -131,7 +131,7 @@ export default function previewCard({ params }) {
 
   const getUrlParams = (config) => {
     const params = new URLSearchParams();
-    const includeKeys = ["theme", "font", "pattern", "image", "star", "fork", "issue"];
+    const includeKeys = ["theme", "font", "pattern", "image", "star", "fork", "repo"];
     Object.entries(config).forEach(([key, value]) => {
       if (includeKeys.includes(key) && value !== false && value !== "" && value !== null) {
         params.set(key, value);
@@ -288,12 +288,12 @@ export default function previewCard({ params }) {
             <div className="flex gap-1 items-center justify-center">
               <input
                 type="checkbox"
-                name="issue"
-                checked={config.issue || false}
+                name="repo"
+                checked={config.repo || false}
                 onChange={handleChange}
                 className="accent-blue-500"
               />
-              <label htmlFor="username">Issue</label>
+              <label htmlFor="username">Repo</label>
             </div>
           </div>
         </form>

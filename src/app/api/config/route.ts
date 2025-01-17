@@ -22,7 +22,6 @@ export async function POST(request: Request): Promise<Response> {
     const Description: Record<string, string> = {};
     const Stars: Record<string, number | null> = {};
     const Forks: Record<string, number | null> = {};
-    const Issues: Record<string, number | null> = {};
     const config: Config = {
       theme: "dark",
       font: "helvetica",
@@ -34,12 +33,12 @@ export async function POST(request: Request): Promise<Response> {
       lang: false,
       star: false,
       fork: false,
-      issue: false,
+      repo: false,
       UserName: userData[0].owner.login,
       Tagline: "",
       star_count: 0,
       fork_count: 0,
-      issue_count: 0,
+      repo_count: Object.keys(userData).length || 0,
     };
 
     if (userData && Array.isArray(userData)) {
@@ -59,10 +58,6 @@ export async function POST(request: Request): Promise<Response> {
         if (item.forks_count !== null) {
           Forks[item.name] = item.forks_count;
         }
-
-        if (item.open_issues_count !== null) {
-          Issues[item.name] = item.open_issues_count;
-        }
       });
 
       config.star_count = userData.reduce(
@@ -72,11 +67,6 @@ export async function POST(request: Request): Promise<Response> {
 
       config.fork_count = userData.reduce(
         (acc, item) => acc + (item.forks_count || 0),
-        0
-      );
-
-      config.issue_count = userData.reduce(
-        (acc, item) => acc + (item.open_issues_count || 0),
         0
       );
     }

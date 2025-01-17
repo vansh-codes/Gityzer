@@ -5,7 +5,7 @@ export interface GenerateTaglineParams {
     config: {
         star_count: number;
         fork_count: number;
-        issue_count: number;
+        repo_count: number;
     };
 }
 

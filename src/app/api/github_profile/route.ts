@@ -22,11 +22,10 @@ export async function POST(request: Request): Promise<Response> {
     const Description: Record<string, string | null> = {};
     const Stars: Record<string, number | null> = {};
     const Forks: Record<string, number | null> = {};
-    const Issues: Record<string, number | null> = {};
     const config = {
       star_count: 0,
       fork_count: 0,
-      issue_count: 0,
+      repo_count: 0 || Object.keys(userData).length,
     };
 
     if (userData && Array.isArray(userData)) {
@@ -46,10 +45,6 @@ export async function POST(request: Request): Promise<Response> {
         if (item.forks_count !== null) {
           Forks[item.name] = item.forks_count;
         }
-
-        if (item.open_issues_count !== null) {
-          Issues[item.name] = item.open_issues_count;
-        }
       });
 
       config.star_count = userData.reduce(
@@ -61,11 +56,6 @@ export async function POST(request: Request): Promise<Response> {
         (acc, item) => acc + (item.forks_count || 0),
         0
       );
-
-      config.issue_count = userData.reduce(
-        (acc, item) => acc + (item.open_issues_count || 0),
-        0
-      );
     }
 
     return new Response(JSON.stringify({
@@ -73,7 +63,6 @@ export async function POST(request: Request): Promise<Response> {
       Description,
       Stars,
       Forks,
-      Issues,
       config,
     }), {
       headers: { "Content-Type": "application/json" },
