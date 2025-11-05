@@ -60,7 +60,7 @@ function Home() {
   return (
     <>
       <Toaster />
-      <div className='flex flex-col justify-between min-h-screen'>
+      <div className='flex flex-col justify-between min-h-[92vh] md:min-h-[94vh] lg:min-h-[90vh] xl:min-h-[91vh]'>
         {/* Main Content */}
         <main className='flex flex-col justify-center items-center flex-grow px-8 sm:px-4'>
           <>
@@ -92,7 +92,7 @@ function Home() {
                 <div className='px-3'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
-                    className='h-6 w-6 text-gray-600'
+                    className='h-7 w-7 text-gray-600'
                     viewBox='0 0 24 24'
                     fill='currentColor'
                   >
@@ -104,7 +104,7 @@ function Home() {
                 <input
                   type='text'
                   placeholder='Enter GitHub username'
-                  className='w-full px-4 py-2 text-gray-700 bg-white focus:outline-none'
+                  className='w-full px-4 py-2 text-gray-700 bg-white focus:outline-none text-base md:text-lg'
                   value={username}
                   onChange={handleUser}
                   ref={inputRef}
@@ -113,7 +113,8 @@ function Home() {
                 {/* Submit button */}
                 <button
                   type='submit'
-                  className='bg-purple-500 text-white p-3 rounded-full hover:bg-purple-600  focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50 transition duration-200 flex items-center justify-center'
+                  disabled={!username.trim()}
+                  className='bg-purple-500 text-white p-3 rounded-full hover:bg-purple-600 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50 transition duration-200 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed'
                 >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -131,7 +132,7 @@ function Home() {
           </>
         </main>
         {/* Footer */}
-        <footer className='p-4 text-center text-gray-600'>
+        <footer className='p-4 text-center text-gray-400'>
           Open source ❤️ |{' '}
           <button
             onClick={() => setShowContributors(!showContributors)}
