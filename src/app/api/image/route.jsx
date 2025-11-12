@@ -1,6 +1,7 @@
 import satori from 'satori';
 import { NextResponse } from 'next/server';
 import RenderSVG from '@/components/RenderSVG'; // Ensure this path is correct
+import { getValidLanguage } from '@/libs/translations';
 
 export const runtime = 'edge';
 
@@ -8,13 +9,14 @@ export async function GET(req) {
     const { searchParams } = new URL(req.url)
     const query = Object.fromEntries(searchParams)
     const username = query.username
+    const language = getValidLanguage(query.lang)
 
     if (!process.env.NEXT_PUBLIC_BASE_URL) {
         return new NextResponse(JSON.stringify({ error: "BASE_URL is not defined" }), {
             status: 500,
             headers: {
-            'content-type': 'application/json',
-            'cache-control': 'public, max-age=0',
+                'content-type': 'application/json',
+                'cache-control': 'public, max-age=0',
             },
         });
     }
@@ -22,9 +24,9 @@ export async function GET(req) {
     const requestBody = { username: username };
 
     const configRes = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/config`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestBody),
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestBody),
     });
 
     if (!configRes.ok) {
@@ -41,7 +43,7 @@ export async function GET(req) {
         image: query.image || configData.image || '',
         username: configData.username !== undefined ? configData.username : true,
         tagline: configData.tagline !== undefined ? configData.tagline : true,
-        lang: configData.lang !== undefined ? configData.lang : false,
+        lang: language,
         star: query.star !== undefined ? true : configData.star !== undefined ? configData.star : false,
         fork: query.fork !== undefined ? true : configData.fork !== undefined ? configData.fork : false,
         repo: query.repo !== undefined ? true : configData.repo !== undefined ? configData.repo : false,
@@ -59,42 +61,42 @@ export async function GET(req) {
             width: 720,
             height: 360,
             fonts: [
-            {
-                name: 'Helvetica',
-                data: await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/Helvetica.otf`).then((res) => res.arrayBuffer()),
-                weight: 400,
-                style: 'normal',
-            },
-            {
-                name: 'Arial',
-                data: await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/Arial.ttf`).then((res) => res.arrayBuffer()),
-                weight: 400,
-                style: 'normal',
-            },
-            {
-                name: 'TimesNewRoman',
-                data: await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/TimesNewRoman.ttf`).then((res) => res.arrayBuffer()),
-                weight: 400,
-                style: 'normal',
-            },
-            {
-                name: 'Calibri',
-                data: await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/Calibri.ttf`).then((res) => res.arrayBuffer()),
-                weight: 400,
-                style: 'normal',
-            },
-            {
-                name: 'Verdana',
-                data: await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/Verdana.ttf`).then((res) => res.arrayBuffer()),
-                weight: 400,
-                style: 'normal',
-            },
-            {
-                name: 'Cascadia',
-                data: await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/CascadiaCode-Bold.otf`).then((res) => res.arrayBuffer()),
-                weight: 800,
-                style: 'bold',
-            },
+                {
+                    name: 'Helvetica',
+                    data: await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/Helvetica.otf`).then((res) => res.arrayBuffer()),
+                    weight: 400,
+                    style: 'normal',
+                },
+                {
+                    name: 'Arial',
+                    data: await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/Arial.ttf`).then((res) => res.arrayBuffer()),
+                    weight: 400,
+                    style: 'normal',
+                },
+                {
+                    name: 'TimesNewRoman',
+                    data: await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/TimesNewRoman.ttf`).then((res) => res.arrayBuffer()),
+                    weight: 400,
+                    style: 'normal',
+                },
+                {
+                    name: 'Calibri',
+                    data: await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/Calibri.ttf`).then((res) => res.arrayBuffer()),
+                    weight: 400,
+                    style: 'normal',
+                },
+                {
+                    name: 'Verdana',
+                    data: await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/Verdana.ttf`).then((res) => res.arrayBuffer()),
+                    weight: 400,
+                    style: 'normal',
+                },
+                {
+                    name: 'Cascadia',
+                    data: await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/CascadiaCode-Bold.otf`).then((res) => res.arrayBuffer()),
+                    weight: 800,
+                    style: 'bold',
+                },
             ],
         },
     )

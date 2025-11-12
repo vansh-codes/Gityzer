@@ -1,3 +1,5 @@
+import { getTranslation } from '@/libs/translations';
+
 const RenderSVG = (config) => {
   const calculatePositions = (items, containerWidth) => {
     const spacing = items.length === 3 ? 75 : 120;
@@ -16,6 +18,7 @@ const RenderSVG = (config) => {
 
     return positions.map((x, i) => {
       const stat = activeStats[i];
+      const translatedLabel = getTranslation(stat.label, config.lang);
       return (
         <div key={i} style={{
           position: 'absolute',
@@ -25,7 +28,7 @@ const RenderSVG = (config) => {
           alignItems: 'center'
         }}>
           <div style={{
-            display: 'flex',            
+            display: 'flex',
             itemsAlign: 'center',
             justifyContent: 'center',
             width: 50,
@@ -35,8 +38,8 @@ const RenderSVG = (config) => {
             fontWeight: 'bold',
             fontFamily: 'Cascadia',
             color: config.theme === "dark" ? "#fff" : "#474747"
-          }}> 
-            {stat.label}
+          }}>
+            {translatedLabel}
           </div>
           <div style={{
             display: 'flex',
@@ -138,7 +141,7 @@ const RenderSVG = (config) => {
           fontFamily: config.font,
           color: config.theme === "dark" ? "#fff" : "#000",
           whiteSpace: 'pre-wrap',
-          wordWrap: 'break-word', 
+          wordWrap: 'break-word',
         }}>
           {config.Tagline || "Tagline"}
         </div>
