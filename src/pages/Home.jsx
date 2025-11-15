@@ -145,7 +145,7 @@ function Home() {
           </>
         </main>
         {loading && (
-          <Loader message='Loading profile' />
+          <Loader message='Verifying username...' />
         )}
         {/* Footer */}
         <footer className='p-4 text-center text-gray-400'>
