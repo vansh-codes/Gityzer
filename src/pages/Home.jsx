@@ -4,10 +4,12 @@ import { useRouter } from 'next/navigation'
 import toast, { Toaster } from 'react-hot-toast'
 import Typewriter from 'typewriter-effect'
 import Link from 'next/link'
+import Loader from '@/components/Loader'
 
 function Home() {
   const [username, setUserName] = useState('')
   const [showContributors, setShowContributors] = useState(false)
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
   const inputRef = useRef(null)
 
@@ -26,6 +28,7 @@ function Home() {
 
     if (username.trim()) {
       try {
+        setLoading(true)
         const response = await fetch('/api/user', {
           method: 'POST',
           headers: {
@@ -37,6 +40,7 @@ function Home() {
         if (response.ok) {
           const data = await response.json()
           if (data.exists) {
+            // Show loader while navigating to profile page
             router.push(`/${username.trim()}`)
           } else {
             toast.error('Username does not exist on GitHub')
@@ -46,6 +50,9 @@ function Home() {
         }
       } catch (error) {
         toast.error('An unexpected error occurred. Please try again.')
+      } finally {
+        // Keep loading state true briefly to allow route transition loading UI to appear
+        setTimeout(() => setLoading(false), 800)
       }
     } else {
       toast.error('Please enter a username.')
@@ -108,29 +115,38 @@ function Home() {
                   value={username}
                   onChange={handleUser}
                   ref={inputRef}
+                  disabled={loading}
                 />
 
                 {/* Submit button */}
                 <button
                   type='submit'
-                  disabled={!username.trim()}
-                  className='bg-purple-500 text-white p-3 rounded-full hover:bg-purple-600 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50 transition duration-200 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed'
+                  disabled={!username.trim() || loading}
+                  aria-busy={loading}
+                  className='relative bg-purple-500 text-white p-3 rounded-full hover:bg-purple-600 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50 transition duration-200 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed'
                 >
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-5 w-5'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                    strokeWidth='2'
-                  >
-                    <path strokeLinecap='round' strokeLinejoin='round' d='M9 5l7 7-7 7' />
-                  </svg>
+                  {loading ? (
+                    <span className='h-5 w-5 rounded-full border-2 border-white border-t-transparent animate-spin' />
+                  ) : (
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='h-5 w-5'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                      strokeWidth='2'
+                    >
+                      <path strokeLinecap='round' strokeLinejoin='round' d='M9 5l7 7-7 7' />
+                    </svg>
+                  )}
                 </button>
               </div>
             </form>
           </>
         </main>
+        {loading && (
+          <Loader message='Loading profile' />
+        )}
         {/* Footer */}
         <footer className='p-4 text-center text-gray-400'>
           Open source ❤️ |{' '}
