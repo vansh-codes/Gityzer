@@ -6,6 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { items } from './exportTools';
 import { selects } from './selectTools';
 import { checks } from './checkboxTools';
+import Loader from "@/components/Loader";
 
 export default function previewCard({ params }) {
   const username = params.username;
@@ -16,6 +17,7 @@ export default function previewCard({ params }) {
   const configCalled = useRef(false);
   const userConfigRef = useRef({});
   const [imageUrl, setImageUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const defaultConfig = {
     theme: "dark",
@@ -151,8 +153,11 @@ export default function previewCard({ params }) {
   const fetchImage = async () => {
     if (isUrlComplete()) {
       const url = `${process.env.NEXT_PUBLIC_BASE_URL}/${username}/image?${getUrlParams(config)}`;
+      // Start loading until the image element confirms onLoad
+      setLoading(true);
       setImageUrl(url);
     } else {
+      setLoading(false);
       setImageUrl("");
     }
   };
@@ -163,6 +168,7 @@ export default function previewCard({ params }) {
 
   return (
     <div className='min-h-screen min-w-[100%] px-5 text-white relative flex flex-col gap-2'>
+      {loading && <Loader message="Generating preview..." />}
       <div className="flex md:gap-10 items-center justify-center mb-2 md:h-[360px]">
         <div className="w-[620px] lg:w-[720px] mt-6 md:h-[360px] flex">
           {imageUrl && (
@@ -170,6 +176,8 @@ export default function previewCard({ params }) {
               src={imageUrl}
               alt={`Background image of ${username}`}
               title={`Background preview for ${username}`}
+              onLoad={() => setLoading(false)}
+              onError={() => { setLoading(false); toast.error("Failed to load image."); }}
             />
           )}
         </div>
