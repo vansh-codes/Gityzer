@@ -3,6 +3,9 @@
 import { useEffect, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast, { Toaster } from 'react-hot-toast';
+import { items } from './exportTools';
+import { selects } from './selectTools';
+import { checks } from './checkboxTools';
 
 export default function previewCard({ params }) {
   const username = params.username;
@@ -159,142 +162,101 @@ export default function previewCard({ params }) {
   }, [config]);
 
   return (
-    <div className='min-h-screen text-white relative flex flex-col gap-2' >
-      <div className="flex gap-10 items-center justify-center mb-2 h-[360px]">
-        <div className="w-[720px] h-[360px] flex">
-          {imageUrl && <img src={imageUrl} alt="" />}
+    <div className='min-h-screen min-w-[100%] px-5 text-white relative flex flex-col gap-2'>
+      <div className="flex md:gap-10 items-center justify-center mb-2 md:h-[360px]">
+        <div className="w-[620px] lg:w-[720px] mt-6 md:h-[360px] flex">
+          {imageUrl && (
+            <img
+              src={imageUrl}
+              alt={`Background image of ${username}`}
+              title={`Background preview for ${username}`}
+            />
+          )}
         </div>
       </div>
-      <div className="text-justify font-semibold font-mono flex bg-slate-800 bg-opacity-80 rounded-xl p-4 shadow-lg gap-8 items-center justify-center w-[50vw] min-w-[600px] mx-auto">
-        <button 
-          onClick={exportMarkdown}
-          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] min-w-[120px]">
-          <img src="/markdown.svg" alt="" width="20" />
-          MARKDOWN
-        </button>
-        <button
-          onClick={exportPNG}
-          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] min-w-[120px]"
-        >
-          <img src="/download.svg" alt="" width="20" />
-          DOWNLOAD
-        </button>
-        <button 
-          onClick={exportURL}
-          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] min-w-[120px]">
-          <img src="/url.svg" alt="" width="20" />
-          URL
-        </button>
-        <button 
-          onClick={exportImg}
-          className="flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] min-w-[120px]">
-          <img src="/img.svg" alt="" width="20" />
-          &lt;IMG /&gt;
-        </button>
+      <div className="w-[95%] md:w-[75%] lg:w-[55%] mx-auto mt-5 text-justify font-semibold font-mono grid grid-cols-2 lg:grid-cols-4 bg-slate-800 bg-opacity-80 rounded-xl p-4 shadow-lg gap-4 items-center">
+        {items.map((item) => {
+          const actionMap = {
+            markdown: exportMarkdown,
+            download: exportPNG,
+            url: exportURL,
+            img: exportImg,
+          };
+
+          const onClick = actionMap[item.action] || (() => {});
+
+          return (
+            <button
+              key={item.key}
+              onClick={onClick}
+              title={item.title}
+              className="w-full flex gap-2 bg-slate-600 p-1 rounded-md items-center border-white border-[1px] justify-center hover:bg-slate-500"
+            >
+              <img src={item.icon} alt={`${item.key} icon`} width="20" />
+              <span>{item.label}</span>
+            </button>
+          );
+        })}
       </div>
-      <div className="max-w-6xl mx-auto mb-2 bg-slate-800 bg-opacity-80 rounded-xl p-8 shadow-lg h-fit w-[50vw] items-center justify-center font-medium">
-        <form className="flex flex-col gap-8">
-          <div className="grid grid-cols-3 gap-7">
-            <div className="flex items-center justify-center">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="theme">Theme</label>
-                <select
-                  name="theme"
-                  id="theme"
-                  value={config.theme || ""}
-                  onChange={handleChange}
-                  className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[100px]"
-                >
-                  <option value="dark">Dark</option>
-                  <option value="light">Light</option>
-                </select>
+      <div className="w-[95%] md:w-[75%] lg:w-[55%] mx-auto mt-3 mb-6 bg-slate-800 bg-opacity-80 rounded-xl p-8 shadow-lg h-fit items-center justify-center font-medium">
+        <form className="w-full flex flex-col gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {selects.map((s) => (
+              <div key={s.key} className="w-full flex items-center justify-center">
+                <div className="w-full flex flex-col items-center gap-2">
+                  <label htmlFor={s.name}>{s.label}</label>
+                  <select
+                    name={s.name}
+                    id={s.name}
+                    value={config[s.name] || ""}
+                    onChange={handleChange}
+                    className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-full md:w-[110px] lg:w-[150px]"
+                    title={s.title}
+                  >
+                    {s.options.map((opt) => (
+                      <option key={opt.value} value={opt.value}>{opt.label}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center justify-center">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="font">Font</label>
-                <select
-                  name="font"
-                  id="font"
-                  value={config.font || ""}
-                  onChange={handleChange}
-                  className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[100px]"
-                >
-                  <option value="Helvetica">Helvetica</option>
-                  <option value="Arial">Arial</option>
-                  <option value="TimesNewRoman">Times New Roman</option>
-                  <option value="Calibri">Calibri</option>
-                  <option value="Verdana">Verdana</option>
-                </select>
-              </div>
-            </div>
-            <div className="flex items-center justify-center">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="pattern">Pattern</label>
-                <select
-                  name="pattern"
-                  id="pattern"
-                  value={config.pattern || ""}
-                  onChange={handleChange}
-                  className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[100px]"
-                >
-                  <option value="shape 1">Shape 1</option>
-                  <option value="shape 2">Shape 2</option>
-                </select>
-              </div>
-            </div>
-            <div className="flex items-center justify-center col-span-3">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="image">Image URL (Optional)</label>
-                <input
-                  type="text"
-                  name="image"
-                  id="image"
-                  placeholder="Enter image URL"
-                  value={config.image || ""}
-                  onChange={handleChange}
-                  className="bg-slate-600 p-1 rounded-md border-white border-[1px] w-[40vw] h-8 resize-none break-normal"
-                  style={{
-                    overflowX: "scroll",
-                    overflowY: "hidden",
-                    scrollbarWidth: "none", // For Firefox
-                    msOverflowStyle: "none" // For Internet Explorer
-                  }}
-                />
-              </div>
+            ))}
+          </div>
+          <div className="w-full flex items-center justify-center">
+            <div className="w-full flex flex-col justify-center items-center gap-2">
+              <label htmlFor="image">Image URL (Optional)</label>
+              <input
+                type="text"
+                name="image"
+                id="image"
+                placeholder="Enter image URL"
+                value={config.image || ""}
+                onChange={handleChange}
+                title="Image URL for profile picture (optional)"
+                className="w-full bg-slate-600 p-1 rounded-md border-white border-[1px] md:w-[40vw] h-8 resize-none break-normal hover:bg-slate-500"
+                style={{
+                  overflowX: "scroll",
+                  overflowY: "hidden",
+                  scrollbarWidth: "none", // For Firefox
+                  msOverflowStyle: "none" // For Internet Explorer
+                }}
+              />
             </div>
           </div>
           <div className="grid grid-cols-3 gap-7">
-            <div className="flex gap-1 items-center justify-center">
-              <input
-                type="checkbox"
-                name="star"
-                checked={config.star || false}
-                onChange={handleChange}
-                className="accent-blue-500"
-              />
-              <label htmlFor="username">Star</label>
-            </div>
-            <div className="flex gap-1 items-center justify-center">
-              <input
-                type="checkbox"
-                name="fork"
-                checked={config.fork || false}
-                onChange={handleChange}
-                className="accent-blue-500"
-              />
-              <label htmlFor="username">Fork</label>
-            </div>
-            <div className="flex gap-1 items-center justify-center">
-              <input
-                type="checkbox"
-                name="repo"
-                checked={config.repo || false}
-                onChange={handleChange}
-                className="accent-blue-500"
-              />
-              <label htmlFor="username">Repo</label>
-            </div>
+            {checks.map((c) => (
+              <div key={c.key} className="flex gap-1 items-center justify-center">
+                <input
+                  type="checkbox"
+                  id={c.name}
+                  name={c.name}
+                  checked={config[c.name] || false}
+                  onChange={handleChange}
+                  className="accent-blue-500"
+                  title={c.title}
+                />
+                <label htmlFor={c.name}>{c.label}</label>
+              </div>
+            ))}
           </div>
         </form>
       </div>
