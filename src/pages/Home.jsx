@@ -3,12 +3,11 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import toast, { Toaster } from 'react-hot-toast'
 import Typewriter from 'typewriter-effect'
-import Link from 'next/link'
 import Loader from '@/components/Loader'
+import Footer from '@/components/Footer'
 
 function Home() {
   const [username, setUserName] = useState('')
-  const [showContributors, setShowContributors] = useState(false)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
   const inputRef = useRef(null)
@@ -94,9 +93,9 @@ function Home() {
               className='flex items-center w-full sm:w-2/3 lg:w-1/3 h-1/3'
               onSubmit={handleSubmit}
             >
-              <div className='flex items-center bg-white rounded-full shadow-md p-2 w-full'>
+              <div className='flex items-center bg-white rounded-full shadow-md p-2 w-full group'>
                 {/* GitHub Logo inside search bar */}
-                <div className='px-3'>
+                <div className='px-3 group-hover:animate-spin'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     className='h-7 w-7 text-gray-600'
@@ -144,27 +143,12 @@ function Home() {
             </form>
           </>
         </main>
+
         {loading && (
           <Loader message='Verifying username...' />
         )}
-        {/* Footer */}
-        <footer className='p-4 text-center text-gray-400'>
-          Open source ❤️ |{' '}
-          <button
-            onClick={() => setShowContributors(!showContributors)}
-            className='  focus:outline-none'
-          >
-            <Link href='/contributors'>Contributors</Link>
-          </button>{' '}
-          |{' '}
-          <a
-            href='https://github.com/vansh-codes/Gityzer'
-            target='_blank'
-            rel='noreferrer noopener'
-          >
-            Gityzer{' '}
-          </a>
-        </footer>
+
+        <Footer />
       </div>
     </>
   )

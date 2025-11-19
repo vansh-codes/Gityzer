@@ -169,19 +169,28 @@ export default function previewCard({ params }) {
   return (
     <div className='min-h-screen min-w-[100%] px-5 text-white relative flex flex-col gap-2'>
       {loading && <Loader message="Generating preview..." />}
-      <div className="flex md:gap-10 items-center justify-center mb-2 md:h-[360px]">
-        <div className="w-[620px] lg:w-[720px] mt-6 md:h-[360px] flex">
-          {imageUrl && (
+      {imageUrl ? (
+        <div className="flex md:gap-10 items-center justify-center mb-2 md:h-[360px]">
+          <div className="w-[620px] lg:w-[720px] mt-6 md:h-[360px] flex">
             <img
               src={imageUrl}
               alt={`Background image of ${username}`}
               title={`Background preview for ${username}`}
               onLoad={() => setLoading(false)}
-              onError={() => { setLoading(false); toast.error("Failed to load image."); }}
+              onError={() => {
+                setLoading(false);
+                setImageUrl("");
+                toast.error("Failed to load image.");
+              }}
             />
-          )}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="flex flex-col gap-5 items-center justify-center mb-2 md:h-[360px]">
+          <img src="/not-found.png" alt="Not found" />
+          <p className="text-base md:text-xl text-gray-300">No image available.</p> 
+        </div>
+      )}
       <div className="w-[95%] md:w-[75%] lg:w-[55%] mx-auto mt-5 text-justify font-semibold font-mono grid grid-cols-2 lg:grid-cols-4 bg-slate-800 bg-opacity-80 rounded-xl p-4 shadow-lg gap-4 items-center">
         {items.map((item) => {
           const actionMap = {
@@ -191,7 +200,7 @@ export default function previewCard({ params }) {
             img: exportImg,
           };
 
-          const onClick = actionMap[item.action] || (() => {});
+          const onClick = actionMap[item.action] || (() => { });
 
           return (
             <button
