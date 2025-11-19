@@ -52,6 +52,7 @@ function Contributors() {
           {contributors?.map((contributor) => {
             return (
               <MyCard
+                key={contributor?.login}
                 login={contributor?.login}
                 img={contributor?.avatar_url}
                 url={contributor?.html_url}

@@ -178,17 +178,17 @@ export default function previewCard({ params }) {
               title={`Background preview for ${username}`}
               onLoad={() => setLoading(false)}
               onError={() => {
-                setLoading(false);
-                setImageUrl("");
-                toast.error("Failed to load image.");
+                setLoading(false)
+                setImageUrl("")
+                toast.error("Failed to load image.")
               }}
             />
           </div>
         </div>
       ) : (
         <div className="flex flex-col gap-5 items-center justify-center mb-2 md:h-[360px]">
-          <img src="/not-found.png" alt="Not found" />
-          <p className="text-base md:text-xl text-gray-300">No image available.</p> 
+          <img src="/not-found.png" alt="Placeholder icon for missing profile background image" />
+          <p className="text-base md:text-xl text-gray-300">No image available.</p>
         </div>
       )}
       <div className="w-[95%] md:w-[75%] lg:w-[55%] mx-auto mt-5 text-justify font-semibold font-mono grid grid-cols-2 lg:grid-cols-4 bg-slate-800 bg-opacity-80 rounded-xl p-4 shadow-lg gap-4 items-center">

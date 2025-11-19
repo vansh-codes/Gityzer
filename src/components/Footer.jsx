@@ -10,7 +10,7 @@ const Footer = () => {
         Open source ❤️
       </span>
 
-      <p>|</p>
+      <span>|</span>
 
       <Link
         href='/contributors'
@@ -19,7 +19,7 @@ const Footer = () => {
         Contributors
       </Link>
 
-      <p>|</p>
+      <span>|</span>
 
       <a
         href='https://github.com/vansh-codes/Gityzer'

@@ -95,7 +95,7 @@ function Home() {
             >
               <div className='flex items-center bg-white rounded-full shadow-md p-2 w-full group'>
                 {/* GitHub Logo inside search bar */}
-                <div className='px-3 group-hover:animate-spin'>
+                <div className='px-3 group-hover:animate-spin motion-reduce:group-hover:animate-none'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     className='h-7 w-7 text-gray-600'
