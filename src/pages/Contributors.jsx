@@ -16,8 +16,9 @@ function Contributors() {
       const perPage = 100
 
       try {
+        setLoading(true)
+        
         while (true) {
-          setLoading(true);
           const response = await fetch(
             `https://api.github.com/repos/vansh-codes/Gityzer/contributors?per_page=${perPage}&page=${page}`
           )

@@ -200,7 +200,7 @@ export default function previewCard({ params }) {
             img: exportImg,
           };
 
-          const onClick = actionMap[item.action] || (() => { });
+          const onClick = actionMap[item.action] || (() => {});
 
           return (
             <button
