@@ -21,7 +21,7 @@ function MyCard({ login, img, url, contributions }) {
         },
       }}
     >
-      <a href={url}>
+      <a href={url} target='_blank' rel='noreferrer noopener'>
         <CardMedia
           component='img'
           height='140'
