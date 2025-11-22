@@ -1,5 +1,19 @@
 <div align="center">
 
+## 📑 Table of Contents
+
+- [GITYZER](#gityzer)
+- [Live Demo](#-live-demo)
+- [Outreach](#-outreach)
+- [Technologies Used](#technologies-used)
+- [How it works](#how-it-works)
+- [Project Structure](#✨-project-structure)
+- [How to contribute ?](#how-to-contribute-)
+- [Want to Contribute?](#want-to-contribute)
+- [Project Admin](#project-admin-)
+- [Code of Conduct](#code-of-conduct)
+- [Contributors](#-contributors)
+
 # **GITYZER**
 
 <i>Gityzer is an open-source tool that generates a personalized image summarizing a user's GitHub stats. This image can be easily embedded in GitHub README files, helping developers showcase their contributions, coding activity, and overall GitHub presence.\*
