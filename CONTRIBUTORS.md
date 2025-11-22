@@ -48,14 +48,21 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/palchhinparihar">
+                    <img src="https://avatars.githubusercontent.com/u/116425582?v=4" width="100;" alt="palchhinparihar"/>
+                    <br />
+                    <sub><b>Palchhin</b></sub>
+                </a>
+            </td>
+		</tr>
+		<tr>
+            <td align="center">
                 <a href="https://github.com/Akshithsaai">
                     <img src="https://avatars.githubusercontent.com/u/76246437?v=4" width="100;" alt="Akshithsaai"/>
                     <br />
                     <sub><b>Akshith saai</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/mehul-m-prajapati">
                     <img src="https://avatars.githubusercontent.com/u/7879392?v=4" width="100;" alt="mehul-m-prajapati"/>
@@ -91,6 +98,8 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>smog-root</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/HarshitShukla-dev">
                     <img src="https://avatars.githubusercontent.com/u/109151752?v=4" width="100;" alt="HarshitShukla-dev"/>
@@ -98,8 +107,6 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Harshit Shukla</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/piyushpatelcodes">
                     <img src="https://avatars.githubusercontent.com/u/136020845?v=4" width="100;" alt="piyushpatelcodes"/>
@@ -135,6 +142,15 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Dimpal Yadav</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
+            <td align="center">
+                <a href="https://github.com/durdana3105">
+                    <img src="https://avatars.githubusercontent.com/u/165191846?v=4" width="100;" alt="durdana3105"/>
+                    <br />
+                    <sub><b>Durdana Sultana</b></sub>
+                </a>
+            </td>
             <td align="center">
                 <a href="https://github.com/adityakalburgi">
                     <img src="https://avatars.githubusercontent.com/u/124163311?v=4" width="100;" alt="adityakalburgi"/>
@@ -142,8 +158,6 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Aditya kalburgi</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/akash70629">
                     <img src="https://avatars.githubusercontent.com/u/76689571?v=4" width="100;" alt="akash70629"/>
