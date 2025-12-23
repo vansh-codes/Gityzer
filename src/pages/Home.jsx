@@ -141,9 +141,7 @@ export default function Home() {
     autoFocus
   />
 </div>
-
-
-                <button
+<button
                   type="submit"
                   disabled={!username.trim() || loading}
                   className="bg-purple-500 text-white p-3 rounded-full hover:bg-purple-600 disabled:opacity-50"
