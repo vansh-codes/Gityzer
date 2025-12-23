@@ -9,10 +9,7 @@ import Loader from "@/components/Loader";
 import Footer from "@/components/Footer";
 
 export default function Home() {
-  /* ---------------- NAVBAR STATE ---------------- */
   const [open, setOpen] = useState(false);
-
-  /* ---------------- EXISTING STATE ---------------- */
   const [username, setUserName] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -53,7 +50,7 @@ export default function Home() {
     } catch {
       toast.error("Unexpected error occurred.");
     } finally {
-      setTimeout(() => setLoading(false), 800);
+      setTimeout(() => setLoading(false), 500);
     }
   };
 
@@ -77,7 +74,7 @@ export default function Home() {
           {/* Mobile Hamburger */}
           <button
             className="md:hidden text-2xl"
-            onClick={() => setOpen(!open)}
+            onClick={() => setOpen(prev => !prev)}
             aria-label="Toggle menu"
           >
             ☰
@@ -131,16 +128,20 @@ export default function Home() {
               className="flex items-center w-full sm:w-2/3 lg:w-1/3"
               onSubmit={handleSubmit}
             >
-              <div className="flex items-center bg-white rounded-full shadow-md p-2 w-full">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  placeholder="Enter GitHub username"
-                  className="w-full px-4 py-2 text-gray-700 focus:outline-none"
-                  value={username}
-                  onChange={(e) => setUserName(e.target.value)}
-                  disabled={loading}
-                />
+              <div className="flex items-center bg-white rounded-full shadow-md p-2 w-full group">
+  {/* GitHub Logo inside search bar */}
+  <div className="px-3 group-hover:animate-spin motion-reduce:group-hover:animate-none">
+    <GitHubIcon />
+  </div>
+
+  <input
+    className="w-full px-4 py-2 text-gray-700 bg-white focus:outline-none text-base md:text-lg"
+    value={username}
+    onChange={handleUser}
+    autoFocus
+  />
+</div>
+
 
                 <button
                   type="submit"
