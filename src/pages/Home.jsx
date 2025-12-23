@@ -1,26 +1,22 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import Typewriter from "typewriter-effect";
 import Loader from "@/components/Loader";
 import Footer from "@/components/Footer";
+import { GitHubIcon } from "@/components/Icons"; // Make sure this import is correct
 
 export default function Home() {
   const [open, setOpen] = useState(false);
   const [username, setUserName] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
 
   /* ---------------- HANDLERS ---------------- */
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const val = username.trim();
@@ -54,6 +50,8 @@ export default function Home() {
     }
   };
 
+  const handleUser = (e) => setUserName(e.target.value);
+
   /* ---------------- JSX ---------------- */
   return (
     <>
@@ -74,7 +72,7 @@ export default function Home() {
           {/* Mobile Hamburger */}
           <button
             className="md:hidden text-2xl"
-            onClick={() => setOpen(prev => !prev)}
+            onClick={() => setOpen((prev) => !prev)}
             aria-label="Toggle menu"
           >
             ☰
@@ -124,40 +122,34 @@ export default function Home() {
               />
             </h1>
 
+            {/* ================= SEARCH FORM ================= */}
             <form
-  className="flex items-center w-full sm:w-2/3 lg:w-1/3"
-  onSubmit={handleSubmit}
->
-  <div className="w-full">
-    <div className="flex items-center bg-white rounded-full shadow-md p-2 w-full group">
-      {/* GitHub Logo inside search bar */}
-      <div className="px-3 group-hover:animate-spin motion-reduce:group-hover:animate-none">
-        <GitHubIcon />
-      </div>
+              className="flex flex-col items-center w-full sm:w-2/3 lg:w-1/3"
+              onSubmit={handleSubmit}
+            >
+              <div className="w-full">
+                <div className="flex items-center bg-white rounded-full shadow-md p-2 w-full group">
+                  {/* GitHub Logo inside search bar */}
+                  <div className="px-3 group-hover:animate-spin motion-reduce:group-hover:animate-none">
+                    <GitHubIcon />
+                  </div>
 
-      <input
-        className="w-full px-4 py-2 text-gray-700 bg-white focus:outline-none text-base md:text-lg"
-        value={username}
-        onChange={handleUser}
-        autoFocus
-      />
-    </div>
-  </div>
-
-  <button>
-    {/* button content */}
-  </button>
-</form>
-
-
-      <button
-                  type="submit"
-                  disabled={!username.trim() || loading}
-                  className="bg-purple-500 text-white p-3 rounded-full hover:bg-purple-600 disabled:opacity-50"
-                >
-                  →
-                </button>
+                  <input
+                    className="w-full px-4 py-2 text-gray-700 bg-white focus:outline-none text-base md:text-lg"
+                    value={username}
+                    onChange={handleUser}
+                    autoFocus
+                  />
+                </div>
               </div>
+
+              <button
+                type="submit"
+                disabled={!username.trim() || loading}
+                className="mt-4 bg-purple-500 text-white p-3 rounded-full hover:bg-purple-600 disabled:opacity-50"
+              >
+                →
+              </button>
             </form>
           </main>
 
@@ -168,4 +160,3 @@ export default function Home() {
     </>
   );
 }
-
