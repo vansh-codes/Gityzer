@@ -128,12 +128,10 @@ export default function Home() {
               className="flex items-center w-full sm:w-2/3 lg:w-1/3"
               onSubmit={handleSubmit}
             >
-              <div className="flex items-center bg-white rounded-full shadow-md p-2 w-full group">
-  {/* GitHub Logo inside search bar */}
-  <div className="px-3 group-hover:animate-spin motion-reduce:group-hover:animate-none">
-    <GitHubIcon />
-  </div>
-
+              <div className='flex items-center bg-white rounded-full shadow-md p-2 w-full group'>
+                {/* GitHub Logo inside search bar */}
+                <div className='px-3 group-hover:animate-spin motion-reduce:group-hover:animate-none'>
+</div>
   <input
     className="w-full px-4 py-2 text-gray-700 bg-white focus:outline-none text-base md:text-lg"
     value={username}
