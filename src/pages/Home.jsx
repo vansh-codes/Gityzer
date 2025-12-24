@@ -124,10 +124,9 @@ export default function Home() {
 
             {/* ================= SEARCH FORM ================= */}
             <form onSubmit={handleSubmit}>
-  <div className="flex items-center bg-white rounded-full shadow-md p-2 w-full group">
-    {/* GitHub Logo inside search bar */}
-    <div className="px-3 group-hover:animate-spin motion-reduce:group-hover:animate-none">
-      {/* icon here */}
+  <div className='flex items-center bg-white rounded-full shadow-md p-2 w-full group'>
+                {/* GitHub Logo inside search bar */}
+                <div className='px-3 group-hover:animate-spin motion-reduce:group-hover:animate-none'>
     </div>
 
     <input
