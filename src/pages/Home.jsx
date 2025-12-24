@@ -7,7 +7,6 @@ import toast, { Toaster } from "react-hot-toast";
 import Typewriter from "typewriter-effect";
 import Loader from "@/components/Loader";
 import Footer from "@/components/Footer";
-import { GitHubIcon } from "@/components/Icons"; // Make sure this import is correct
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -123,30 +122,37 @@ export default function Home() {
             </h1>
 
             {/* ================= SEARCH FORM ================= */}
-            <form onSubmit={handleSubmit}>
-  <div className='flex items-center bg-white rounded-full shadow-md p-2 w-full group'>
-                {/* GitHub Logo inside search bar */}
-                <div className='px-3 group-hover:animate-spin motion-reduce:group-hover:animate-none'>
-    </div>
+            <form onSubmit={handleSubmit} className="w-full max-w-xl">
+              <div className="flex items-center bg-white rounded-full shadow-md p-2 w-full group">
+                {/* GitHub Logo inside search bar (inline svg to avoid missing import) */}
+                <div className="px-3 group-hover:animate-spin motion-reduce:group-hover:animate-none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                    className="w-6 h-6 text-gray-800"
+                  >
+                    <path d="M12 .5C5.73.5.75 5.48.75 11.75c0 4.93 3.19 9.11 7.61 10.59.56.1.76-.24.76-.54 0-.26-.01-1-.02-1.96-3.09.67-3.74-1.49-3.74-1.49-.51-1.29-1.24-1.63-1.24-1.63-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 .17 1.57-.75 1.57-.75.92-1.57 2.42-1.12 3.01-.86.09-.67.39-1.12.71-1.38-2.47-.28-5.07-1.23-5.07-5.47 0-1.21.43-2.2 1.14-2.98-.11-.28-.5-1.41.11-2.95 0 0 .93-.3 3.05 1.14.88-.24 1.83-.37 2.77-.38.94.01 1.89.14 2.77.38 2.12-1.44 3.05-1.14 3.05-1.14.61 1.54.22 2.67.11 2.95.71.78 1.14 1.77 1.14 2.98 0 4.25-2.61 5.19-5.09 5.47.4.35.76 1.04.76 2.1 0 1.52-.01 2.75-.01 3.12 0 .3.2.65.77.54C19.06 20.86 22.25 16.68 22.25 11.75 22.25 5.48 17.27.5 12 .5z" />
+                  </svg>
+                </div>
 
-    <input
-      type="text"
-      placeholder="Search..."
-      className="flex-1 outline-none px-2"
-    />
+                <input
+                  type="text"
+                  placeholder="Search GitHub username..."
+                  value={username}
+                  onChange={handleUser}
+                  className="flex-1 outline-none px-2"
+                />
 
-    <button type="submit" className="px-4">
-      Search
-    </button>
-  </div>
-</form>
-<button
-                type="submit"
-                disabled={!username.trim() || loading}
-                className="mt-4 bg-purple-500 text-white p-3 rounded-full hover:bg-purple-600 disabled:opacity-50"
-              >
-                →
-              </button>
+                <button
+                  type="submit"
+                  disabled={!username.trim() || loading}
+                  className="ml-2 bg-purple-500 text-white p-3 rounded-full hover:bg-purple-600 disabled:opacity-50"
+                >
+                  →
+                </button>
+              </div>
             </form>
           </main>
 
