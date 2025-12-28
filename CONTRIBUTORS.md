@@ -27,6 +27,20 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/Dippp10">
+                    <img src="https://avatars.githubusercontent.com/u/163040639?v=4" width="100;" alt="Dippp10"/>
+                    <br />
+                    <sub><b>Dippp10</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/palchhinparihar">
+                    <img src="https://avatars.githubusercontent.com/u/116425582?v=4" width="100;" alt="palchhinparihar"/>
+                    <br />
+                    <sub><b>Palchhin</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/yashksaini-coder">
                     <img src="https://avatars.githubusercontent.com/u/115717039?v=4" width="100;" alt="yashksaini-coder"/>
                     <br />
@@ -40,6 +54,8 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Garima Bhayana</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/rajdeepchakraborty-rc">
                     <img src="https://avatars.githubusercontent.com/u/68934988?v=4" width="100;" alt="rajdeepchakraborty-rc"/>
@@ -54,8 +70,6 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Akshith saai</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/mehul-m-prajapati">
                     <img src="https://avatars.githubusercontent.com/u/7879392?v=4" width="100;" alt="mehul-m-prajapati"/>
@@ -84,6 +98,8 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Tamanna</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/smog-root">
                     <img src="https://avatars.githubusercontent.com/u/181578777?v=4" width="100;" alt="smog-root"/>
@@ -98,8 +114,6 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Harshit Shukla</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/piyushpatelcodes">
                     <img src="https://avatars.githubusercontent.com/u/136020845?v=4" width="100;" alt="piyushpatelcodes"/>
@@ -128,11 +142,20 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Amiya Singh</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/dimpal-yadav">
                     <img src="https://avatars.githubusercontent.com/u/177777929?v=4" width="100;" alt="dimpal-yadav"/>
                     <br />
                     <sub><b>Dimpal Yadav</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/durdana3105">
+                    <img src="https://avatars.githubusercontent.com/u/165191846?v=4" width="100;" alt="durdana3105"/>
+                    <br />
+                    <sub><b>Durdana Sultana</b></sub>
                 </a>
             </td>
             <td align="center">
@@ -142,8 +165,6 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>Aditya kalburgi</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/akash70629">
                     <img src="https://avatars.githubusercontent.com/u/76689571?v=4" width="100;" alt="akash70629"/>
@@ -165,6 +186,8 @@ Thank you once again to all our contributors! Your efforts are truly appreciated
                     <sub><b>nithinrvs</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/Unnati2603">
                     <img src="https://avatars.githubusercontent.com/u/130018046?v=4" width="100;" alt="Unnati2603"/>
