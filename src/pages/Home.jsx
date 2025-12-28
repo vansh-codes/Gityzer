@@ -1,79 +1,110 @@
-'use client'
-import { useState, useEffect, useRef } from 'react'
-import { useRouter } from 'next/navigation'
-import toast, { Toaster } from 'react-hot-toast'
-import Typewriter from 'typewriter-effect'
-import Loader from '@/components/Loader'
-import Footer from '@/components/Footer'
+"use client";
 
-function Home() {
-  const [username, setUserName] = useState('')
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
-  const inputRef = useRef(null)
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
+import Typewriter from "typewriter-effect";
+import Loader from "@/components/Loader";
+import Footer from "@/components/Footer";
 
-  useEffect(() => {
-    inputRef.current.focus()
-  })
+export default function Home() {
+  const [open, setOpen] = useState(false);
+  const [username, setUserName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
+  /* ---------------- HANDLERS ---------------- */
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const val = username.trim()
+    const val = username.trim();
     if (!val) {
-      toast.error('Please enter a valid username.')
-      return
+      toast.error("Please enter a valid username.");
+      return;
     }
 
-    if (username.trim()) {
-      try {
-        setLoading(true)
-        const response = await fetch('/api/user', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username: username.trim() }),
-        })
+    try {
+      setLoading(true);
+      const response = await fetch("/api/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: val }),
+      });
 
-        if (response.ok) {
-          const data = await response.json()
-          if (data.exists) {
-            // Show loader while navigating to profile page
-            router.push(`/${username.trim()}`)
-          } else {
-            toast.error('Username does not exist on GitHub')
-          }
+      if (response.ok) {
+        const data = await response.json();
+        if (data.exists) {
+          router.push(`/${val}`);
         } else {
-          toast.error('Error verifying username. Please try again.')
+          toast.error("Username does not exist on GitHub");
         }
-      } catch (error) {
-        toast.error('An unexpected error occurred. Please try again.')
-      } finally {
-        // Keep loading state true briefly to allow route transition loading UI to appear
-        setTimeout(() => setLoading(false), 800)
+      } else {
+        toast.error("Error verifying username.");
       }
-    } else {
-      toast.error('Please enter a username.')
+    } catch {
+      toast.error("Unexpected error occurred.");
+    } finally {
+      setTimeout(() => setLoading(false), 500);
     }
-  }
+  };
 
-  const handleUser = async (e) => {
-    const val = e.target.value
-    setUserName(val)
-  }
+  const handleUser = (e) => setUserName(e.target.value);
 
+  /* ---------------- JSX ---------------- */
   return (
     <>
-      <Toaster />
-      <div className='flex flex-col justify-between min-h-[92vh] md:min-h-[94vh] lg:min-h-[90vh] xl:min-h-[91vh]'>
-        {/* Main Content */}
-        <main className='flex flex-col justify-center items-center flex-grow px-8 sm:px-4'>
-          <>
-            <h1 className='text-4xl font-light text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 tracking-widest mb-8'>
+      {/* ================= NAVBAR ================= */}
+      <nav className="fixed top-0 z-50 w-full bg-black text-white shadow-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+          <Link href="/" className="text-xl font-bold">
+            Gityzer
+          </Link>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex gap-6">
+            <Link href="#features">Features</Link>
+            <Link href="#demo">Demo</Link>
+            <Link href="#docs">Docs</Link>
+          </div>
+
+          {/* Mobile Hamburger */}
+          <button
+            className="md:hidden text-2xl"
+            onClick={() => setOpen((prev) => !prev)}
+            aria-label="Toggle menu"
+          >
+            ☰
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {open && (
+          <div className="md:hidden px-4 pb-4 space-y-2 bg-black">
+            <Link onClick={() => setOpen(false)} href="#features" className="block">
+              Features
+            </Link>
+            <Link onClick={() => setOpen(false)} href="#demo" className="block">
+              Demo
+            </Link>
+            <Link onClick={() => setOpen(false)} href="#docs" className="block">
+              Docs
+            </Link>
+          </div>
+        )}
+      </nav>
+
+      {/* ================= PAGE CONTENT ================= */}
+      <main className="pt-16">
+        <Toaster />
+
+        <div className="flex flex-col justify-between min-h-[92vh] md:min-h-[94vh] lg:min-h-[90vh]">
+          <main className="flex flex-col justify-center items-center flex-grow px-8 sm:px-4">
+            <h1 className="text-4xl font-light text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 tracking-widest mb-8">
               <Typewriter
                 options={{
-                  cursor: "<span style='color: #fff; animation: blink 1s infinite;'>|</span>",
+                  cursor:
+                    "<span style='color:#fff; animation: blink 1s infinite;'>|</span>",
                 }}
                 onInit={(typewriter) => {
                   const animate = () => {
@@ -82,21 +113,22 @@ function Home() {
                       .pauseFor(1000)
                       .deleteAll()
                       .pauseFor(1000)
-                      .start()
-                    setTimeout(animate, 2000) // Adjust delay
-                  }
-                  animate()
+                      .start();
+                    setTimeout(animate, 2000);
+                  };
+                  animate();
                 }}
               />
             </h1>
-            <form
-              className='flex items-center w-full sm:w-2/3 lg:w-1/3 h-1/3'
-              onSubmit={handleSubmit}
-            >
-              <div className='flex items-center bg-white rounded-full shadow-md p-2 w-full group'>
+
+            {/* ================= SEARCH FORM ================= */}
+           <form
+onSubmit={handleSubmit}
+>
+<div className='flex items-center bg-white rounded-full shadow-md p-2 w-full group'>
                 {/* GitHub Logo inside search bar */}
                 <div className='px-3 group-hover:animate-spin motion-reduce:group-hover:animate-none'>
-                  <svg
+ <svg
                     xmlns='http://www.w3.org/2000/svg'
                     className='h-7 w-7 text-gray-600'
                     viewBox='0 0 24 24'
@@ -107,51 +139,30 @@ function Home() {
                 </div>
 
                 {/* Search input */}
+
                 <input
-                  type='text'
-                  placeholder='Enter GitHub username'
-                  className='w-full px-4 py-2 text-gray-700 bg-white focus:outline-none text-base md:text-lg'
+                  type="text"
+                  placeholder="Search GitHub username..."
                   value={username}
                   onChange={handleUser}
-                  ref={inputRef}
-                  disabled={loading}
+                  className="flex-1 outline-none px-2"
                 />
 
-                {/* Submit button */}
                 <button
-                  type='submit'
+                  type="submit"
                   disabled={!username.trim() || loading}
-                  aria-busy={loading}
-                  className='relative bg-purple-500 text-white p-3 rounded-full hover:bg-purple-600 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50 transition duration-200 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed'
+                  className="ml-2 bg-purple-500 text-white p-3 rounded-full hover:bg-purple-600 disabled:opacity-50"
                 >
-                  {loading ? (
-                    <span className='h-5 w-5 rounded-full border-2 border-white border-t-transparent animate-spin' />
-                  ) : (
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      className='h-5 w-5'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke='currentColor'
-                      strokeWidth='2'
-                    >
-                      <path strokeLinecap='round' strokeLinejoin='round' d='M9 5l7 7-7 7' />
-                    </svg>
-                  )}
+                  →
                 </button>
               </div>
             </form>
-          </>
-        </main>
+          </main>
 
-        {loading && (
-          <Loader message='Verifying username...' />
-        )}
-
-        <Footer />
-      </div>
+          {loading && <Loader message="Verifying username..." />}
+          <Footer />
+        </div>
+      </main>
     </>
-  )
+  );
 }
-
-export default Home
