@@ -160,6 +160,65 @@ onSubmit={handleSubmit}
           </main>
 
           {loading && <Loader message="Verifying username..." />}
+
+          <section
+            id="features"
+            className="mx-auto w-full max-w-6xl px-8 py-16 text-center text-white sm:px-4"
+          >
+            <p className="mb-3 text-sm uppercase tracking-[0.3em] text-purple-300">
+              Features
+            </p>
+            <h2 className="mb-8 text-3xl font-semibold">
+              Explore any GitHub profile at a glance
+            </h2>
+            <div className="grid gap-6 md:grid-cols-3">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+                <h3 className="mb-2 text-xl font-semibold">Profile insights</h3>
+                <p className="text-sm text-gray-300">
+                  View contribution activity, repository highlights, and key profile details in one place.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+                <h3 className="mb-2 text-xl font-semibold">Fast username lookup</h3>
+                <p className="text-sm text-gray-300">
+                  Search a GitHub username from the landing page and jump straight to the generated dashboard.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+                <h3 className="mb-2 text-xl font-semibold">Shareable summaries</h3>
+                <p className="text-sm text-gray-300">
+                  Turn public GitHub data into a clean visual summary that is easy to review and share.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="demo"
+            className="mx-auto w-full max-w-5xl px-8 py-16 text-center text-white sm:px-4"
+          >
+            <p className="mb-3 text-sm uppercase tracking-[0.3em] text-pink-300">
+              Demo
+            </p>
+            <h2 className="mb-4 text-3xl font-semibold">Try the live search</h2>
+            <p className="mx-auto max-w-3xl text-gray-300">
+              Enter a GitHub username in the search bar above to verify the account and open its Gityzer profile page.
+            </p>
+          </section>
+
+          <section
+            id="docs"
+            className="mx-auto w-full max-w-5xl px-8 py-16 text-center text-white sm:px-4"
+          >
+            <p className="mb-3 text-sm uppercase tracking-[0.3em] text-purple-300">
+              Docs
+            </p>
+            <h2 className="mb-4 text-3xl font-semibold">How to use Gityzer</h2>
+            <p className="mx-auto max-w-3xl text-gray-300">
+              Search for an existing GitHub username, review the generated dashboard, and share the profile URL with others.
+            </p>
+          </section>
+
           <Footer />
         </div>
       </main>
