@@ -159,6 +159,52 @@ onSubmit={handleSubmit}
             </form>
           </main>
 
+          <section id="features" className="px-8 py-16 text-white bg-black">
+            <div className="mx-auto max-w-5xl">
+              <h2 className="mb-6 text-3xl font-semibold">Features</h2>
+              <div className="grid gap-6 md:grid-cols-3">
+                <div className="rounded-xl border border-purple-500/40 p-5">
+                  <h3 className="mb-2 text-xl font-medium">Profile lookup</h3>
+                  <p className="text-gray-300">
+                    Search a GitHub username and jump into a focused profile analysis flow.
+                  </p>
+                </div>
+                <div className="rounded-xl border border-purple-500/40 p-5">
+                  <h3 className="mb-2 text-xl font-medium">Fast validation</h3>
+                  <p className="text-gray-300">
+                    Checks whether the requested GitHub account exists before navigation.
+                  </p>
+                </div>
+                <div className="rounded-xl border border-purple-500/40 p-5">
+                  <h3 className="mb-2 text-xl font-medium">Clean interface</h3>
+                  <p className="text-gray-300">
+                    Keeps the landing page centered around one simple search action.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="demo" className="px-8 py-16 bg-white text-gray-900">
+            <div className="mx-auto max-w-5xl">
+              <h2 className="mb-4 text-3xl font-semibold">Demo</h2>
+              <p className="max-w-3xl text-lg text-gray-700">
+                Enter a GitHub username in the search box above to verify the account and open the
+                generated Gityzer profile page.
+              </p>
+            </div>
+          </section>
+
+          <section id="docs" className="px-8 py-16 text-white bg-black">
+            <div className="mx-auto max-w-5xl">
+              <h2 className="mb-4 text-3xl font-semibold">Docs</h2>
+              <p className="max-w-3xl text-lg text-gray-300">
+                Use the search field with any public GitHub username. If the account exists, Gityzer
+                routes to the username page for deeper profile exploration.
+              </p>
+            </div>
+          </section>
+
           {loading && <Loader message="Verifying username..." />}
           <Footer />
         </div>
